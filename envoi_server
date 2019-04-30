@@ -1,0 +1,34 @@
+<?php
+
+$File=
+
+$ftpServer = 'localhost';
+$ftpUser = 'admin';
+$ftpPwd = 'admin';
+$ftpTarget = '/eleveur/';
+
+$log .= '<h3>Tentative de connexion FTP...</h3>';
+  $connection = ftp_connect($ftpServer);
+  $login = ftp_login($connection, $ftpUser, $ftpPwd);
+  if ($connection && $login) {
+    $log .= 'La tentative de connexion FTP a réussi !<br>';
+    $upload = ftp_put($connection, $ftpTarget . $File, $path . $savedFile, FTP_BINARY);
+    if ($upload) {
+      $log .= '<span style="color:#090">Le téléversement par FTP a réussi !</span><br>';
+    } else {
+      $log .= '<span style="color:#900">Le téléversement par FTP a échoué !</span><br>';
+    }
+  } else {
+    $log .= 'La tentative de connexion FTP a échoué !<br>';
+  }
+  ftp_close($connection);
+} catch(PDOException $e) {
+  $log .= '<h1>Erreur de connexion MySQL : </h1><pre>';
+  $log .= $e->getMEssage();
+  $log .= '</pre>';
+  exit();
+}
+// On écrit le log dans le fichier de logs de la journée
+fwrite($f, $log);
+fclose($f);
+?>

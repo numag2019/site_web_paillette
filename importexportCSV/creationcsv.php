@@ -16,18 +16,20 @@ $requete="SELECT id_animal,nom_animal,sexe FROM animal";
 // Requete Eleveurs  : on sélectionne seulement les éleveurs dont l'elevage possède la/les race(s) Bearnaise, Bordelaise, Marine.
 //(Bearnaise : 19, Bordelaise : 6, Marine : 6)
 //
-$requete="
+$requeteEleveurs="
 SELECT id_contact,nom,prenom FROM contact
 JOIN link_race_elevage ON contact.id_elevage = link_race_elevage.id_elevage
 
-WHERE link_race_elevage.code_race=19 OR link_race_elevage.code_race=6  OR link_race_elevage.code_race=5
+WHERE link_race_elevage.code_race=19 OR link_race_elevage.code_race=6  OR link_race_elevage.code_race=5 AND contact.consentement=Oui
 
 ";
 
 
 
+
+
 // Tableau Eleveurs		
-$obs=mysqli_query($link,$requete);
+$obs=mysqli_query($link,$requeteEleveurs);
 
 // Transformation données en tableau 
 $tab=mysqli_fetch_all($obs);
@@ -66,7 +68,21 @@ foreach($lignes as $ligne){
 
 // fermeture du fichier csv
 fclose($table_eleveurs_csv);
+
+
+$requeteAnimal= "
+SELECT animal.no_identification, animal.nom_animal, animal.sexe, animal.code_race, contact.id_contact, periode.id_type FROM animal
+JOIN periode ON animal.id_animal=periode.id_animal
+JOIN contact ON periode.id_elevage=contact.id_elevage
+WHERE animal.code_race=19 OR animal.code_race=5 OR animal.code_race=6 AND contact.consentement=Oui 
+
+";
+
+
+
+
 ?>
+
 
 
 </body>

@@ -25,6 +25,7 @@ WHERE link_race_elevage.code_race=19 OR link_race_elevage.code_race=6  OR link_r
 ";
 
 
+
 // Tableau Eleveurs		
 $obs=mysqli_query($link,$requete);
 

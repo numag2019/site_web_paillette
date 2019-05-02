@@ -46,7 +46,7 @@ $i=0;
 
 
 // Paramétrage de l'écriture du futur fichier CSV
-$chemin = 'csv/fichier.csv';
+$chemin = 'csv/table_eleveurs.csv';
 
 // Création du fichier csv (le fichier est vide pour le moment)
 // w+ : consulter http://php.net/manual/fr/function.fopen.php

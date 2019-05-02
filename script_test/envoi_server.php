@@ -29,7 +29,7 @@ $log= '<h3>Tentative de connexion FTP...</h3>';
   if ($connection && $login) 
   {
     $log= 'La tentative de connexion FTP a réussi !<br>';
-    $upload = ftp_put($connection, $ftpTarget.$file, $path . $savedFile, FTP_BINARY);
+    $upload = ftp_put($connection, $ftpTarget . $file, , FTP_BINARY);
     if ($upload) 
 	{
       $log= '<span style="color:#090">Le téléversement par FTP a réussi !</span><br>';

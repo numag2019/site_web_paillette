@@ -70,7 +70,7 @@ if (filter_var($mail, FILTER_VALIDATE_EMAIL))
 	//=========
  
 	//=====Création du header de l'e-mail.
-	$header = "From: \"WeaponsB\"<cra.conservatoire@gmail.com>".$passage_ligne;
+	$header = "From: \"\"<cra.conservatoire@gmail.com>".$passage_ligne;
 
 
 	//=====Ajout du message au format txt

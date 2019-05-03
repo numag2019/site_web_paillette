@@ -5,7 +5,7 @@
 
 <form action="verification_connexion.php" method="post">
 <p>
-	Speudo:
+	Pseudo:
     <input type="text" name="identifiant" />
 	<br />
 	<br />

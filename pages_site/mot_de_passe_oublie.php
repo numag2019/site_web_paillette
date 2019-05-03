@@ -15,7 +15,7 @@
 	<body>
 	<div>
 	<!-- DIV Entête -->
-	<?php include("../mise_en_page/entete.php");?>	
+	<?php include("../mise_en_page/entete.html");?>	
 
 	<!-- DIV Navigation (Menus) -->
 	<?php include("../mise_en_page/navigation.html"); ?>
@@ -81,6 +81,6 @@ else
 ?>
 	</body>
 	<?php
-	include (../mise_en_page/pied.php)
+	include (../mise_en_page/pied.html)
 	?>
 </html>

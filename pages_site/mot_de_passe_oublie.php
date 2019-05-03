@@ -40,7 +40,7 @@ if(isset($_POST['email']))
 	// Déclaration de l'adresse de destination.
 	// Protection faille CRLF 
 	//Suppression des retours à la ligne lors du traitement
-	$mail = str_replace(array("\n","\r",PHP_EOL),'',$_POST['email']; 
+	$mail = str_replace(array("\n","\r",PHP_EOL),'',$_POST['email']); 
 	//Vérification que la chaîne de caractères entrée est bien une adresse mail
 if (filter_var($mail, FILTER_VALIDATE_EMAIL))
 	{
@@ -54,9 +54,16 @@ if (filter_var($mail, FILTER_VALIDATE_EMAIL))
 	}
 
 	//=====Déclaration des messages au format texte et au format HTML.
-	$message_txt = 'Veuillez trouvez ci dessous le mot de passe temporaire de votre comptre cranet, pensez a le changer rapidement';
-	$mdp='motdepasseturfu45';
-	//==========
+	$message_txt = 'Veuillez trouvez ci dessous le mot de passe temporaire de votre comptre cranet: ( pensez a le changer rapidement)';
+
+	//==========Création du mot de passe
+	function genererChaineAleatoire($longueur = 10)
+	{
+		return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*', rand( 1, $longueur) )),1,$longueur);
+	}
+	$mdp = genererChaineAleatoire();
+	//!!!!!! Hasher puis Enregistrer le mot de passe dans la BDD
+	
  
 	//=====Définition du sujet.
 	$sujet = "Reinitialisation de votre mot de passe Cranet";
@@ -71,16 +78,16 @@ if (filter_var($mail, FILTER_VALIDATE_EMAIL))
 
 	//=====Envoi de l'e-mail.
 	mail($mail,$sujet,$message,$header);
-	echo "Votre nouveau mot de passe a bien été envoyé à l'adresse ".$mail;
+	//htmlspecialchars() permet de prévenir les failles XSS
+	echo "Votre nouveau mot de passe a bien été envoyé à l'adresse ".htmlspecialchars($mail);
 	//==========
 	}
+}
 else 
 {
 	echo "Veuillez entrer une adresse email valide";
 }
 ?>
 	</body>
-	<?php
-	include (../mise_en_page/pied.html)
-	?>
+	<?php include ("../mise_en_page/pied.html");?>
 </html>

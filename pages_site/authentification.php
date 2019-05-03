@@ -16,5 +16,8 @@
     <input type="submit" value="Valider" />
 </p>
 </form>
+<br />
+<!-- lien vers la page permettant de changer de mot de passe-->
+<a href="mot_de_passe_oublie.php">Mot de passe oublié ?</a></li>
 
 

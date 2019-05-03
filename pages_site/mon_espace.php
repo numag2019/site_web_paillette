@@ -51,6 +51,6 @@
 		}
 		?>
 		<!-- DIV Pied de page -->	
-		<?php include (../mise_en_page/pied.html)?>
+		<?php include ("../mise_en_page/pied.html");?>
 	</body>
 </html>

@@ -46,38 +46,51 @@ WHERE utilisateurs.id_utilisateur=eleveurs_intermediaires.id_eleveur )";
 // Exécution requête
 $obs=mysqli_query($link,$requete);
 
-
-//RACES
-// Pb : seuil min seuil max ?
-$requete="INSERT INTO races(id_race, nom_race)
-SELECT races_intermediaires.id_race_int,races_intermediaires.nom_race
-FROM races_intermediaires
-WHERE not exists (SELECT races.id_race from races WHERE races.id_race=races_intermediaires.id_race_int )";
+$requete="UPDATE utilisateurs 
+SET utilisateurs.nom=eleveurs_intermediaires.nom,
+utilisateurs.prenom=eleveurs_intermediaires.prenom,
+utilisateurs.email=eleveurs_intermediaires.email
+FROM (SELECT 
+eleveurs_intermediaires.nom,
+eleveurs_intermediaires.prenom,
+eleveurs_intermediaires.email 
+FROM eleveurs_intermediaires)
+WHERE utilisateurs.id_utilisateur=eleveurs_intermediaires.id_eleveur";
 
 // Exécution requête
 $obs=mysqli_query($link,$requete);
 
+//RACES
+// Pb : seuil min seuil max ?
+// $requete="INSERT INTO races(id_race, nom_race)
+// SELECT races_intermediaires.id_race_int,races_intermediaires.nom_race
+// FROM races_intermediaires
+// WHERE not exists (SELECT races.id_race from races WHERE races.id_race=races_intermediaires.id_race_int )";
+
+// Exécution requête
+// $obs=mysqli_query($link,$requete);
+
 //BOVINS
 // Pb : mort (date d'un cote et chiffre de l'autre)
-$requete="INSERT INTO bovins(id_bovin, nom_bovin,sexe,mort,id_race,id_utilisateur)
-SELECT bovins_intermediaires.id_bovin, bovins_intermediaires.nom_bovin, bovins_intermediaires.sexe,
-bovins_intermediaires.date_mort, bovins_intermediaires.id_race, bovins_intermediaires.id_eleveur
-FROM bovins_intermediaires
-WHERE not exists (SELECT bovins.id_bovin from races WHERE bovins.id_bovin=bovins_intermediaires.id_bovin )";
+// $requete="INSERT INTO bovins(id_bovin, nom_bovin,sexe,mort,id_race,id_utilisateur)
+// SELECT bovins_intermediaires.id_bovin, bovins_intermediaires.nom_bovin, bovins_intermediaires.sexe,
+// bovins_intermediaires.date_mort, bovins_intermediaires.id_race, bovins_intermediaires.id_eleveur
+// FROM bovins_intermediaires
+// WHERE not exists (SELECT bovins.id_bovin from races WHERE bovins.id_bovin=bovins_intermediaires.id_bovin )";
 
 // Exécution requête
 $obs=mysqli_query($link,$requete);
 
 //COEFFICIENTS
-$requete="INSERT INTO coefficients(id_coeff, valeur_coeff,id_vache,id_taureau)
-SELECT coefficients_intermediaires.id_coeff_int, coefficients_intermediaires.valeur_coeff, 
-coefficients_intermediaires.id_vache, coefficients_intermediaires.id_taureau
-FROM coefficients_intermediaires
-WHERE not exists (SELECT coefficients.id_coeff from coefficients
- WHERE coefficients.id_coeff=coefficients_intermediaires.id_coeff_int )";
+// $requete="INSERT INTO coefficients(id_coeff, valeur_coeff,id_vache,id_taureau)
+// SELECT coefficients_intermediaires.id_coeff_int, coefficients_intermediaires.valeur_coeff, 
+// coefficients_intermediaires.id_vache, coefficients_intermediaires.id_taureau
+// FROM coefficients_intermediaires
+// WHERE not exists (SELECT coefficients.id_coeff from coefficients
+ // WHERE coefficients.id_coeff=coefficients_intermediaires.id_coeff_int )";
  
  // Exécution requête
-$obs=mysqli_query($link,$requete);
+// $obs=mysqli_query($link,$requete);
 
 //PERIODES
 //Pb : à réfléchir. Date début date du jour ? reinitialisation quand une periode pour une race prend fin

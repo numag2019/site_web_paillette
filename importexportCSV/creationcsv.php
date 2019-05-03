@@ -16,15 +16,15 @@ $requete="SELECT id_animal,nom_animal,sexe FROM animal";
 // Requete Eleveurs  : on sélectionne seulement les éleveurs dont l'elevage possède la/les race(s) Bearnaise, Bordelaise, Marine.
 //(Bearnaise : 19, Bordelaise : 6, Marine : 6)
 //
-$requete="
-SELECT id_contact,nom,prenom FROM contact
-JOIN link_race_elevage ON contact.id_elevage = link_race_elevage.id_elevage
+// $requete="
+// SELECT id_contact,nom,prenom FROM contact
+// JOIN link_race_elevage ON contact.id_elevage = link_race_elevage.id_elevage
 
-WHERE link_race_elevage.code_race=19 OR link_race_elevage.code_race=6  OR link_race_elevage.code_race=5
+// WHERE link_race_elevage.code_race=19 OR link_race_elevage.code_race=6  OR link_race_elevage.code_race=5
 
-";
+// ";
 
-
+$requete="create or replace view v_ani_mort as select * from animal a left join (SELECT id_animal as id_ani, id_periode, date_entree, date_sortie, id_elevage, id_type FROM `periode` WHERE id_type=1) vmort on a.id_animal=vmort.id_ani";
 
 // Tableau Eleveurs		
 $obs=mysqli_query($link,$requete);

@@ -20,7 +20,7 @@ else
 	$req->execute(array($login, $password));
 	$resultat=$req->fetch();
 // Comparaison du pass envoyé via le formulaire avec la base
-	$isPasswordCorrect = password_verify($passord, $resultat['password']);
+	$isPasswordCorrect = password_verify($password, $resultat['password']);
 
 	if (!$resultat)
 	{	

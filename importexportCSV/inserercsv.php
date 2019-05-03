@@ -4,7 +4,7 @@
 
 
 <?php
- $link=mysqli_connect('localhost','root','','test_insertion');
+ $link=mysqli_connect('localhost','root','','crabase');
 
 
 $query ="LOAD DATA LOCAL INFILE 'csv/fichier.csv'

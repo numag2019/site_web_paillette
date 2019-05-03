@@ -18,18 +18,19 @@
 if(isset($_FILES['mon_fichier']))
 {
 $file = $_FILES["mon_fichier"] ;// on récupère le fichier
+$chemin= "C:\Users\Nobella Théo\AppData\Local\Temp\Memento Stage 2A_2018-2019";
 
 $ftpServer = 'localhost';
 $ftpUser = 'admin';
 $ftpPwd = 'admin';
-$ftpTarget = '/eleveur/';
+$ftpTarget = '/';
 $log= '<h3>Tentative de connexion FTP...</h3>';
   $connection = ftp_connect($ftpServer);
   $login = ftp_login($connection, $ftpUser, $ftpPwd);
   if ($connection && $login) 
   {
     $log= 'La tentative de connexion FTP a réussi !<br>';
-    $upload = ftp_put($connection, $ftpTarget . $file, , FTP_BINARY);
+    $upload = ftp_put($connection, $ftpTarget , $chemin, FTP_BINARY);
     if ($upload) 
 	{
       $log= '<span style="color:#090">Le téléversement par FTP a réussi !</span><br>';

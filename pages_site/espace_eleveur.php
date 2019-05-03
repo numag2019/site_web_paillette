@@ -8,18 +8,19 @@
 	
 	<body>
 	<?php
-		
+		include(../mise_en_page/entete.php)	
 		if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
 		{
-			include(../mise_en_page/entete.php)
+			
 			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; //lien vers la page etats_de_sorties.php
 			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";//lien vers la plateforme paillette
-			include (../mise_en_page/pied.php)
+			
 		}
 		else
 		{
 			include (authentification.php) //formulaire de connexion
 		}	
-		?>
+		include (../mise_en_page/pied.php)
+	?>
 	</body>
 </html>

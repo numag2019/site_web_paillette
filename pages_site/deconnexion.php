@@ -1,9 +1,5 @@
-<html>
-	<head>
-		<!-- informations sur le type et la version du fichier HTML et informations diverses à destination notamment 				des robots-->
-		<meta charset="UTF-8">
-	</head>
-	<body>
+<!--Page non visible par l'utilisateur, elle est executé si l'utilisateur clique sur déconnexion
+	On efface les variables de  session puis on le redirige vers l'acceuil-->
 	<?php 
 		session_start();
 		// Suppression des variables de session et de la session
@@ -12,6 +8,8 @@
 		// Suppression des cookies de connexion automatique
 		setcookie('login', '');
 		setcookie('pass_hache', '');
+		// Redirection vers l'acceuil 
+		header ('location : acceuil_site.php')
 	?>
 	</body>
 </html>

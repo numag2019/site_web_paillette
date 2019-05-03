@@ -1,38 +1,46 @@
 <?php 
-if(empty($_SESSION['id']) or empty($_SESSION['pseudo'])) 
-{
-	$identifiant=htmlspecialchars($_POST['identifiant'])
-	$mdp=htmlspecialchars($_POST['mdp'])
-//  Récupération de l'utilisateur et de son pass hashé
-	$req = $bdd->prepare('SELECT id_utilisateur, mdp FROM utilisateurs WHERE identifiant' = $identifiant);
-	$req->execute();
-	$resultat = $req->fetch();
 
+if(empty($_POST['identifiant']) or empty($_POST['mdp'])) 
+	{
+	echo "Veuillez remplir les deux champs.";
+	}
+
+else
+	{
+	// On récupère les variables envoyées par le formulaire
+	$login = $_POST['identifiant'];
+	$password = $_POST['mdp'];
+
+	// Connexion à la BDD en PDO
+	try { $bdd = new PDO('mysql:host=localhost;dbname=bdd','root',''); }
+	catch (Exeption $e) { die('Erreur : ' .$e->getMessage())  or die(print_r($bdd->errorInfo())); }
+
+	// Requête SQL sécurisée
+	$req = $bdd->prepare("SELECT * FROM utilisateurs WHERE login= ? AND password= ?");
+	$req->execute(array($login, $password));
+	$resultat=$req->fetch();
 // Comparaison du pass envoyé via le formulaire avec la base
-	$isPasswordCorrect = password_verify(htmlspecialchars($_POST['pass']), $resultat['pass']);
+	$isPasswordCorrect = password_verify($passord, $resultat['password']);
 
 	if (!$resultat)
-	{
+	{	
 		echo 'Mauvais identifiant ou mot de passe !';
 	}
 	else
 	{
-		if ($isPasswordCorrect) {
+		if ($isPasswordCorrect) 
+		{
 			session_start();
 			$_SESSION['id'] = $resultat['id']; //creation de variables de sessions
-			$_SESSION['identifiant'] = $identifiant);
-			echo 'Vous êtes connecté !';
+			$_SESSION['id_type']=$id_type;
+			$_SESSION['identifiant'] = $identifiant;
+			header ('location : mon_espace.php');
 		}
 		else 
 		{
 			echo 'Mauvais identifiant ou mot de passe !';
 		}
+	
 	}
-}
-<?php 
-if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
-{
-    echo 'Bonjour ' . $_SESSION['pseudo'];
-}
 }
 ?>

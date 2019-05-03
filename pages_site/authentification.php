@@ -1,10 +1,4 @@
-<html>
-	<head>
-		<!-- Formulaire d'authentification-->
-		<meta charset="UTF-8">
-	</head>
-	
-	<body>
+<!-- Formulaire d'authentification-->
 <p>
     Veuillez rentrer vos identifiants :
 </p>
@@ -23,5 +17,4 @@
 </p>
 </form>
 
-	</body>
-</html>
+

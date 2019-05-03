@@ -1,13 +1,21 @@
-<html>
+<!--Page d'acceuil du site web CRAnet-->		
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">>
 	<head>
-		<!-- informations sur le type et la version du fichier HTML et informations diverses à destination notamment 				des robots-->
-		<meta charset="UTF-8">
+	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
+		<title>
+		Site web Cranet
+		</title>
 	</head>
 	
 	<body>
-	<?php
-	include(../mise_en_page/entete.php)
-	?>
+	<div>
+	<!-- DIV Entête -->
+	<?php include("../mise_en_page/entete.php");?>	
+
+	<!-- DIV Navigation (Menus) -->
+	<?php include("../mise_en_page/navigation.html"); ?>
+	
 	<a href="https://www.synel.net/"><img src="canard.jpg" alt="canard"/></a> 
 	<BR/>
 	Accéder à SYNEL, la base de données de l’ARSOE conçue pour enregistrer et visualiser les
@@ -21,7 +29,6 @@ informations concernant vos cheptels équins.
 	<p><a href="deconnexion.html">Déconnexion</a></p>
 	
 	</body>
-	<?php
-	include (../mise_en_page/pied.php)
-	?>
+<!-- DIV Pied de page -->	
+	<?php include ("../mise_en_page/pied.php");?>
 </html>

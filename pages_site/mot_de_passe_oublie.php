@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">>
 	<head>
-	<link href="mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
+	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
 		<title>
 		Site web Cranet
 		</title>

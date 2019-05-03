@@ -1,5 +1,4 @@
 <!-- Formulaire d'authentification-->
-<html>
 <p>
     Veuillez rentrer vos identifiants :
 </p>
@@ -18,5 +17,4 @@
 </p>
 </form>
 
-	</body>
-</html>
+

@@ -4,7 +4,7 @@ if(empty($_SESSION['id']) or empty($_SESSION['pseudo']))
 	$identifiant=htmlspecialchars($_POST['identifiant'])
 	$mdp=htmlspecialchars($_POST['mdp'])
 //  Récupération de l'utilisateur et de son pass hashé
-	$req = $bdd->prepare('SELECT id_utilisateur, mdp FROM utilisateurs WHERE identifiant' = $identifiant);
+	$req = $bdd->prepare('SELECT id_utilisateur, id_type, mdp FROM utilisateurs WHERE identifiant' = $identifiant);
 	$req->execute();
 	$resultat = $req->fetch();
 
@@ -20,9 +20,14 @@ if(empty($_SESSION['id']) or empty($_SESSION['pseudo']))
 		if ($isPasswordCorrect) {
 			session_start();
 			$_SESSION['id'] = $resultat['id']; //creation de variables de sessions
+			$_SESSION['id_type']=$id_type
 			$_SESSION['identifiant'] = $identifiant);
-			echo 'Vous êtes connecté !';
-		}
+			if ($_SESSION=3)
+			{header ('location : espace_cra.php');}
+			else 
+			{
+				if($_SESSION=2) {header ('location : espace_admi_race.php');}
+					else {header ('location : espace_eleveur.php');};
 		else 
 		{
 			echo 'Mauvais identifiant ou mot de passe !';

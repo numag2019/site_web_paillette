@@ -54,9 +54,10 @@
 		}
 		// S'il n'est pas connecté on affiche le formulaire de connexion
 		else
-		{
-			include ("authentification.php"); //formulaire de connexion
-		}
+			{
+			header ('authentification.php'); //formulaire de connexion
+			exit;
+			}
 		?>
 		<!-- DIV Pied de page -->	
 		<?php include ("../mise_en_page/pied.html");?>

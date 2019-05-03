@@ -19,7 +19,7 @@ function creationcsv($lignes,$nom_fichier)
 	foreach($lignes as $ligne){
 		// chaque ligne en cours de lecture est insérée dans le fichier
 		// les valeurs présentes dans chaque ligne seront séparées par $delimiteur
-		fputcsv(fichier_csv,$ligne,";","\"");
+		fputcsv($fichier_csv,$ligne,";","\"");
 	}
 
 	// fermeture du fichier csv

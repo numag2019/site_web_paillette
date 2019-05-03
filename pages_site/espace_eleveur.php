@@ -1,14 +1,19 @@
-<html>
-	<head>
-		<!-- Page disponible aux éleveurs bovins identifiés, 
+<!-- Page disponible aux éleveurs bovins identifiés, 
 		elle permet l'accès à la plateforme paillette et à la page des états de sorties
-		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->
-		<meta charset="UTF-8">
+		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->		
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">>
+	<head>
+	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
+		<title>
+		Site web Cranet
+		</title>
+
 	</head>
 	
 	<body>
+	<div>
 	<?php
-		include(../mise_en_page/entete.php)	
+		include(../mise_en_page/entete.php)	;
 		if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
 		{
 			
@@ -18,9 +23,10 @@
 		}
 		else
 		{
-			include (authentification.php) //formulaire de connexion
-		}	
-		include (../mise_en_page/pied.php)
-	?>
+			include (authentification.php); //formulaire de connexion
+		}
+		?>
+		<!-- DIV Pied de page -->	
+		<?php include (../mise_en_page/pied.php)?>
 	</body>
 </html>

@@ -1,10 +1,5 @@
+<!-- Formulaire d'authentification-->
 <html>
-	<head>
-		<!-- Formulaire d'authentification-->
-		<meta charset="UTF-8">
-	</head>
-	
-	<body>
 <p>
     Veuillez rentrer vos identifiants :
 </p>

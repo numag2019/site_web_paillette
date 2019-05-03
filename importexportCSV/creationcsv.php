@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 <body>
 <?php
 
@@ -153,5 +153,9 @@ $csvCoeff=creationcsv($lignes,"tableau_coeff_csv");
 ?>
 
 
+
 </body>
+</html>
+</body>
+>>>>>>> db1697991c2eafae97a0a09179d397998e000023
 </html>

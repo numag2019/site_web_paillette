@@ -1,5 +1,7 @@
 <html>
 <body>
+
+
 <!--pour le type d'utilisateur : le cra doit pouvoir modifier les droits sur
 le site, donc, par défaut, les utilisateurs présents auront le statut d'éleveurs (id=1)
 sauf pour le CRA (id=3). Pb : si le CRA fait une erreur et vire les administrateurs, 
@@ -85,7 +87,7 @@ $obs=mysqli_query($link,$requete);
 
 
 ?>
-	
+
 </body>
 
 </html>

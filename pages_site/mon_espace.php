@@ -24,27 +24,35 @@
 		{
 			// On affiche les liens disponible au type d'utilisateur connecté
 			if ($_SESSION['id_type']=1)
-			{
-			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; //lien vers la page etats_de_sorties.php
-			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";//lien vers la plateforme paillette
+			{ 
+			//lien vers la page etats_de_sorties.php
+			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>";
+			//lien vers la plateforme paillette entant qu'éleveurs
+			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
 			}
 			elseif ($_SESSION['id_type']=2)
 				{
-				echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; //lien vers la page etats_de_sorties.php
-				echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";//lien vers la plateforme paillette
+				//lien vers la page etats_de_sorties.php en 
+				echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; 
+				//lien vers la page plateforme plan_previsionnel_IA.php en tant qu'éleveurs
+				echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
+				//lien vers la plateforme paillette en tant qu'administrateur de race 
+				echo "<p><a href='bilan_plan_previsionnel_IA.php'>Bilan plan prévisionnel d IA</a> ?</p>";
 				}
 			elseif ($_SESSION['id_type']=3)
 				{
-				echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; //lien vers la page etats_de_sorties.php
-				echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";//lien vers la plateforme paillette
+				//lien vers l'administration du site
+				echo "<p><a href='administration.php'>Accès à l'administration du site</a> ?</p>"; 
+				//lien vers la plateforme paillette en tant qu'administrateur de race 
+				echo "<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
 				}
 			else
 			{
-			include (authentification.php); //formulaire de connexion
+			include ("authentification.php"); //formulaire de connexion
 			}
 				
 		}
-		// Si il n'est pas connecté on affiche le formulaire de connexion
+		// S'il n'est pas connecté on affiche le formulaire de connexion
 		else
 		{
 			include ("authentification.php"); //formulaire de connexion

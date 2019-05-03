@@ -21,7 +21,7 @@
 	Accéder à SYNEL, la base de données de l’ARSOE conçue pour enregistrer et visualiser les
 informations relatives à vos cheptels bovins.
 	<BR/>
-	<a href="https://www.ifce.fr/"><img src="../mise_en_page/images/ifce.jpg" alt="canard"/></a>
+	<a href="https://www.ifce.fr/"><img src="../mise_en_page/images/ifce.png" alt="ifce"/></a>
 	<BR/>
 	Accéder au SIRE, la base de données de l’IFCE vous permettant d’enregistrer et de visualiser les
 informations concernant vos cheptels équins.

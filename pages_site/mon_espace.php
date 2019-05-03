@@ -47,7 +47,7 @@
 		// Si il n'est pas connecté on affiche le formulaire de connexion
 		else
 		{
-			include (authentification.php); //formulaire de connexion
+			include ("authentification.php"); //formulaire de connexion
 		}
 		?>
 		<!-- DIV Pied de page -->	

@@ -1,10 +1,10 @@
 <?php 
 if(empty($_SESSION['id']) or empty($_SESSION['identifiant'])) 
 {
-	$identifiant=htmlspecialchars($_POST['identifiant'])
-	$mdp=htmlspecialchars($_POST['mdp'])
+	$identifiant=htmlspecialchars($_POST['identifiant']);
+	$mdp=htmlspecialchars($_POST['mdp']);
 //  Récupération de l'utilisateur et de son pass hashé
-	$req = $bdd->prepare('SELECT id_utilisateur, id_type, mdp FROM utilisateurs WHERE identifiant' = $identifiant);
+	$req = $bdd->prepare('SELECT id_utilisateur, id_type, mdp FROM utilisateurs WHERE identifiant' = :identifiant);
 	$req->execute();
 	$resultat = $req->fetch();
 
@@ -20,7 +20,7 @@ if(empty($_SESSION['id']) or empty($_SESSION['identifiant']))
 		if ($isPasswordCorrect) {
 			session_start();
 			$_SESSION['id'] = $resultat['id']; //creation de variables de sessions
-			$_SESSION['id_type']=$id_type
+			$_SESSION['id_type']=$id_type;
 			$_SESSION['identifiant'] = $identifiant);
 			{header ('location : mon_espace.php');}
 		else 

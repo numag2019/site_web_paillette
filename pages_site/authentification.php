@@ -1,4 +1,21 @@
 <!-- Formulaire d'authentification-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">>
+	<head>
+	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
+		<title>
+		Site web Cranet
+		</title>
+
+	</head>
+	
+	<body>
+	<div>
+	<!-- DIV Entête -->
+	<?php include("../mise_en_page/entete.html");?>	
+
+<!-- DIV Navigation (Menus) -->
+	<?php include("../mise_en_page/navigation.html"); ?>
+	
 <p>
     Veuillez rentrer vos identifiants :
 </p>
@@ -17,16 +34,20 @@
 </p>
 </form>
 <br />
+<?php if (isset($Post['error']))
+	{echo $Post['error']}
 <!-- lien vers la page permettant de changer de mot de passe-->
 <a href="mot_de_passe_oublie.php">Mot de passe oublié ?</a></li>
 
 
-<?php 
+
+
 if (isset($_POST['Valider']) )
 	{
 	if(empty($_POST['identifiant']) or empty($_POST['mdp'])) 
 		{
-		echo "Veuillez remplir les deux champs.";
+		$_POST['error']='Veuillez remplir les deux champs.';
+		echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
 		}
 
 	else
@@ -43,14 +64,17 @@ if (isset($_POST['Valider']) )
 		$req = $bdd->prepare("SELECT * FROM utilisateurs WHERE login= ? AND password= ?");
 		$req->execute(array($login, $password));
 		$resultat=$req->fetch();
-		// Comparaison du pass envoyé via le formulaire avec la base
-		$isPasswordCorrect = password_verify($password, $resultat['password']);
+		
 
 		if (!$resultat)
 			{	
-			echo 'Mauvais identifiant ou mot de passe !';
+			$_POST['error']='Mauvais identifiant ou mot de passe !';
+			echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
+			
 			}
 		else
+		// Comparaison du pass envoyé via le formulaire avec la base
+		$isPasswordCorrect = password_verify($password, $resultat['password']);
 			{
 			if ($isPasswordCorrect) 
 				{
@@ -58,15 +82,19 @@ if (isset($_POST['Valider']) )
 				$_SESSION['id'] = $resultat['id']; //creation de variables de sessions
 				$_SESSION['id_type']=$id_type;
 				$_SESSION['identifiant'] = $identifiant;
-				header ('location : mon_espace.php');
+				echo "<script type='text/javascript'>document.location.replace('mon_espace.php');</script>";
 				exit;
 				}
 			else 
 				{
-				echo 'Mauvais identifiant ou mot de passe !';
+				echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
 				}
 		
 			}
 		}
 	}
 ?>
+		<!-- DIV Pied de page -->	
+		<?php include ("../mise_en_page/pied.html");?>
+	</body>
+</html>

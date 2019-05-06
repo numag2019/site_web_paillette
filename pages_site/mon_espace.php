@@ -51,17 +51,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
 				//lien vers la plateforme paillette en tant qu'administrateur de race 
 				echo "<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
 				}
-			else
-			{
-			include ("authentification.php"); //formulaire de connexion
-			}
 				
-		}
-		// S'il n'est pas connecté on affiche le formulaire de connexion
-		else
-			{
-		
-			}
 		?>
 		<!-- DIV Pied de page -->	
 		<?php include ("../mise_en_page/pied.html");?>

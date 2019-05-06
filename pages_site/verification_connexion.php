@@ -2,7 +2,9 @@
 
 if(empty($_POST['identifiant']) or empty($_POST['mdp'])) 
 	{
-	echo "Veuillez remplir les deux champs.";
+	$_SESSION['error']= "Veuillez remplir les deux champs.";
+	header ('location : authentification.php')
+	;
 	}
 
 else
@@ -24,13 +26,16 @@ else
 
 	if (!$resultat)
 	{	
-		echo 'Mauvais identifiant ou mot de passe !';
+		$_SESSION['error']= 'Mauvais identifiant ou mot de passe !';
+		header ('location : authentification.php');
 	}
 	else
 	{
 		if ($isPasswordCorrect) 
 		{
 			session_start();
+			$_SESSION['error']= array()
+			session_destroy()
 			$_SESSION['id'] = $resultat['id']; //creation de variables de sessions
 			$_SESSION['id_type']=$id_type;
 			$_SESSION['identifiant'] = $identifiant;
@@ -38,7 +43,8 @@ else
 		}
 		else 
 		{
-			echo 'Mauvais identifiant ou mot de passe !';
+		$_SESSION['error']= 'Mauvais identifiant ou mot de passe !';
+		header ('location : authentification.php');
 		}
 	
 	}

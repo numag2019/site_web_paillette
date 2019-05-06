@@ -1,31 +1,53 @@
 
 <?php
-
-function creationcsv($lignes,$nom_fichier)
+// Fonction créant un csv ayant comme variable une requete et le nom du fichier (appelé par la page creationcsv.php)
+function creationcsv($requete,$nom_fichier)
 {
-	// Paramétrage de l'écriture du futur fichier CSV
+	$link=mysqli_connect('localhost','root','','genis_test');
+	mysqli_set_charset($link,"utf8mb4");
+
+	// Recuperation de la requete 		
+	$obs=mysqli_query($link,$requete);
+
+	// Transformation donnees en tableau 
+	$tab=mysqli_fetch_all($obs);
+
+	// Recuperation lignes et colonnes du tableau
+	$nbligne=mysqli_num_rows($obs);
+	$nbcol=mysqli_num_fields($obs);
+
+	//chemin du fichier texte
 	$chemin = 'csv/'.$nom_fichier.'.csv';
 
-	// Création du fichier csv (le fichier est vide pour le moment)
-	// w+ : consulter http://php.net/manual/fr/function.fopen.php
+	// Creation du fichier csv (le fichier est vide pour le moment)
 	$fichier_csv = fopen($chemin, 'w+');
 
-	// Si votre fichier a vocation a être importé dans Excel,
-	// vous devez impérativement utiliser la ligne ci-dessous pour corriger
-	// les problèmes d'affichage des caractères internationaux (les accents par exemple)
+	//Pour éviter les problemes avec des caracteres speciaux sur le fichier texte
 	fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
-
-	// Boucle foreach sur chaque ligne du tableau
-	foreach($lignes as $ligne){
-		// chaque ligne en cours de lecture est insérée dans le fichier
-		// les valeurs présentes dans chaque ligne seront séparées par $delimiteur
-		fputcsv($fichier_csv,$ligne,";","\"");
+	
+	// Creation de l'ecrit destine au csv
+	$i=0;
+	$ecrit='';
+	while ($i<$nbligne)
+	{	
+		$ecrit.='/"'.$tab[$i][0];
+		$j=1;
+		while ($j<$nbcol-1)
+		{
+			$ecrit.='";"'. $tab[$i][$j];
+			$j++;
+		}
+		$ecrit.='";"'.$tab[$i][$nbcol-1].'"/'."\r\n";
+		$i++;
 	}
-
+	
+	//ecriture dans le csv
+	fwrite($fichier_csv,$ecrit);
+	
 	// fermeture du fichier csv
 	fclose($fichier_csv);
 
 }
-?>
 
+?>
 

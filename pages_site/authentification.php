@@ -37,7 +37,7 @@
 <a href="mot_de_passe_oublie.php">Mot de passe oublié ?</a></li>
 <br />
 <?php if (isset($_SESSION['error']))
-	{echo $_SESSION['error']}
+	{echo $_SESSION['error'];}
 	
 
 ?>

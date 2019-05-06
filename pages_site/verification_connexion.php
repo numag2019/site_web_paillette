@@ -34,9 +34,9 @@ else
 		if ($isPasswordCorrect) 
 		{
 			session_start();
-			$_SESSION['error']= array()
+			$_SESSION= array()
 			session_destroy()
-			$_SESSION['id'] = $resultat['id']; //creation de variables de sessions
+			$_SESSION['id_utilisateur'] = $resultat['id_utilisateur']; //creation de variables de sessions
 			$_SESSION['id_type']=$id_type;
 			$_SESSION['identifiant'] = $identifiant;
 			header ('location : mon_espace.php');

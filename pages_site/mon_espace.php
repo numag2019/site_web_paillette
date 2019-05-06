@@ -1,15 +1,10 @@
+<?php
+session_start();
+?>
 <!-- Page disponible aux éleveurs bovins identifiés, 
 		elle permet l'accès à la plateforme paillette et à la page des états de sorties
 		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->
-
-<?php
-if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
-	{
-	header ('Location : authentification.php'); //formulaire de connexion
-	exit;
-	}
-?>		{		
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
 	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
 		<title>
@@ -26,16 +21,19 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
 <!-- DIV Navigation (Menus) -->
 	<?php include("../mise_en_page/navigation.html"); ?>
 	
+	
 	<?php
+	if (isset($_SESSION['id_utilisateur']))
+	{
 			// On affiche les liens disponible au type d'utilisateur connecté
-			if ($_SESSION['id_type']=1)//eleveur
+			if ($_SESSION['id_type']==1)//eleveur
 			{ 
 			//lien vers la page etats_de_sorties.php
 			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>";
 			//lien vers la plateforme paillette entant qu'éleveurs
 			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
 			}
-			elseif ($_SESSION['id_type']=2)//administrateur de race
+			elseif ($_SESSION['id_type']==2)//administrateur de race
 				{
 				//lien vers la page etats_de_sorties.php en 
 				echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; 
@@ -44,13 +42,16 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
 				//lien vers la plateforme paillette en tant qu'administrateur de race 
 				echo "<p><a href='bilan_plan_previsionnel_IA.php'>Bilan plan prévisionnel d IA</a> ?</p>";
 				}
-			elseif ($_SESSION['id_type']=3)
+			elseif ($_SESSION['id_type']==3)
 				{
 				//lien vers l'administration du site
 				echo "<p><a href='administration.php'>Accès à l'administration du site</a> ?</p>"; 
 				//lien vers la plateforme paillette en tant qu'administrateur de race 
 				echo "<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
 				}
+	}
+	else 
+	{echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}
 				
 		?>
 		<!-- DIV Pied de page -->	

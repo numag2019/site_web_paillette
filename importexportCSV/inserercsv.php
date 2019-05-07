@@ -38,9 +38,7 @@ INTO TABLE eleveurs_intermediaire
         STARTING BY '/'
         TERMINATED BY '/'";
 
-    if ($obsE=mysqli_query($link,$queryEleveurs)) {
-        echo "executed";
-	}
+$obsE=mysqli_query($link,$queryEleveurs)
 
 //•• Ajout de données à la table bovins_intermediaire ••\\
 $queryBovins ="LOAD DATA LOCAL INFILE 'csv/tableau_animal_csv.csv'
@@ -53,9 +51,8 @@ INTO TABLE bovins_intermediaire
         STARTING BY '/'
         TERMINATED BY '/'";
 
-    if ($obsB=mysqli_query($link,$queryBovins)) {
-        echo "executed";
-	} 
+$obsB=mysqli_query($link,$queryBovins)
+
 //•• Ajout de données à la table races_intermediaire ••\\
 $queryRaces ="LOAD DATA LOCAL INFILE 'csv/tableau_race_csv.csv'
 INTO TABLE races_intermediaire
@@ -67,9 +64,8 @@ INTO TABLE races_intermediaire
         STARTING BY '/'
         TERMINATED BY '/'";
 
-    if ($obsC=mysqli_query($link,$queryRaces)) {
-        echo "executed";
-	}
+$obsC=mysqli_query($link,$queryRaces);
+
 		
 //•• Ajout de données à la table coefficients_intermediaire ••\\
 $queryCoeff ="LOAD DATA LOCAL INFILE 'csv/tableau_coeff_csv.csv'
@@ -82,9 +78,11 @@ INTO TABLE coefficients_intermediaire
         STARTING BY '/'
         TERMINATED BY '/'";
 
-    if ($obsD=mysqli_query($link,$queryCoeff)) {
-        echo "executed";
-	}
+$obsD=mysqli_query($link,$queryCoeff);
+
+	
+include('requetes_transfert.php');
+
 ?>
 	
 </body>

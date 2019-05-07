@@ -29,25 +29,25 @@ session_start();
 			if ($_SESSION['id_type']==1)//eleveur
 			{ 
 			//lien vers la page etats_de_sorties.php
-			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>";
+			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a></p>";
 			//lien vers la plateforme paillette entant qu'éleveurs
-			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
+			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>";
 			}
 			elseif ($_SESSION['id_type']==2)//administrateur de race
 				{
 				//lien vers la page etats_de_sorties.php en 
-				echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a> ?</p>"; 
+				echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a></p>"; 
 				//lien vers la page plateforme plan_previsionnel_IA.php en tant qu'éleveurs
-				echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
+				echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>";
 				//lien vers la plateforme paillette en tant qu'administrateur de race 
-				echo "<p><a href='bilan_plan_previsionnel_IA.php'>Bilan plan prévisionnel d IA</a> ?</p>";
+				echo "<p><a href='bilan_plan_previsionnel_IA.php'>Bilan plan prévisionnel d IA</a></p>";
 				}
 			elseif ($_SESSION['id_type']==3)
 				{
 				//lien vers l'administration du site
-				echo "<p><a href='administration.php'>Accès à l'administration du site</a> ?</p>"; 
+				echo "<p><a href='administration.php'>Accès à l'administration du site</a></p>"; 
 				//lien vers la plateforme paillette en tant qu'administrateur de race 
-				echo "<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a> ?</p>";
+				echo "<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>";
 				}
 	}
 	else 

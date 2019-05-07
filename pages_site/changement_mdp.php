@@ -26,11 +26,11 @@
 
 <form action="changement_mdp_verification_form.php" method="post">
 <p>
-    <input type="text" name="mdp" />
+    <input type="text" name="mdp_changement" />
     <input type="submit" value="Valider" />
 </p>
 </form>
-<?php if (isset $_SESSION['error'])
+<?php if (isset ($_SESSION['error']))
 	{echo $_SESSION['error'];}?>
 	</body>
 	<?php include ("../mise_en_page/pied.html");?>

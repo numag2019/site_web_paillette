@@ -20,14 +20,15 @@
 	
 <?php
 
-if(isset($_POST['mdp']))
-{	
-	$mdp=$_POST['mdp'];
+if(isset($_POST['mdp_changement']))
+	{	
+	$mdp=$_POST['mdp_changement'];
+
 	if (password_verify($mdp,$_SESSION['mdp']))
 	{		
-	echo "<br /> Veuillez entrer votre mot de passe actuel :";
+	echo "<br /> Veuillez entrer votre nouveau mot de passe deux fois de façon identiques:";
 	echo "<form action='changement_mdp_verification_form.php' method='post'>
-			echo<p>
+			<p>
 			<input type='text' name='nouveaumdp1' />
 			<input type='text' name='nouveaumdp2' />
 			<input type='submit' value='Valider' />
@@ -39,9 +40,8 @@ if(isset($_POST['mdp']))
 		$_SESSION['error']='Votre mot de passe est incorrect.';
 		echo "<script type='text/javascript'>document.location.replace('changement_mdp.php');</script>";
 	}
-	$_SESSION['error']='Veuillez saisir un mot de passe';
-	echo "<script type='text/javascript'>document.location.replace('changement_mdp.php');</script>";
 }
+///////////////mettre un else 
 if(isset($_POST['nouveaumdp1']) and isset($_POST['nouveaumdp2']))
 	{
 		if ($_POST['nouveaumdp1']=$_POST['nouveaumdp2'])
@@ -57,17 +57,13 @@ if(isset($_POST['nouveaumdp1']) and isset($_POST['nouveaumdp2']))
 		$req->bindValue('mdp', $mdp_hash, PDO::PARAM_STR);
 		$req->bindValue('id_utilisateur', $_SESSION['id_utilisateur'], PDO::PARAM_STR);
 		$req->execute();
-		$rows = $req->rowCount();
-		if ($rows>0) 
-			{
-			echo "<div class='alert alert-success'><p>Votre mot de passe a bien été changé.</p>";
+		echo "<script type='text/javascript'>document.location.replace('deconnexion.php');</script>";
+		
 		}
-	else 
-		{
-		echo "Veuillez entrer deux mots de passe identiques !";   
-		}
-		echo "Veuillez entrer deux mots de passe identiques !";   
-		}
+else 
+	{
+	echo "Veuillez entrer deux mots de passe identiques !";   
+	}
 
 }
 

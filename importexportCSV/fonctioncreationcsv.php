@@ -1,21 +1,39 @@
 
 <?php
 // Fonction créant un csv ayant comme variable une requete et le nom du fichier (appelé par la page creationcsv.php)
-function creationcsv($requete,$nom_fichier)
+function creationcsv($requete1, $requete2, $nom_fichier)
 {
 	$link=mysqli_connect('localhost','root','','genis_test');
 	mysqli_set_charset($link,"utf8mb4");
 
 	// Recuperation de la requete 		
-	$obs=mysqli_query($link,$requete);
-
+	$obs1=mysqli_query($link,$requete1);
+	if ($requete2!=NULL)
+	{
+		$obs2=mysqli_query($link,$requete2);
+	}
+	
 	// Transformation donnees en tableau 
-	$tab=mysqli_fetch_all($obs);
-
+	$tab=mysqli_fetch_all($obs1);
+	if ($requete2!=NULL)
+	{
+		$tab2=mysqli_fetch_all($obs2);
+	}
+	
 	// Recuperation lignes et colonnes du tableau
-	$nbligne=mysqli_num_rows($obs);
-	$nbcol=mysqli_num_fields($obs);
+	$nbligne=mysqli_num_rows($obs1);
+	if ($requete2!=NULL)
+	{
+		$nbligne=mysqli_num_rows($obs2) + mysqli_num_rows($obs1);
+	}
+	$nbcol=mysqli_num_fields($obs1);
 
+	//Concaténation tableaux
+	if ($requete2!=NULL)
+	{
+		$tab=array_merge($tab,$tab2);
+	}
+	
 	//chemin du fichier texte
 	$chemin = 'csv/'.$nom_fichier.'.csv';
 
@@ -41,12 +59,13 @@ function creationcsv($requete,$nom_fichier)
 		$i++;
 	}
 	
+		
 	//ecriture dans le csv
 	fwrite($fichier_csv,$ecrit);
 	
 	// fermeture du fichier csv
 	fclose($fichier_csv);
-
+	
 }
 
 ?>

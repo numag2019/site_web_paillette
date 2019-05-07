@@ -19,10 +19,10 @@ else
 		catch (Exeption $e) { die('Erreur : ' . $e->getMessage())  or die(print_r($bdd->errorInfo())); }
 		
 		// Requête SQL sécurisée
-		$req = $bdd->prepare("SELECT * 
+		$req = $bdd->query("SELECT * 
 							FROM utilisateurs 
-							WHERE identifiant= :identifiant ");
-		$req->bindValue('identifiant', $identifiant, PDO::PARAM_STR);
+							WHERE identifiant= '$identifiant' ");
+
 		$req->execute();
 		$rows = $req->rowCount();
 		$resultat = $req->fetchAll(PDO::FETCH_NAMED);
@@ -44,7 +44,6 @@ else
 				$_SESSION['id_utilisateur'] = $resultat['id_utilisateur']; //creation de variables de sessions
 				$_SESSION['id_type']=$resultat['id_type'];
 				$_SESSION['identifiant'] = $resultat['identifiant'];
-				$_SESSION['mdp']=$mdp;
 				header ('Location: mon_espace.php');
 			}
 			else 

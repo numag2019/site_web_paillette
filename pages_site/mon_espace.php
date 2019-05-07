@@ -29,6 +29,8 @@
 			echo "<p><a href='etats_de_sorties.php'>Accès états de sorties</a></p>";
 			//lien vers la plateforme paillette entant qu'éleveurs
 			echo "<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>";
+			//lien vers la plateforme de récupération de mot de passe
+			echo "<p><a href='changement_mdp.php'>Changer mon mot de passe</a></p>";
 			}
 			elseif ($_SESSION['id_type']==2)//administrateur de race
 				{

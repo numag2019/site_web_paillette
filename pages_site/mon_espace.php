@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!-- Page disponible aux éleveurs bovins identifiés, 
 		elle permet l'accès à la plateforme paillette et à la page des états de sorties
 		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->

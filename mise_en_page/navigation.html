@@ -12,9 +12,10 @@
 			<li class="gauche"><a href="mon_espace.php">Mon espace</a></li>
 			
 <?php 
+	session_start();
 	if (isset($_SESSION['identifiant']))
 	{
-	echo ("Bonjour"&nbsp.$_SESSION['identifiant']);
+	echo ("Bonjour, ".$_SESSION['identifiant']);
 	echo ('<li class="droite"><a href="deconnexion.php">Déconnexion</a></li>');
 	}
 	

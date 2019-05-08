@@ -16,6 +16,19 @@
 							Concepteur : Equipe Numag
 					</h5>
 				</div>
+				<div id="block3" class="col-md-6">
+					<h5 align='right'>
+						<?php 
+						session_start();
+						if (isset($_SESSION['identifiant']))
+						{
+						
+							echo ("<p align='right'>Bonjour, ".$_SESSION['identifiant']."</p>");
+							echo ('<a  href="../pages_site/deconnexion.php"><h5 style="color:white"><em>Déconnexion</em></h5></a>');
+						}
+						?>
+					</h5>
+				</div>
 			</div>
 		</div>
 	</div>	

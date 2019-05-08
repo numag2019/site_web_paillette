@@ -54,19 +54,13 @@
 
 		}
 		else 
-			{
-				echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}
-					
-				
-			
-
-
-				//page pour administrer les types d'utilisateurs
-				echo "<p><a href='type_utilisateur.php'>Administer les administrateurs de Races d IA</a></p>";
-			}
+		{
+			echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
+			//page pour administrer les types d'utilisateurs
+			echo "<p><a href='type_utilisateur.php'>Administer les administrateurs de Races d IA</a></p>";
+		}
 	
-	else 
-	{echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}
+
 				
 		?>
 		<!-- DIV Pied de page -->	

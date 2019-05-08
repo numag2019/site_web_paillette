@@ -9,7 +9,6 @@ intérieur div :
 class="container-fluid"
 style="background:red"
 	<div id="block2" class="col-md-6" style="border:1px solid red">
-	
-	
+style='background:#9BE7DD'
 	
 	https://getbootstrap.com/docs/4.2/components/forms/

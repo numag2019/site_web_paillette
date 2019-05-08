@@ -6,5 +6,5 @@
 		$_SESSION = array();
 		session_destroy();
 		// Redirection vers l'acceuil 
-		header ('Location: acceuil_site.php')
+		header ('Location: accueil_site.php')
 	?>

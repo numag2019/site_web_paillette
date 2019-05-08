@@ -102,12 +102,12 @@ if (isset ($_POST['id_type_selection']))
 	$req->bindValue('race_admin',$_POST['id_type_selection'], PDO::PARAM_STR);
 	$req->execute();
 	$_SESSION['message_type_utilisateur']= 'Changement effectué';
-	unset ($_SESSION['id_utilisateur_selection'])
-	unset ($_SESSION['id_type_selection'])
+	unset ($_SESSION['id_utilisateur_selection']);
+	unset ($_SESSION['id_type_selection']);
 	//echo "<script type='text/javascript'>document.location.replace('type_utilisateur.php');</script>";
 	header('Refresh: 0');
 	}
-if (isset($_SESSION['message_type_utilisateur'])
+if (isset($_SESSION['message_type_utilisateur']))
 	{echo $_SESSION['message_type_utilisateur']; }
 			?>
 		<!-- DIV Pied de page -->	

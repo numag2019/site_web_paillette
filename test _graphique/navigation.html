@@ -1,0 +1,39 @@
+<!-- appelle des pages suivantes dans la barre de navigation-->
+
+<HTML>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css"> 
+
+		
+		<!-- navigation.html -->
+
+	<?php 
+	session_start();
+		if (isset($_SESSION['identifiant']))
+		{
+			echo ("Bonjour, ".$_SESSION['identifiant']);
+			echo ('<li class="droite"><a href="deconnexion.php">Déconnexion</a></li>');
+		}
+	?>
+	
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="navbar-brand" id="navbarNav">
+		<ul class="nav nav-pills">
+			<li class="nav-item">
+				<a class="nav-link"><img src="bazadaise.jpg" width="40" height="40" alt=""></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="accueil_site_test_graphique.php">Accueil</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="http://194.199.250.44:8080/ora/main_icefaces.html">Information Ovin</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="mon_espace.php">Mon espace</a>
+			</li>
+		</ul>	
+	</div>
+</nav>
+
+</HTML>

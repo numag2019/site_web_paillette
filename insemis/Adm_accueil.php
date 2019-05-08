@@ -15,19 +15,19 @@
 	<body>
 <?php
 {
-	if ($_SESSION['id_type']==3)
+	if ($_SESSION['id_type']==3) //administrateur
 	{?>
 	<p><a href="Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a></p>
 	<p><a href="Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a></p>
 <?php 
 	}	
-	elseif ($_SESSION['id_type']==2)
+	elseif ($_SESSION['id_type']==2) //animateur de race
 	{?>
 	<p><a href="Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a></p>
 	<p><a href="Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a></p>
 <?php 
 	}
-	elseif ($_SESSION['id_type']==1)
+	elseif ($_SESSION['id_type']==1)// eleveur
 	{?>
 	<p><a href="Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a></p>
 	<p><a href="Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a></p>

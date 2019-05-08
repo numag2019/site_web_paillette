@@ -48,6 +48,9 @@
 				//lien vers la plateforme paillette en tant qu'administrateur de race 
 				echo "<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>";
 				}
+				//page pour administrer les types d'utilisateurs
+				echo "<p><a href='type_utilisateur.php'>Administer les administrateurs de Races d IA</a></p>";
+				}
 	}
 	else 
 	{echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}

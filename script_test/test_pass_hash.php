@@ -1,6 +1,6 @@
 
 <?php
-$mdpa=password_hash("secu", PASSWORD_DEFAULT);
+$mdpa=password_hash("joseline", PASSWORD_DEFAULT);
 echo $mdpa;
 echo "<BR/>";
 $mdpb=password_hash('secu', PASSWORD_BCRYPT);

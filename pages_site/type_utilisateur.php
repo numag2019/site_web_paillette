@@ -18,7 +18,7 @@
 <!-- DIV Navigation (Menus) -->
 	<?php include("../mise_en_page/navigation.html"); ?>
 <?php 
-if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
+if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']))
 	{
 
 	// Sélection de l'utilisateur dont vous voulez changer le droit 
@@ -33,7 +33,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	mysqli_set_charset($link,"utf8mb4");
 
 	// Requête
-	$querya="SELECT  nom prenom id_utilisateur FROM ulisateurs WHERE id_type=1";
+	$querya="SELECT  nom, prenom, id_utilisateur FROM utilisateurs WHERE id_type=1";
 	$result=mysqli_query($link,$querya);
 
 
@@ -42,7 +42,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	$nbligne=mysqli_num_rows($result);
 	$nbcol=mysqli_num_fields($result);
 	echo '<FORM action="type_utilisateur.php" method="POST" name="form">';
-	
+	$j=0;
 		while ($j<$nbligne)
 			{
 			echo "<option value=".urlencode($tab[$j][1]).">".$tab[$j][1]."</option>";
@@ -76,7 +76,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	$nbligne=mysqli_num_rows($result);
 	$nbcol=mysqli_num_fields($result);
 	echo '<FORM action="type_utilisateur.php" method="POST" name="form">';
-	
+	$j=0;
 		while ($j<$nbligne)
 			{
 			echo "<option value=".urlencode($tab[$j][1]).">".$tab[$j][1]."</option>";

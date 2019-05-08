@@ -20,12 +20,12 @@
 					<form action="verification_connexion.php" method="post">
 					  <div class="form-group">
 						<label for="identifiant">Identifiant</label>
-						<input type="text" class="form-control" id="identifiant" placeholder="Identifiant">
+						<input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="Identifiant">
 						<small id="remarque" class="form-text text-muted">Vous devez détenir un compte</small>
 					  </div>
 					  <div class="form-group">
 						<label for="mdp">Mot de passe</label>
-						<input type="password" class="form-control" id="mdp" placeholder="Mot de passe">
+						<input type="password" name="mdp" class="form-control" id="mdp" placeholder="Mot de passe">
 						<small id="mdpoublie" class="form-text text-muted"><a href="mot_de_passe_oublie.php">Mot de passe oublié ?</a></small>
 					  </div>
 					  <button type="submit" class="btn btn-primary">Valider</button>

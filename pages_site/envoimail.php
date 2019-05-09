@@ -1,7 +1,7 @@
 <?php
 function envoimail ($email)
 {
-	$email = str_replace(array("\n","\r",PHP_EOL),'',$_POST['email']); 
+	$email = str_replace(array("\n","\r",PHP_EOL),'','$email'); 
 	//Vérification que la chaîne de caractères entrée est bien une adresse mail
 if (filter_var($email, FILTER_VALIDATE_EMAIL))
 	{

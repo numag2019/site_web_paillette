@@ -56,10 +56,7 @@
 		{
 			echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
 		}
-
-	
-
-				
+		
 		?>
 		<!-- DIV Pied de page -->	
 

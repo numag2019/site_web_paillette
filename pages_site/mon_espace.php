@@ -51,14 +51,14 @@
 				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
 				<?php
 				}
-
+		}
 		else 
-			{
-				echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}
-			}
+		{
+			echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
+		}
+
 	
-	else 
-	{echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}
+
 				
 		?>
 		<!-- DIV Pied de page -->	

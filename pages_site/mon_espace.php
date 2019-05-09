@@ -26,7 +26,7 @@
 				<!--lien vers la page etats_de_sorties.php-->
 				<p><a href='etats_de_sorties.php'>Accès états de sorties</a></p>
 				<!--lien vers la plateforme paillette entant qu'éleveurs-->
-				<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>
+				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
 				<!--lien vers la plateforme de récupération de mot de passe-->
 				<p><a href='changement_mdp.php'>Changer mon mot de passe</a></p>
 				<?php
@@ -39,7 +39,7 @@
 				<!--lien vers la page plateforme plan_previsionnel_IA.php en tant qu'éleveurs-->
 				<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>
 				<!--lien vers la plateforme paillette en tant qu'administrateur de race--> 
-				<p><a href='bilan_plan_previsionnel_IA.php'>Bilan plan prévisionnel d IA</a></p>
+				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
 				<?php
 				}
 			elseif ($_SESSION['id_type']==3)
@@ -48,7 +48,7 @@
 				<!--lien vers l'administration du site-->
 				<p><a href='administration.php'>Accès à l'administration du site</a></p> 
 				<!--lien vers la plateforme paillette en tant qu'administrateur de race -->
-				<p><a href='bilan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>
+				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
 				<?php
 				}
 

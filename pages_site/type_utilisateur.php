@@ -3,27 +3,25 @@
 		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
-		<title>
-		Site web Cranet
-		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+		
+		<!-- Entête -->
+		<?php include("../mise_en_page/entete.html");?>	
 
+		<!--  Navigation -->
+		<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
 	
 	<body>
-	<div>
-	<!-- DIV Entête -->
-	<?php include("../mise_en_page/entete.html");?>	
-
-<!-- DIV Navigation (Menus) -->
-	<?php include("../mise_en_page/navigation.html"); ?>
 <?php 
-if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
+if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']))
 	{
 
 	// Sélection de l'utilisateur dont vous voulez changer le droit 
 	echo "<br>";
-	echo "*Choix de l'utilisateur que vous voulez rendre administateur de races";
+	echo "Choix de l'utilisateur que vous voulez rendre animateur de races";
 	echo "<br>";
 
 	// recuperation des utilisateurs eleveurs
@@ -33,7 +31,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	mysqli_set_charset($link,"utf8mb4");
 
 	// Requête
-	$querya="SELECT  nom prenom id_utilisateur FROM ulisateurs WHERE id_type=1";
+	$querya="SELECT  nom, prenom, id_utilisateur FROM utilisateurs WHERE id_type=1";
 	$result=mysqli_query($link,$querya);
 
 
@@ -42,7 +40,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	$nbligne=mysqli_num_rows($result);
 	$nbcol=mysqli_num_fields($result);
 	echo '<FORM action="type_utilisateur.php" method="POST" name="form">';
-	
+	$j=0;
 		while ($j<$nbligne)
 			{
 			echo "<option value=".urlencode($tab[$j][1]).">".$tab[$j][1]."</option>";
@@ -57,7 +55,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	{
 		// Sélection de l'utilisateur dont vous voulez changer le droit 
 	echo "<br>";
-	echo "*Choix de la race à administrer";
+	echo "Choix de la race à animer";
 	echo "<br>";
 
 	// recuperation des utilisateurs eleveurs
@@ -76,7 +74,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['utilisateur']))
 	$nbligne=mysqli_num_rows($result);
 	$nbcol=mysqli_num_fields($result);
 	echo '<FORM action="type_utilisateur.php" method="POST" name="form">';
-	
+	$j=0;
 		while ($j<$nbligne)
 			{
 			echo "<option value=".urlencode($tab[$j][1]).">".$tab[$j][1]."</option>";
@@ -102,12 +100,12 @@ if (isset ($_POST['id_type_selection']))
 	$req->bindValue('race_admin',$_POST['id_type_selection'], PDO::PARAM_STR);
 	$req->execute();
 	$_SESSION['message_type_utilisateur']= 'Changement effectué';
-	unset ($_SESSION['id_utilisateur_selection'])
-	unset ($_SESSION['id_type_selection'])
+	unset ($_SESSION['id_utilisateur_selection']);
+	unset ($_SESSION['id_type_selection']);
 	//echo "<script type='text/javascript'>document.location.replace('type_utilisateur.php');</script>";
 	header('Refresh: 0');
 	}
-if (isset($_SESSION['message_type_utilisateur'])
+if (isset($_SESSION['message_type_utilisateur']))
 	{echo $_SESSION['message_type_utilisateur']; }
 			?>
 		<!-- DIV Pied de page -->	

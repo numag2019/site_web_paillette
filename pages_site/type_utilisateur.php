@@ -44,53 +44,45 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) and
 	  echo '<select name="id_utilisateur_selection" id="id_utilisateur_selection">';
 		while ($j<$nbligne)
 			{
-			echo "<option value=".$tab[$j][1].">".$tab[$j][0]."</option>";
+			echo "<option value=".$tab[$j][2].">".$tab[$j][0]."</option>";
 			$j++;
 			}
 			echo '</select>';
-	echo '<input onclick="do;" type="submit" value="id_utilisateur_selection" />';
-	echo '</FORM>';
-	}
+
+	
 	
 ///////////Si l'utilisateur a déjà choisi l'éleveur	
-	if (isset ($_POST['id_utilisateur_selection']))
-	{
-	$_SESSION['id_utilisateur_selection']=$_POST['id_utilisateur_selection'];
+
+
 	// Sélection de l'utilisateur dont vous voulez changer le droit 
 	echo "<br>";
 	echo "Choix de la race à animer";
 	echo "<br>";
 
-	// recuperation des utilisateurs eleveurs
-	$link=mysqli_connect('localhost','root','','crabase');
-
-	//Change l'encodage des données de la BDD
-	mysqli_set_charset($link,"utf8mb4");
-
 	// Requête
-	$querya="SELECT id_type, libelle_type FROM `type_utilisateur` WHERE id_type > 20 ";
-	$result=mysqli_query($link,$querya);
+	$queryb="SELECT id_type, libelle_type FROM `type_utilisateur` WHERE id_type > 20 ";
+	$resultb=mysqli_query($link,$queryb);
 
 
 	//Création tableau
-	$tab=mysqli_fetch_all($result);
-	$nbligne=mysqli_num_rows($result);
-	$nbcol=mysqli_num_fields($result);
-	echo '<FORM action="type_utilisateur.php" method="POST" name="form">';
+	$tabb=mysqli_fetch_all($resultb);
+	$nbligneb=mysqli_num_rows($resultb);
+	$nbcolb=mysqli_num_fields($resultb);
+	
 	$j=0;
-	 echo '<select name="Race à administrer" id="id_type_selection">';
-		while ($j<$nbligne)
+	 echo '<select name="id_type_selection" id="id_type_selection">';
+		while ($j<$nbligneb)
 			{
-			echo "<option value=".$tab[$j][2].">".$tab[$j][1]."</option>";
+			echo "<option value=".$tabb[$j][0].">".$tabb[$j][1]."</option>";
 			$j++;
 			}
 	echo '</select>';
-	echo '<input onclick="do;" type="submit" value="id_type_selection" />';
+	echo '<input onclick="do;" type="submit" value="Valider" />';
 	echo '</FORM>';
-	
 	}
+	
 ////////////
-if (isset ($_POST['id_type_selection']))
+else
 	{
 	// Connexion à la BDD en PDO
 	try { $bdd = new PDO('mysql:host=localhost;dbname=crabase','root',''); }
@@ -101,15 +93,13 @@ if (isset ($_POST['id_type_selection']))
 	$req = $bdd->prepare("UPDATE utilisateurs
 						SET id_type = :race_admin
 						WHERE id_utilisateur= :id_utilisateur ");
-						
-	$req->bindValue('id_utilisateur',$_SESSION['id_utilisateur_selection'], PDO::PARAM_STR);
+	$req->bindValue('id_utilisateur',$_POST['id_utilisateur_selection'], PDO::PARAM_STR);
 	$req->bindValue('race_admin',$_POST['id_type_selection'], PDO::PARAM_STR);
 	$req->execute();
-	var_dump($req); /*
+	
 	$_SESSION['message_type_utilisateur']= 'Changement effectué';
 	unset ($_SESSION['id_utilisateur_selection']);
-	//echo "<script type='text/javascript'>document.location.replace('type_utilisateur.php');</script>";
-	header('Refresh: 0');*/
+	header('Refresh: 0');
 	}
 	
 if (isset($_SESSION['message_type_utilisateur']))

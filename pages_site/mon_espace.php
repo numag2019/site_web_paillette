@@ -51,19 +51,12 @@
 				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
 				<?php
 				}
-
+		}
 		else 
-<<<<<<< HEAD
 		{
 			echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
-			//page pour administrer les types d'utilisateurs
-			echo "<p><a href='type_utilisateur.php'>Administer les administrateurs de Races d IA</a></p>";
 		}
-=======
-			{
-				echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";}
-			}
->>>>>>> fcd2845eaceb4e39956b25641b86ed1c8d3c81e1
+
 	
 
 				

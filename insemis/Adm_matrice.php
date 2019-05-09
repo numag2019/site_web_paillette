@@ -35,17 +35,14 @@
 		
 		if (in_array($eleveur,$liste_eleveur_bord))
 		{
-			echo "eleveur bordelaise";
 			echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Bordelaise </a> <br><br>" ;
 		}
 		if (in_array($eleveur,$liste_eleveur_mar))
 		{
-			echo "eleveur marine";
 			echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Marine </a> <br><br>" ;
 		}
 		if (in_array($eleveur,$liste_eleveur_bear))
 		{
-			echo "eleveur bearnaise";
 			echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 		}
 		
@@ -55,6 +52,9 @@
 	
 		<FORM action="Adm_historique.php" method="GET">
 			<INPUT TYPE="SUBMIT" name="bt_submit" value="Voir son historique de prévisions paillettes">
+			<?php
+				echo "<INPUT type='hidden' name='eleveur' value='" . $eleveur . "'>" ;
+			?>
 		</FORM>
 		
 		

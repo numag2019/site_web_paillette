@@ -6,7 +6,7 @@
 
 CETTE PAGE PERMET D'ALIMENTER LES 4 TABLES INTERMÉDIAIRES DE LA BDD DATACRANET (eleveurs_intermediaire, bovins_intermediaire, 
 races_intermediaire, coefficients_intermediaire),
-À PARTIR DES 4 FICHIERS .CSV CRÉES DANS LE FICHIER "creationcsv.php" (tableau_eleveurs_csv
+À PARTIR DES 4 FICHIERS .CSV CRÉES DANS LE FICHIER "creationcsv.php" 
 
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••-->
 
@@ -15,7 +15,7 @@ races_intermediaire, coefficients_intermediaire),
 
 
 //••• Connexion à la base de données DataCraNet •••\\
-$link=mysqli_connect('localhost','root','','crabase');
+$link=mysqli_connect('localhost','root','','datacranet');
 
 //•••Suppression données des tables intermediaires•••\\
 $queryDC="DELETE FROM coefficients_intermediaire";
@@ -82,7 +82,7 @@ INTO TABLE coefficients_intermediaire
 $obsD=mysqli_query($link,$queryCoeff);
 
 	
-include('requetes_transfert.php');
+//include('requetes_transfert.php');
 
 echo "Vos données ont bien été mises à jour";
 ?>

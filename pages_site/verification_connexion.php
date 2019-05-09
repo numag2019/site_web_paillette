@@ -40,10 +40,10 @@ else
 	// Comparaison du mot de passe envoyé via le formulaire avec celui de la base
 			if (password_verify($mdp, $resultat['mdp'])) 
 			{
-				
 				$_SESSION['id_utilisateur'] = $resultat['id_utilisateur']; //creation de variables de sessions
 				$_SESSION['id_type']=$resultat['id_type'];
 				$_SESSION['identifiant'] = $resultat['identifiant'];
+				$_SESSION['mdp']=$resultat['mdp'];
 				header ('Location: mon_espace.php');
 			}
 			else 

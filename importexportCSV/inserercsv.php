@@ -4,8 +4,9 @@
 
 <!--••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
-CETTE PAGE PERMET D'ALIMENTER LES 4 TABLES INTERMÉDIAIRES DE LA BDD DATACRANET (eleveurs_intermediaire, bovins_intermediaire, races_intermediaire, coefficients_intermediaire),
-À PARTIR DES 4 FICHIERS .CSV CRÉES DANS LE FICHIER "creationcsv.php" (tableau_eleveurs_csv
+CETTE PAGE PERMET D'ALIMENTER LES 4 TABLES INTERMÉDIAIRES DE LA BDD DATACRANET (eleveurs_intermediaire, bovins_intermediaire, 
+races_intermediaire, coefficients_intermediaire),
+À PARTIR DES 4 FICHIERS .CSV CRÉES DANS LE FICHIER "creationcsv.php" 
 
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••-->
 
@@ -14,7 +15,7 @@ CETTE PAGE PERMET D'ALIMENTER LES 4 TABLES INTERMÉDIAIRES DE LA BDD DATACRANET 
 
 
 //••• Connexion à la base de données DataCraNet •••\\
-$link=mysqli_connect('localhost','root','','crabase');
+$link=mysqli_connect('localhost','root','','datacranet');
 
 //•••Suppression données des tables intermediaires•••\\
 $queryDC="DELETE FROM coefficients_intermediaire";
@@ -28,7 +29,7 @@ $obsDB=mysqli_query($link,$queryDB);
 $obsDR=mysqli_query($link,$queryDR);
 
 //•• Ajout de données à la table eleveurs_intermediaire ••\\
-$queryEleveurs ="LOAD DATA LOCAL INFILE 'csv/tableau_eleveurs_csv.csv'
+$queryEleveurs ="LOAD DATA LOCAL INFILE 'csv/tableauEleveurs.csv'
 INTO TABLE eleveurs_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -38,10 +39,10 @@ INTO TABLE eleveurs_intermediaire
         STARTING BY '/'
         TERMINATED BY '/'";
 
-$obsE=mysqli_query($link,$queryEleveurs)
+$obsE=mysqli_query($link,$queryEleveurs);
 
 //•• Ajout de données à la table bovins_intermediaire ••\\
-$queryBovins ="LOAD DATA LOCAL INFILE 'csv/tableau_animal_csv.csv'
+$queryBovins ="LOAD DATA LOCAL INFILE 'csv/tableauAnimal.csv'
 INTO TABLE bovins_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -51,10 +52,10 @@ INTO TABLE bovins_intermediaire
         STARTING BY '/'
         TERMINATED BY '/'";
 
-$obsB=mysqli_query($link,$queryBovins)
+$obsB=mysqli_query($link,$queryBovins);
 
 //•• Ajout de données à la table races_intermediaire ••\\
-$queryRaces ="LOAD DATA LOCAL INFILE 'csv/tableau_race_csv.csv'
+$queryRaces ="LOAD DATA LOCAL INFILE 'csv/tableauRace.csv'
 INTO TABLE races_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -68,7 +69,7 @@ $obsC=mysqli_query($link,$queryRaces);
 
 		
 //•• Ajout de données à la table coefficients_intermediaire ••\\
-$queryCoeff ="LOAD DATA LOCAL INFILE 'csv/tableau_coeff_csv.csv'
+$queryCoeff ="LOAD DATA LOCAL INFILE 'csv/tableauCoeff.csv'
 INTO TABLE coefficients_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -81,8 +82,9 @@ INTO TABLE coefficients_intermediaire
 $obsD=mysqli_query($link,$queryCoeff);
 
 	
-include('requetes_transfert.php');
+//include('requetes_transfert.php');
 
+echo "Vos données ont bien été mises à jour";
 ?>
 	
 </body>

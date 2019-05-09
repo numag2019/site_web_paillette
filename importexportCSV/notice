@@ -1,0 +1,17 @@
+DOSSIER GENIS (partie permettant de créer les csv et d'afficher une touche 'export vers datacranet' sur Genis
+-Remplacer 'html_bodystart1' dans situé dans'librarie'.
+-Créer un dossier 'exportation' contenant :  -un dossier nommé 'csv' 
+											- 'creationcsv.php'
+											-'fonctioncreationcsv.php'
+											-'exportCRAnet.php'
+											-'ftp.php'
+
+Sur le site web dans un dossier 'importexportCSV'
+-un dossier nommé 'csv'
+-'inserercsv.php'
+-'requetes_transfert.php'
+
+Rmq : chemin d'appel de la page php de mise à jour des données temporaire ('creationcsv.php')
+Ainsi que serveur ftp (ftp.php), fait en local pour l'instant
+Actuellement mettre le dossier 'site_web_paillette' dans le www qui accueille genis.
+Ne peux marcher qu'avec un compte filezilla serveur en localhost qui a comme utilisateur le nom 'cra' avec un mdp 'cranumag'

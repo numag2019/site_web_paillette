@@ -21,7 +21,7 @@
 	<!--lien vers l'administration du site-->
 	<p><a href='type_utilisateur.php'>Rendre un éleveur animateur de race</a></p>
 	<!--lien vers l'administration du site-->
-	<p><a href='type_utilisateur.php'>Rendre un animateur de race éleveur</a></p> 
+	<p><a href='type_utilisateur_supp_anim.php'>Rendre un animateur de race éleveur</a></p> 
 	
 <?php 
 } 

@@ -47,19 +47,14 @@
 
 			//affichage du tableau récap
 			$nb_periodes=count($liste_per);
-			echo $nb_periodes;
 			$i=0 ;
-			//while ($i<$nb_periodes)
-			//{
+			while ($i<$nb_periodes-1)
+			{
 				$nb_vaches=count($liste_vache);
-				echo $nb_vaches;
 				$j=0;
-				//while ($j<$nb_vaches)
-				//{
+				while ($j<$nb_vaches-1)
+				{
 					
-					
-			
-			
 		?>
 
 	</body>

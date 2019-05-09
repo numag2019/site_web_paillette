@@ -13,19 +13,23 @@
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
-<?php include (envoimail.php)
+<?php include ('envoimail.php')?>
 	<body>
-
-<?php
+<form name="x" action="page.php" method="post">
+<input type="submit" value="Page suivante">
+<a class="btn btn-default" name="validation" value ="999" method=post><span class="glyphicon glyphicon-refresh"></span> Cliquer pour réinitialiser tous les mots de passe</a>
+</form>		
+<?php 
+if (isset ($_POST['validation']))
+{
 
 // recuperation des utilisateurs eleveurs
 $link=mysqli_connect('localhost','root','','crabase');
 //Change l'encodage des données de la BDD
 mysqli_set_charset($link,"utf8mb4");
 // Requête
-$querya="SELECT email FROM utilisateurs WHERE id_type<3";
+$querya="SELECT email FROM utilisateurs WHERE id_type <3  ORDER BY email";
 $result=mysqli_query($link,$querya);
-
 
 //Création tableau
 $tab=mysqli_fetch_all($result);
@@ -33,11 +37,14 @@ $nbligne=mysqli_num_rows($result);
 $j=0;
 while ($j<$nbligne)
 	{
-	envoimail($tab[$j])
+	envoimail($tab[$j]);
 	$j++;
-	}
-			
-			<!-- DIV Pied de page -->	
+	echo $j;}
+echo "Les nouveaux mots de passe ont bien été envoyés.";
+}		
+
+?>		
+<!-- DIV Pied de page -->	
 
 		<?php include ("../mise_en_page/pied.html");?>
 	</body>

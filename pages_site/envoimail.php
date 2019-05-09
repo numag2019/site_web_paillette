@@ -1,11 +1,8 @@
 <?php
 function envoimail ($email)
 {
-	$email = str_replace(array("\n","\r",PHP_EOL),'',$_POST['email']); 
-	//Vérification que la chaîne de caractères entrée est bien une adresse mail
-if (filter_var($email, FILTER_VALIDATE_EMAIL))
-	{
-		
+	if (filter_var($email, FILTER_VALIDATE_EMAIL))
+	{	
 	//==========Création du mot de passe
 	function genererChaineAleatoire($longueur = 10)
 		{return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*', rand( 1, $longueur) )),1,$longueur);}
@@ -13,9 +10,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL))
 	$mdp_hash=password_hash($mdp, PASSWORD_DEFAULT);//Hashage du mot de passe
 
 	// Connexion à la BDD en PDO
-	try { $bdd = new PDO('mysql:host=localhost;dbname=crabase','root',''); }
-	
-	catch (Exeption $e) { die('Erreur : ' . $e->getMessage())  or die(print_r($bdd->errorInfo())); }
+	$bdd = new PDO('mysql:host=localhost;dbname=crabase','root',''); 
 	
 	// Requête SQL sécurisée
 	$req = $bdd->prepare("UPDATE utilisateurs
@@ -45,7 +40,8 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL))
 	//=====Ajout du message au format txt
 	$message= $passage_ligne.$message_txt.$passage_ligne.$mdp;
 ///php.ini
-mail($email,$sujet,$message,$header);
-echo "<div class='alert alert-success'><h1>Votre nouveau mot de passe a bien été envoyé.</h1><p>Pensez à le modifier prochainement.</p>";
-		}
-} 
+	mail($email,$sujet,$message,$header);
+	$error=1;
+	}
+else {$error=0;}
+return($error);}

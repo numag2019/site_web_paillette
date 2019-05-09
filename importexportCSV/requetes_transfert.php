@@ -105,9 +105,6 @@ $requeteCoI="INSERT INTO coefficients(id_coeff, valeur_coeff,id_vache,id_taureau
 SELECT coefficients_intermediaire.id_coeff_int, coefficients_intermediaire.valeur_coeff, 
 coefficients_intermediaire.id_vache, coefficients_intermediaire.id_taureau
 FROM coefficients_intermediaire 
-
-JOIN bovins ON bovins.id_bovin=coefficients_intermediaire.id_vache
-
 WHERE not exists (SELECT coefficients.id_coeff 
 FROM coefficients
 WHERE coefficients.id_coeff=coefficients_intermediaire.id_coeff_int )";

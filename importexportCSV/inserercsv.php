@@ -15,7 +15,7 @@ races_intermediaire, coefficients_intermediaire),
 
 
 //••• Connexion à la base de données DataCraNet •••\\
-$link=mysqli_connect('localhost','root','','datacranet');
+$link=mysqli_connect('localhost','root','','crabase');
 
 //•••Suppression données des tables intermediaires•••\\
 $queryDC="DELETE FROM coefficients_intermediaire";
@@ -82,7 +82,7 @@ INTO TABLE coefficients_intermediaire
 $obsD=mysqli_query($link,$queryCoeff);
 
 	
-//include('requetes_transfert.php');
+include('requetes_transfert.php');
 
 echo "Vos données ont bien été mises à jour";
 ?>

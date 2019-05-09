@@ -5,8 +5,10 @@
 		
 		<!-- navigation.html -->
 
-
-	
+<?php
+if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
+{	
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="navbar-brand" id="navbarNav">
 		<ul class="nav nav-pills">
@@ -14,14 +16,108 @@
 				<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="http://194.199.250.44:8080/ora/main_icefaces.html">Information Ovin</a>
+				<a class="nav-link" href="http://194.199.250.44:8080/ora/main_icefaces.html">Plateforme ovin</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="../pages_site/mon_espace.php">Mon espace</a>
+				<a class="nav-link" href="../pages_site/mon_espace.php">Plateforme bovin</a>
 			</li>
-			</ul>
-
+		</ul>
 	</div>
 </nav>
+<?php
+}
 
+
+else
+{
+	?>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="navbar-brand" id="navbarNav">
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil</a>
+				</li>
+				<?php
+				if (isset($_SESSION['id_utilisateur']))
+				{
+					// On affiche les liens disponible au type d'utilisateur connecté
+					if ($_SESSION['id_type']==1)//eleveur
+					{ 
+						?>
+						<!--lien vers la page etats_de_sorties.php-->
+						<li class="nav-item">
+							<a class="nav-link" href="../pages_site/etats_de_sorties.php">Accès états de sorties</a>
+						</li>
+						<!--lien vers la plateforme paillette entant qu'éleveurs-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="../insemis/Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a>
+								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
+							</div>
+						</li>
+						<!--lien vers la plateforme de récupération de mot de passe-->
+						<li class="nav-item">
+							<a class="nav-link" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+						</li>
+						<?php
+						}
+					elseif ($_SESSION['id_type']==21 or $_SESSION['id_type']==22 or $_SESSION['id_type']==23)//administrateur de race
+					{
+						?>	
+						<!--lien vers la page etats_de_sorties.php en-->
+						<li class="nav-item">
+							<a class="nav-link" href="../pages_site/etats_de_sorties.php">Accès états de sorties</a>
+						</li>
+						<!--lien vers la page plateforme plan_previsionnel_IA.php en tant qu'éleveurs-->
+						<li class="nav-item">
+							<a class="nav-link" href="../insemis/plan_previsionnel_IA.php">Plan prévisionnel d IA</a>
+						</li>
+						<!--lien vers la plateforme paillette en tant qu'administrateur de race--> 
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="../insemis/Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a>
+								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
+							</div>
+						</li>
+						<?php
+					}
+					elseif ($_SESSION['id_type']==3)
+					{
+						?>
+						<!--lien vers l'administration du site-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accès à l'administration du site</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="type_utilisateur.php">Changer les droits d'utilisateurs</a>
+								<a class="dropdown-item" href="type_utilisateur.php">Associer identifiant et mot de passe à un compte</a>
+							</div>
+						</li>
+						<!--lien vers la plateforme paillette en tant qu'administrateur de race -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="../insemis/Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a>
+								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
+							</div>
+						</li>
+						<?php
+					}
+				}
+				elseif (!isset ($authentification))
+				{
+					echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
+				}
+				?>
+				</ul>
+
+		</div>
+	</nav>
+	<?php
+}
+?>
+
+
+  
 </HTML>

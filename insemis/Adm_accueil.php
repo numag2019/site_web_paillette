@@ -13,8 +13,6 @@
 	</head>
 	
 	<body>
-
-
 	
 
 	<p><a href="Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a></p>

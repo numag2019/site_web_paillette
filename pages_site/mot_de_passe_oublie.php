@@ -6,20 +6,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-	<link href="../mise_en_page/maFeuilleDeStyle.css" rel="stylesheet" media="all" type="text/css"> 
-		<title>
-		Site web Cranet
-		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+		
+		<!-- Entête -->
+		<?php include("../mise_en_page/entete.html");?>	
+
+		<!--  Navigation -->
+		<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
 	
 	<body>
-	<div>
-	<!-- DIV Entête -->
-	<?php include("../mise_en_page/entete.html");?>	
-
-	<!-- DIV Navigation (Menus) -->
-	<?php include("../mise_en_page/navigation.html"); ?>
-	
 <p>
     Réinitialisation du mot de passe 
 	<br />

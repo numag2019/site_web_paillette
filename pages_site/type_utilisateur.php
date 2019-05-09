@@ -18,7 +18,7 @@
 	
 	<body>
 <?php 
-if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) and !isset($_POST['id_type_selection']))
+if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
 	{
 
 	// Sélection de l'utilisateur dont vous voulez changer le droit 
@@ -60,7 +60,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) and
 					<?php
 						
 						
-					///////////Si l'utilisateur a déjà choisi l'éleveur	
+
 
 
 					// Sélection de l'utilisateur dont vous voulez changer le droit 
@@ -100,7 +100,6 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) and
 	<?php
 	}
 	
-////////////
 else
 	{
 	// Connexion à la BDD en PDO
@@ -117,12 +116,12 @@ else
 	$req->execute();
 	
 	$_SESSION['message_type_utilisateur']= 'Changement effectué';
-	unset ($_SESSION['id_utilisateur_selection']);
 	header('Refresh: 0');
 	}
 	
 if (isset($_SESSION['message_type_utilisateur']))
-	{echo $_SESSION['message_type_utilisateur']; }
+	{echo $_SESSION['message_type_utilisateur']; 
+	unset ($_SESSION['message_type_utilisateur']);}
 			?>
 		<!-- DIV Pied de page -->	
 		<?php include ("../mise_en_page/pied.html");?>

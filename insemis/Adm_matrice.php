@@ -12,7 +12,7 @@
 		?>
 	
 		<?php
-			$link=mysqli_connect('localhost', 'root', '', 'DataCRANET');
+			$link=mysqli_connect('localhost', 'root', '', 'crabase');
 			mysqli_set_charset($link, "utf8mb4"); 
 		
 			$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise

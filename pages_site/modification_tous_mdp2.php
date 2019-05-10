@@ -6,9 +6,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
-		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
-		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
-
+		
 		<!-- Entête -->
 		<?php include("../mise_en_page/entete.html");?>	
 
@@ -17,8 +15,33 @@
 	</head>
 
 	<body>
-<a href="modification_tous_mdp2.php" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Cliquer pour réinitialiser tous les mots de passe</a>
-			
+<?php include ('envoimail.php')?>
+<?php
+
+if ($_SESSION['id_type']==3)
+{
+// recuperation des utilisateurs eleveurs
+$link=mysqli_connect('localhost','root','','crabase');
+//Change l'encodage des données de la BDD
+mysqli_set_charset($link,"utf8mb4");
+// Requête
+$querya="SELECT email FROM utilisateurs WHERE id_type < 3 and email <> 'NULL' ";
+$result=mysqli_query($link,$querya);
+
+//Création tableau
+$tab=mysqli_fetch_all($result);
+//$tab=$tab[1];
+$nbligne=mysqli_num_rows($result);
+$j=0;
+while ($j<$nbligne)
+	{
+	$error=envoimail($tab[0][$j]);
+	echo '<BR>'.$tab[0][$j].'<BR>'.$error;
+	$j++;
+	}
+}
+echo "Les nouveaux mots de passe ont bien été envoyés.";
+?>		
 <!-- DIV Pied de page -->	
 
 		<?php include ("../mise_en_page/pied.html");?>

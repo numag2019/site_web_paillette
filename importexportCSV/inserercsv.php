@@ -97,6 +97,7 @@ INTO TABLE coefficients_intermediaire
 
 $obsD=mysqli_query($link,$queryCoeff);
 
+
 // Insertion et mise à jour des données des tableaux intermédiaires dans les tables pemranentes
 include('requetes_transfert.php');
 
@@ -119,6 +120,9 @@ echo "<script type='text/javascript'>";
 echo 'alert("Vous avez inséré '.$nbUtInsert.' éleveur(s). \nVous avez inséré '.$nbBoInsert.' bovin(s). \nVous avez inséré '.$nbRaInsert.' race(s). \nVous avez inséré '.$nbCoInsert.' coefficient(s) de consanguinité");';
 echo 'document.location.href="http://localhost/exportation/exportCRAnet.php";';
 echo '</script>';
+
+
+	
 
 
 ?>

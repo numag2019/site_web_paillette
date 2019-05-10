@@ -7,7 +7,7 @@
 		Plateforme Paillettes <br><br><br>
 	
 		<?php
-			$link=mysqli_connect('localhost', 'root', '', 'DataCRANET'); // connexion à la base de données
+			$link=mysqli_connect('localhost', 'root', '', 'crabase'); // connexion à la base de données
 			mysqli_set_charset($link, "utf8mb4"); // prise en compte des caractères de la base de données
 			
 			$query="SELECT id_utilisateur, nom, prenom FROM utilisateurs"; // requête pour la liste déroulante choix eleveur

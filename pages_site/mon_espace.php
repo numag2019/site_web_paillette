@@ -6,7 +6,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
-		
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
+
 		<!-- Entête -->
 		<?php include("../mise_en_page/entete.html");?>	
 
@@ -22,35 +24,16 @@
 			// On affiche les liens disponible au type d'utilisateur connecté
 			if ($_SESSION['id_type']==1)//eleveur
 			{ 
-				?>
-				<!--lien vers la page etats_de_sorties.php-->
-				<p><a href='etats_de_sorties.php'>Accès états de sorties</a></p>
-				<!--lien vers la plateforme paillette entant qu'éleveurs-->
-				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
-				<!--lien vers la plateforme de récupération de mot de passe-->
-				<p><a href='changement_mdp.php'>Changer mon mot de passe</a></p>
-				<?php
-				}
-			elseif ($_SESSION['id_type']==2)//administrateur de race
-				{
-				?>	
-				<!--lien vers la page etats_de_sorties.php en--> 
-				<p><a href='etats_de_sorties.php'>Accès états de sorties</a></p>
-				<!--lien vers la page plateforme plan_previsionnel_IA.php en tant qu'éleveurs-->
-				<p><a href='plan_previsionnel_IA.php'>Plan prévisionnel d IA</a></p>
-				<!--lien vers la plateforme paillette en tant qu'administrateur de race--> 
-				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
-				<?php
-				}
+				echo '<p>Bienvenu, éleveur</p>';
+			}
+			elseif ($_SESSION['id_type']==21 or $_SESSION['id_type']==22 or $_SESSION['id_type']==23)//administrateur de race
+			{
+				echo '<p>Bienvenu, animateur</p>';
+			}
 			elseif ($_SESSION['id_type']==3)
-				{
-				?>
-				<!--lien vers l'administration du site-->
-				<p><a href='administration.php'>Accès à l'administration du site</a></p> 
-				<!--lien vers la plateforme paillette en tant qu'administrateur de race -->
-				<p><a href='../insemis/Adm_accueil.php'>Plan prévisionnel d IA</a></p>
-				<?php
-				}
+			{
+				echo '<p>Bienvenu, administrateur</p>';
+			}
 		}
 		else 
 		{

@@ -1,4 +1,6 @@
-
+<?php
+SESSION_START();
+?>
 <html>
 <body>
 
@@ -15,7 +17,21 @@ races_intermediaire, coefficients_intermediaire),
 
 
 //••• Connexion à la base de données DataCraNet •••\\
-$link=mysqli_connect('localhost','root','','datacranet');
+$link=mysqli_connect('localhost','root','','crabase');
+
+//Compte des lignes des tableaux permanents avant insertion
+include('compte_lignes.php');
+
+$tabElAvantInsert=compteAjout('utilisateurs',$link);
+$tabBoAvantInsert=compteAjout('bovins',$link);
+$tabRaAvantInsert=compteAjout('races',$link);
+$tabCoAvantInsert=compteAjout('coefficients',$link);
+
+
+
+
+
+
 
 //•••Suppression données des tables intermediaires•••\\
 $queryDC="DELETE FROM coefficients_intermediaire";
@@ -81,10 +97,30 @@ INTO TABLE coefficients_intermediaire
 
 $obsD=mysqli_query($link,$queryCoeff);
 
-	
-//include('requetes_transfert.php');
+// Insertion et mise à jour des données des tableaux intermédiaires dans les tables pemranentes
+include('requetes_transfert.php');
 
-echo "Vos données ont bien été mises à jour";
+//Compte des lignes des tableaux permanents après insertion
+$tabUtAprèsInsert=compteAjout('utilisateurs',$link);
+$tabBoAprèsInsert=compteAjout('bovins',$link);
+$tabRaAprèsInsert=compteAjout('races',$link);
+$tabCoAprèsInsert=compteAjout('coefficients',$link);
+
+//Compte des lignes ajoutés
+$nbUtInsert=$tabUtAprèsInsert[0][0]-$tabElAvantInsert[0][0];
+$nbBoInsert=$tabBoAprèsInsert[0][0]-$tabBoAvantInsert[0][0];
+$nbRaInsert=$tabRaAprèsInsert[0][0]-$tabRaAvantInsert[0][0];
+$nbCoInsert=$tabCoAprèsInsert[0][0]-$tabCoAvantInsert[0][0];
+
+echo $nbUtInsert;
+
+//Renvoi un message d'alerte côté Genis avec le nombre de lignes ajoutés
+echo "<script type='text/javascript'>";
+echo 'alert("Vous avez inséré '.$nbUtInsert.' éleveur(s). \nVous avez inséré '.$nbBoInsert.' bovin(s). \nVous avez inséré '.$nbRaInsert.' race(s). \nVous avez inséré '.$nbCoInsert.' coefficient(s) de consanguinité");';
+echo 'document.location.href="http://localhost/exportation/exportCRAnet.php";';
+echo '</script>';
+
+
 ?>
 	
 </body>

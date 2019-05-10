@@ -11,9 +11,9 @@
 //******************************************************************************************************************************************************************************************************************************************\\
 
 // Page necessaire
-// include("exportCRAnet.php");
-include('fonctioncreationcsv.php');
-
+// include("exportCRAnet.php");        // page export de GeniS
+include('fonctioncreationcsv.php');			//page d'une fonction créant les csv
+include('ftp.php');						//page d'une fonction transferant les csv au serveur distant
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // REQUETE ELEVEURS : 
@@ -26,7 +26,7 @@ JOIN link_race_elevage ON contact.id_elevage = link_race_elevage.id_elevage
 WHERE link_race_elevage.code_race=19 OR link_race_elevage.code_race=6  OR link_race_elevage.code_race=5";
 
 //Fonction creant le csv
-$csv=creationcsv($requeteEleveurs,NULL,"tableau_eleveurs_csv");
+$csv=creationcsv($requeteEleveurs,NULL,"tableauEleveurs");
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ and p.id_periode=v.idmax where a.code_race=19 OR a.code_race=5 OR a.code_race=6 
 
 
 //Fonction creant le csv
-$csv=creationcsv($requeteAnimal1,$requeteAnimal2,"tableau_animal_csv");
+$csv=creationcsv($requeteAnimal1,$requeteAnimal2,"tableauAnimal");
 
 
 
@@ -68,7 +68,7 @@ $requeteRace= "SELECT code_race, lib_race FROM race
 WHERE code_race=19 OR code_race=5 OR code_race=6";
 
 //Fonction creant le csv
-$csv=creationcsv($requeteRace,NULL,"tableau_race_csv");
+$csv=creationcsv($requeteRace,NULL,"tableauRace");
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,16 +78,40 @@ $csv=creationcsv($requeteRace,NULL,"tableau_race_csv");
 //(Bearnaise : 19, Bordelaise : 6, Marine : 6)
 
 $requeteCoeff= "SELECT c.id_coeff, c.valeur_coeff, 
-(SELECT a.no_identification from animal a where c.id_vache=a.id_animal) as id_vache, 
-(SELECT a.no_identification from animal a where c.id_taureau=a.id_animal) as id_taureau 
-FROM coefficients c, animal a WHERE a.code_race=19 OR a.code_race=5 OR a.code_race=6 
-GROUP BY c.id_coeff";
+(SELECT a.no_identification from animal a where c.id_vache=a.id_animal), 
+(SELECT a.no_identification from animal a where c.id_taureau=a.id_animal) 
+FROM coefficients c JOIN periode p ON p.id_animal=c.id_vache and 
+p.id_elevage IS NOT NULL JOIN animal a on a.id_animal=p.id_animal 
+WHERE a.code_race=19 OR a.code_race=5 OR a.code_race=6 GROUP BY c.id_coeff";
 
 //Fonction creant le csv
-$csv=creationcsv($requeteCoeff,NULL,"tableau_coeff_csv");
+$csv=creationcsv($requeteCoeff,NULL,"tableauCoeff");
 
 
 ?>
+
+<?php 
+// transferts des fichiers csv vers serveur CRAnet (fonction situé dans ftp.php)
+$chemin=array('csv/tableauEleveurs.csv','csv/tableauAnimal.csv','csv/tableauRace.csv','csv/tableauCoeff.csv');
+$ftpTarget=array('tableauEleveurs.csv','tableauAnimal.csv','tableauRace.csv','tableauCoeff.csv');
+
+$i=0;
+while($i<count($chemin))
+{
+	$trsft=export_vers_cranet($chemin[$i], $ftpTarget[$i]);
+	$i++;
+}
+
+//envoi des pdf du dossier pdf
+include('envoi_pdf.php'); 
+
+//Lancer la page php de mise à jour à distance après que les nouveaux csv aient été créé
+
+header('location:http://cranet/site_web_paillette/importexportCSV/inserercsv.php');
+exit;
+
+?>
+
 
 
 </body>

@@ -9,13 +9,13 @@ $chemin : chemin d'accès au fichier GeniS à envoyer sur Cranet
 $ftpTarget : emplacement où le fichier va être envoyé */
 
 // on établit la connexion au serveur
-	$ftpServer = 'localhost';
+	$ftpServer = '194.199.251.99';
 	
 	// on se connecte en tant qu'utilisateur
-	$ftpUser = 'cra';
-	$ftpPwd = 'cranumag';
+	$ftpUser = 'cranet';
+	$ftpPwd = 'numag2019';
 	$connection = ftp_connect($ftpServer);
-	echo $connection;
+
 	$login = ftp_login($connection, $ftpUser, $ftpPwd);
 	// on active le mode passif 
 	ftp_pasv($connection, true);

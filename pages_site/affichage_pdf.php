@@ -67,7 +67,7 @@ if (isset($_SESSION['id_utilisateur']))
 			$j=$j+1;
 			}
 		$chemin3= $chemin.'fiche_race_globale.pdf';
-		echo '<a href='.$chemin3.'>fiche_race_globale</a>';
+			echo '<a href='.$chemin3.'>fiche_race_globale</a>';
 	}
 }
 		

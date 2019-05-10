@@ -10,8 +10,8 @@
 		<!-- Entête -->
 		<?php include("../mise_en_page/entete.html");?>	
 
-		<!--  Navigation -->
-		<?php include("../mise_en_page/navigation.html"); ?>
+	<!--  Navigation -->
+	<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
 	
 	<body>
@@ -20,7 +20,12 @@
 		
 	<div class="container">	
 		<div class="row">
-			<div id="block1" class="col-md-3 offset-md-2">
+	
+		<!--	<div id="block1" class="col-md-3 offset-md-2">
+				<a href="http://194.199.250.44:8080/ora/main_icefaces.html"><img src="../mise_en_page/images/belier.jpg" class="rounded float-left" alt="synel"></a>
+		</div>-->
+			
+			<div id="block2" class="col-md-3 offset-md-2">
 				<a href="https://www.synel.net/"><img src="../mise_en_page/images/synel1.png" class="rounded float-left" alt="synel"></a>
 			</div>
 			
@@ -31,15 +36,16 @@
 	</div>
 	<div class="container">	
 		<div class="row">
+			</li>
 			<div id="block1" class="col-md-3 offset-md-2">
 				<p align='center'>
-					Accéder à SYNEL, la base de données de l’ARSOE conçue pour enregistrer et visualiser les
+					Enregistrer et visualiser les
 					informations relatives à vos cheptels bovins.
 				</p>
 			</div>
 			<div id="block2" class="col-md-3 offset-md-2">
 				<p align='center'>
-					Accéder au SIRE, la base de données de l’IFCE vous permettant d’enregistrer et de visualiser les
+					Enregistrer et de visualiser les
 					informations concernant vos cheptels équins.
 				</p>
 			</div>

@@ -18,6 +18,26 @@ mysqli_set_charset($link,"utf8mb4");
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//RACES
+
+//INSERTION
+$requeteRaI="INSERT INTO races(id_race, nom_race)
+SELECT races_intermediaire.id_race_int,races_intermediaire.nom_race
+FROM races_intermediaire
+WHERE not exists (SELECT races.id_race from races WHERE races.id_race=races_intermediaire.id_race_int )";
+
+// Exécution requête
+ $obsRaI=mysqli_query($link,$requeteRaI);
+
+// MISE A JOUR
+$requeteRaU="UPDATE races 
+INNER JOIN races_intermediaire 
+ON races.id_race=races_intermediaire.id_race_int 
+SET races.nom_race=races_intermediaire.nom_race";
+
+// Exécution requête
+ $obsRaU=mysqli_query($link,$requeteRaU);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // UTILISATEURS
 
 //INSERTION
@@ -45,26 +65,7 @@ $obsUtU=mysqli_query($link,$requeteUtU);
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//RACES
 
-//INSERTION
-$requeteRaI="INSERT INTO races(id_race, nom_race)
-SELECT races_intermediaire.id_race_int,races_intermediaire.nom_race
-FROM races_intermediaire
-WHERE not exists (SELECT races.id_race from races WHERE races.id_race=races_intermediaire.id_race_int )";
-
-// Exécution requête
- $obsRaI=mysqli_query($link,$requeteRaI);
-
-// MISE A JOUR
-$requeteRaU="UPDATE races 
-INNER JOIN races_intermediaire 
-ON races.id_race=races_intermediaire.id_race_int 
-SET races.nom_race=races_intermediaire.nom_race";
-
-// Exécution requête
- $obsRaU=mysqli_query($link,$requeteRaU);
 
 
 

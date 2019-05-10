@@ -16,7 +16,7 @@
 	
 	<body>
 	<?php
-	$id_elevage;
+	$id_elevage='bazadaise';
 	$fin_chemin = $id_elevage.'php';
 	echo $fin_chemin;
 	//header("Location: ../uploade/$id_elevage.php ");

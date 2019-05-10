@@ -1,6 +1,9 @@
-
+<!--fonction créant les csv, variables: deux requêtes sql possibles et le nom du fichier à créer-->
 <?php
-// Fonction créant un csv ayant comme variable une requete et le nom du fichier (appelé par la page creationcsv.php)
+// page contenant la variable DB NAME
+include("../libraries/constants.php");
+
+// Fonction créant un csv ayant comme variable deux requetes et le nom du fichier (appelé par la page creationcsv.php)
 function creationcsv($requete1, $requete2, $nom_fichier)
 {
 	$link=mysqli_connect('localhost','root','','genis_test');

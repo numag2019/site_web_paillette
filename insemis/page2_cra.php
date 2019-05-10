@@ -1,7 +1,6 @@
 <HTML>
 
 <?php
-require "tableau.php";
 $link = mysqli_connect('localhost', 'root', '', 'crabase');
 mysqli_set_charset($link, "utf8mb4");
 
@@ -34,7 +33,7 @@ echo '<br> <br>';
 //echo '</FORM>';
 
 
-		if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bouton_valider_race']))
+		if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bouton_valider_race'])||isset($_GET['bouton_historique']))
 		{
 			//echo '<FORM method="GET" name="formulaire_race" >';
 			$id_eleveur = $_GET["liste_eleveurs"];
@@ -67,6 +66,7 @@ echo '<br> <br>';
 				} 
 			
 			echo '</SELECT>';
+			echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 			echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
 			echo "<input type='hidden' name='nom_eleveur' value='".$nom_race."'>";
 			echo '<INPUT type="submit" name="bouton_valider_race"  value="Valider">';
@@ -76,7 +76,7 @@ echo '<br> <br>';
 			//$race = $_GET["liste_race"];
 			
 			
-			if(isset($_GET['bouton_valider_race']))
+			if(isset($_GET['bouton_valider_race'])||isset($_GET['bouton_historique']))
 			{
 				$id_eleveur = $_GET["liste_eleveurs"];
 				$race = $_GET["liste_race"];
@@ -87,17 +87,18 @@ echo '<br> <br>';
 				if ($race == 19)
 					$nom_race = 'béarnaise';
 				echo "Matrice de parenté de l'éleveur " .$nom_eleveur. " pour la race " .$nom_race;
+				echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
+				echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
+				echo "<input type='hidden' name='id_race' value='".$race."'>";
+				echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 				echo '<INPUT TYPE="submit" name="bouton_historique"  value="Afficher l historique de commande de l éleveur">';
 				echo '<br>';
 				$query_matrice = "SELECT coefficients.id_vache, coefficients.id_taureau
 								 FROM coefficients
 								 JOIN bovins ON bovins.id_bovin = coefficients.id_vache 
 								 WHERE bovins.id_race =".$race." and bovins.id_utilisateur = ".$id_eleveur." ";
-				//echo $query_matrice;
 				$result_matrice = mysqli_query($link, $query_matrice);
 				$tab_matrice = mysqli_fetch_all($result_matrice);
-				//var_dump($tab_matrice);
-				//tableau($result_matrice);
 				$nb_accouplement = mysqli_num_rows($result_matrice);
 				$liste_males = [];
 				$liste_nom_males = [];
@@ -150,20 +151,16 @@ echo '<br> <br>';
 				for ($i=0; $i < $nb_femelle; $i++)
 				{
 					echo '<tr><center>';
-					echo '<td>'.$liste_nom_femelle[$i];
-					//echo '<td>';
+					echo '<td>'.$liste_nom_femelle[$i];;
 					for ($j=0; $j < $nb_males; $j++)
 						{
-						//echo '<tr>';
 						$query_color = "SELECT races.seuil_min, races.seuil_max FROM races WHERE id_race=".$race."";
 						$result_color = mysqli_query($link, $query_color);
 						$tab_color = mysqli_fetch_all($result_color);
-						
-						//echo '<td bgcolor ='.$color.'><center>';
+
 						$query_coeff="SELECT coefficients.valeur_coeff 
 												FROM coefficients 
 												WHERE id_vache=" .$liste_femelles[$i]." AND id_taureau=".$liste_males[$j]."";
-						//echo $query_coeff;
 						$result_coeff = mysqli_query($link, $query_coeff);
 						$tab_coeff = mysqli_fetch_all($result_coeff);
 						$query_periode = "SELECT periodes.id_periode FROM periodes WHERE ISNULL(date_fin) =1 AND id_race =".$race."";
@@ -206,7 +203,85 @@ echo '<br> <br>';
 				
 			}
 			
-		}	
+		}
+			if(isset($_GET['bouton_historique']))
+				{
+				$nom_eleveur = $_GET['nom_eleveur'];
+				$id_eleveur = $_GET['id_eleveur'];
+				$id_race = $_GET['id_race'];
+				$nom_race = $_GET['nom_race'];
+				echo "Historique des prévisions de commande de paillettes de <b>" . $nom_eleveur . "</b> pour la race ".$nom_race. " <br><br>";
+
+				// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode
+				$query_liste_per="SELECT date_debut, date_fin, id_periode FROM periodes WHERE periodes.id_race =".$id_race."";
+				$result_liste_per=mysqli_query($link, $query_liste_per);
+				$tab_liste_per=mysqli_fetch_all($result_liste_per);
+				$nbligne = mysqli_num_rows($result_liste_per);
+			
+				$liste_per=[] ;
+				for ($i=0;$i<$nbligne;$i++)
+					{
+						$liste_per[$i]=$tab_liste_per[$i][0] . " - " . $tab_liste_per[$i][1] ;
+					}
+			
+				$liste_id_per=[] ;
+				for ($i=0;$i<$nbligne;$i++)
+					{
+						$liste_id_per[$i]=$tab_liste_per[$i][2] ;
+					}
+			
+				// Les lignes suivantes servent à obtenir la liste des vache de l'éleveur séléctionné dans les pages précédentes puis la liste des id_bovins
+				$query_liste_taureau="SELECT nom_bovin, id_bovin FROM bovins WHERE (sexe=1 OR sexe=3) AND id_utilisateur=".$id_eleveur."";
+				$result_liste_taureau=mysqli_query($link, $query_liste_taureau);
+				$tab_liste_taureau=mysqli_fetch_all($result_liste_taureau);
+				$nbligne = mysqli_num_rows($result_liste_taureau);
+			
+				$liste_taureau=[] ;
+				for ($i=0;$i<$nbligne;$i++)
+					{
+						$liste_taureau[$i]=$tab_liste_taureau[$i][0] ;
+					}
+			
+				$liste_id_taureau=[] ;
+				for ($i=0;$i<$nbligne;$i++)
+					{
+						$liste_id_taureau[$i]=$tab_liste_taureau[$i][1] ;
+					}
+
+				$nb_periodes=count($liste_per);
+				$nb_taureau=count($liste_taureau);
+			
+				echo '<table border = 1>';
+				echo "<td> </td>" ;
+				$j = 0;
+				while ($j<$nb_taureau)
+					{
+						echo '<td>' . $liste_taureau[$j]. '</td>';
+						$j++;
+					}
+					
+				$i =0;
+				while ($i<$nb_periodes)
+				{
+					echo '<tr>';
+					echo "<td>" . $liste_per[$i] . "</td>";
+					$j=0;
+					while ($j<$nb_taureau)
+					{
+						$query_paillettes="SELECT nbr_paillettes FROM previsions WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."";
+						$result_paillettes=mysqli_query($link, $query_paillettes);
+						$tab_paillettes=mysqli_fetch_all($result_paillettes);;
+						if (empty($tab_paillettes))
+							echo '<td> 0 </td>';
+						else
+							echo '<td>' . $tab_paillettes[0][0]. '</td>';
+						$j++;
+					}
+					$i++;
+					echo '</tr>';
+				}
+				echo '</table>';
+				}
 echo '</FORM>';	
 ?>
 </HTML>

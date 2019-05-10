@@ -128,7 +128,7 @@ $query_matrice = "SELECT coefficients.id_vache, coefficients.id_taureau
 						if ($tab_coeff[0][0]>$tab_color[0][1])
 							$color = 'red';
 						echo '<td bgcolor ='.$color.'><center>';
-						echo '<INPUT TYPE="submit" name="bouton_prev"  value="">';
+						echo '<INPUT TYPE="text" name="bouton_prev" value = " " size = "0,2">';
 						//echo $tab_coeff[0][0];
 						echo $tab_prev[0][0];
 						echo '</center></td>';

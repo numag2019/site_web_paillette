@@ -9,7 +9,7 @@
 		<?php include("../mise_en_page/entete.html");?>	
 
 		<!--  Navigation -->
-		<?php include("../mise_en_page/navigation.html"); ?>
+
 	</head>
 	
 	<body>

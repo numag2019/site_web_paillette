@@ -1,10 +1,12 @@
-DOSSIER GENIS (partie permettant de créer les csv et d'afficher une touche 'export vers datacranet' sur Genis
+﻿DOSSIER GENIS (partie permettant de créer les csv et d'afficher une touche 'export vers datacranet' sur Genis
 -Remplacer 'html_bodystart1' dans situé dans'librarie'.
--Créer un dossier 'exportation' contenant :  -un dossier nommé 'csv' 
-											- 'creationcsv.php'
-											-'fonctioncreationcsv.php'
-											-'exportCRAnet.php'
-											-'ftp.php'
+-Créer un dossier 'exportation' contenant :  -un dossier nommé 'csv'
+					-un dossier nommé 'pdf' 
+					- 'creationcsv.php'
+					-'fonctioncreationcsv.php'
+					-'exportCRAnet.php'
+					-'ftp.php'
+					-'envoi_pdf.php'
 
 Sur le site web dans un dossier 'importexportCSV'
 -un dossier nommé 'csv'

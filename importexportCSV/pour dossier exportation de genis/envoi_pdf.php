@@ -3,22 +3,23 @@
 
 <?php
 
-include('ftp.php');						//page d'une fonction transferant les pdf au serveur distant
+
 
 
 $nb_fichier = 0;   //variable nombre de fichier
-
-
-if($dossier = opendir('./csv'))
+$chemin=array();
+$ftpTarget=array();
+if($dossier = opendir('./pdf'))
 {
-
+	
 	while(false !== ($fichier = readdir($dossier)))
 	{
 		if($fichier != '.' && $fichier != '..')
 		{
-			$chemin=array("pdf/".$fichier);
-			$ftpTarget=array($fichier);
+			$chemin[]="pdf/".$fichier;
+			$ftpTarget[]=$fichier;
 			$nb_fichier++; // On incrémente le compteur de 1
+			
 
 		} // On ferme le if (qui permet de ne pas afficher index.php, etc.)
 	
@@ -28,10 +29,12 @@ if($dossier = opendir('./csv'))
 closedir($dossier);
  
 
+
 // transferts des fichiers pdf vers serveur CRAnet (fonction situé dans ftp.php)
 $i=0;
 while($i<$nb_fichier)
 {
+
 	$trsft=export_vers_cranet($chemin[$i], $ftpTarget[$i]);
 	$i++;
 }

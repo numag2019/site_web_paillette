@@ -18,7 +18,9 @@
 	</head>
 
 	<body>
-<a href="modification_tous_mdp2.php" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Cliquer pour réinitialiser tous les mots de passe</a>
+	
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<a href="modification_tous_mdp2.php" class="btn btn-default">Cliquer pour réinitialiser tous les mots de passe</a>
 			
 <!-- DIV Pied de page -->	
 

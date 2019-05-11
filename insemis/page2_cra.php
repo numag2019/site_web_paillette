@@ -4,7 +4,7 @@
 $link = mysqli_connect('localhost', 'root', '', 'crabase');
 mysqli_set_charset($link, "utf8mb4");
 
-$query_eleveur = "SELECT id_eleveur, nom, prenom FROM eleveurs_intermediaire";
+$query_eleveur = "SELECT id_utilisateur, nom, prenom FROM utilisateurs WHERE id_type!=3";
 $result_eleveur = mysqli_query($link, $query_eleveur);
 $tab_eleveur = mysqli_fetch_all($result_eleveur);
 $nb_eleveur = mysqli_num_rows($result_eleveur);

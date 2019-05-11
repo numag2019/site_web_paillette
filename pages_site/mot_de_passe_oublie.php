@@ -16,6 +16,9 @@
 		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
 		<?php $authentification=1;?>
 
+		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+		<?php $autorisation=TRUE // tout le monde?>
+		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
 		

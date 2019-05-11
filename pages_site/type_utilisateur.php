@@ -8,14 +8,17 @@
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
-
+		
+		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+		<?php $autorisation=3 // que le CRA?> 
+		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
 	
 	<body>
 <?php 
-if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
+if (!isset($_POST['id_utilisateur_selection']) )
 	{
 
 	// Sélection de l'utilisateur dont vous voulez changer le droit 
@@ -30,21 +33,28 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
 	$result=mysqli_query($link,$querya);
 
 	?>
+	
+<!--
 	<div class="container">	
 		<div class="row">
 			<div id="block1" class="col-md-3 offset-md-4" align='center' >
 				<FORM action="type_utilisateur.php" method="POST" name="form">
-					<div class="form-group">
-					  
-						<?php
+					<div class="form-group"> 
+-->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="selectbasic">Choix de l'utilisateur</label>
+		  <div class="col-md-4">
+			<select id="selectbasic" name="id_utilisateur_selection" class="form-control">
+
+		<?php
 						//Création tableau
 						$tab=mysqli_fetch_all($result);
 						$nbligne=mysqli_num_rows($result);
 						$nbcol=mysqli_num_fields($result);
 						$j=0;
 						?>
-						<label for="id_utilisateur_selection">Choix de l'utilisateur</label>
-						<select class="form-control" name="id_utilisateur_selection" id="id_utilisateur_selection">
+					<!--	<label for="id_utilisateur_selection">Choix de l'utilisateur</label>
+						<select class="form-control" name="id_utilisateur_selection" id="id_utilisateur_selection">-->
 							<?php
 							while ($j<$nbligne)
 								{
@@ -53,6 +63,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
 								}
 							?>
 						</select>
+					</div>
 					</div>
 					<?php
 						
@@ -96,8 +107,8 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
 	
 	<?php
 	}
-	
-else
+// Si le CRA a rempli le formulaire est appuyé sur le bouton on exécute une requête modifiant le type d'utilisateur 	
+else 
 	{
 	// Connexion à la BDD en PDO
 	try { $bdd = new PDO('mysql:host=localhost;dbname=crabase','root',''); }

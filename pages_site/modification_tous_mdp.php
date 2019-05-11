@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
 
 
-		<!-- Entête -->
-		<?php include("../mise_en_page/entete.html");?>	
+		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+		<?php $autorisation=3 // que le CRA?>
 
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>

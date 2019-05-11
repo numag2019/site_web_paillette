@@ -1,6 +1,4 @@
-<!-- Page disponible aux éleveurs bovins identifiés, 
-		elle permet l'accès à la plateforme paillette et à la page des états de sorties
-		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->
+<!--Page disponible uniquement au CRA, appuyer sur le bouton reinitialisera tous les mots de passes -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
 		<meta charset="utf-8">
@@ -20,27 +18,33 @@
 
 if ($_SESSION['id_type']==3)
 {
+////////////////////////////////////////////// CREATION nouveaux mdp
 // recuperation des utilisateurs eleveurs
 $link=mysqli_connect('localhost','root','','crabase');
 //Change l'encodage des données de la BDD
 mysqli_set_charset($link,"utf8mb4");
 // Requête
-$querya="SELECT email FROM utilisateurs WHERE id_type < 3 and email <> 'NULL' ";
+$querya="SELECT email FROM utilisateurs WHERE id_type != 3 and email != 'NULL' ";
 $result=mysqli_query($link,$querya);
 
 //Création tableau
 $tab=mysqli_fetch_all($result);
-//$tab=$tab[1];
 $nbligne=mysqli_num_rows($result);
 $j=0;
 while ($j<$nbligne)
 	{
-	$error=envoimail($tab[0][$j]);
-	echo '<BR>'.$tab[0][$j].'<BR>'.$error;
+	envoimail($tab[$j][0]);
 	$j++;
 	}
+/////////////////////////////////////////////CREATION identifiant : exemple Prénom: Théo Nom: NOBELLA --> identifiant= tNOBELLA
+
+$queryb="UPDATE utilisateurs SET identifiant= CONCAT(SUBSTR(prenom, 1, 1),nom) WHERE id_type != 3 ";
+$result=mysqli_query($link,$queryb);
 }
-echo "Les nouveaux mots de passe ont bien été envoyés.";
+echo "Les nouveaux mots de passe ont bien été envoyés aux éleveurs ayant une adresse email renseignée 
+<BR> Les identifiants sont maintenant de la forme: Première lettre du prénom/nom 
+<BR> Exemple :
+<BR> Théo Nom: NOBELLA --> identifiant= tNOBELLA";
 ?>		
 <!-- DIV Pied de page -->	
 

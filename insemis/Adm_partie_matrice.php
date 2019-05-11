@@ -43,7 +43,7 @@
 			{	
 				$link=mysqli_connect('localhost', 'root', '', 'crabase');
 				mysqli_set_charset($link, "utf8mb4"); 
-			
+			/*
 				$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise
 				$result_bord=mysqli_query($link, $query_bord);
 				$liste_eleveur_bord=requete_2col_to_list ($result_bord) ;
@@ -55,10 +55,25 @@
 				$query_bear="SELECT id_utilisateur FROM bovins WHERE id_race=19"; // requête pour avoir un tableau contenant les éleveurs de la race Béarnaise
 				$result_bear=mysqli_query($link, $query_bear);
 				$liste_eleveur_bear=requete_2col_to_list ($result_bear) ;
-				
+				*/
+						// Requête SQL sécurisée
+		$req = $bdd->prepare("SELECT r.nom_race 
+							FROM races r JOIN bovins b 
+								ON r.id_race = b.id_race 
+							JOIN utilisateurs u 
+								ON b.id_utilisateur = u.id_utilisateur 
+							WHERE u.id_utilisateur= :id_utilisateur 
+							GROUP BY r.id_race  ");
+		$req->bindValue('id_utilisateur', $_SESSION['id_utilisateur'], PDO::PARAM_STR);
+		$req->execute();
+		$rows = $req->Count();
+		$resultat = $req->fetchAll(PDO::FETCH_NAMED);
+		$resultat=$resultat[0];
+	
+		echo '<a href='.$chemin1.'>fiche_race</a>';
 	
 				$eleveur=$_GET["id_utilisateur"];
-				
+				/*
 				if (in_array($eleveur,$liste_eleveur_bord))
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Bordelaise </a> <br><br>" ;
@@ -71,6 +86,7 @@
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}
+				*/
 				
 					echo "<INPUT TYPE='SUBMIT' name='bt_submit_hist' value='Voir son historique de prévisions paillettes'>";
 					echo "<INPUT type='hidden' name='eleveur' value='" . $eleveur . "'>" ;

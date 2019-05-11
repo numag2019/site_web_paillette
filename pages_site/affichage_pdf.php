@@ -33,15 +33,19 @@ if (isset($_SESSION['id_utilisateur']))
 		$req->execute();
 		$rows = $req->Count();
 		$resultat = $req->fetchAll(PDO::FETCH_NAMED);
-		$resultat=$resultat[0];
-	
-		echo '<a href='.utf8_decode($chemin1).'>fiche_race</a>';
+		$race=$resultat[$j]['nom_race'];
+		$chemin='../importexport/export/';
+		$chemin1= $chemin.'fiche_race_'.$race.'.pdf';	
+		$chemin2= $chemin.'fiche_eleveur_'.$race.'.pdf';
+		$chemin3= $chemin.'fiche_race_globale.pdf';
+		
+		echo '<a href='.$chemin1.'>fiche_race</a>';
 		echo "<BR>";
 		echo '<a href='.$chemin2.'>fiche_eleveur</a>';
 		echo "<BR>";
 		echo '<a href='.$chemin3.'>fiche_race_globale</a>';
 	}
-	else 
+	else // SI l'utilisateur est le CRA
 	{
 		$bdd = new PDO('mysql:host=localhost;dbname=crabase','root','', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')) ;
 	

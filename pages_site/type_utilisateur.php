@@ -33,28 +33,22 @@ if (!isset($_POST['id_utilisateur_selection']) )
 	$result=mysqli_query($link,$querya);
 
 	?>
-	
-<!--
+
 	<div class="container">	
 		<div class="row">
 			<div id="block1" class="col-md-3 offset-md-4" align='center' >
 				<FORM action="type_utilisateur.php" method="POST" name="form">
-					<div class="form-group"> 
--->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="selectbasic">Choix de l'utilisateur</label>
-		  <div class="col-md-4">
-			<select id="selectbasic" name="id_utilisateur_selection" class="form-control">
-
-		<?php
+					<div class="form-group">
+					  
+						<?php
 						//Création tableau
 						$tab=mysqli_fetch_all($result);
 						$nbligne=mysqli_num_rows($result);
 						$nbcol=mysqli_num_fields($result);
 						$j=0;
 						?>
-					<!--	<label for="id_utilisateur_selection">Choix de l'utilisateur</label>
-						<select class="form-control" name="id_utilisateur_selection" id="id_utilisateur_selection">-->
+						<label for="id_utilisateur_selection">Choix de l'utilisateur</label>
+						<select class="form-control" name="id_utilisateur_selection" id="id_utilisateur_selection">
 							<?php
 							while ($j<$nbligne)
 								{
@@ -63,7 +57,6 @@ if (!isset($_POST['id_utilisateur_selection']) )
 								}
 							?>
 						</select>
-					</div>
 					</div>
 					<?php
 						

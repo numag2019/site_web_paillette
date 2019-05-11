@@ -56,7 +56,7 @@ if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 
 else
 {
-				if ((isset($_SESSION['id_utilisateur'])) and ($autorisation=TRUE or $autorisation=$_SESSION['id_type']))
+				if ((isset($_SESSION['id_utilisateur'])) and ($autorisation=TRUE or in_array($_SESSION['id_type'],$autorisation)))
 				{
 					// On affiche les liens disponible au type d'utilisateur connecté
 					if ($_SESSION['id_type']==1)//eleveur

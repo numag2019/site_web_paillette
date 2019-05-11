@@ -1,8 +1,18 @@
 <html>
+<!--Page d'acceuil du site web CRAnet-->		
 	<head>
-		<meta charset = "UTF-8">
-	</head>
-	
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		
+		
+		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
+	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+	<?php $autorisation=TRUE // tout le monde?>
+<head>
 	<body>
 		Plateforme Paillettes <br><br><br>
 	
@@ -43,7 +53,7 @@
 			{	
 				$link=mysqli_connect('localhost', 'root', '', 'crabase');
 				mysqli_set_charset($link, "utf8mb4"); 
-			/*
+			
 				$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise
 				$result_bord=mysqli_query($link, $query_bord);
 				$liste_eleveur_bord=requete_2col_to_list ($result_bord) ;
@@ -55,25 +65,12 @@
 				$query_bear="SELECT id_utilisateur FROM bovins WHERE id_race=19"; // requête pour avoir un tableau contenant les éleveurs de la race Béarnaise
 				$result_bear=mysqli_query($link, $query_bear);
 				$liste_eleveur_bear=requete_2col_to_list ($result_bear) ;
-				*/
+				
 						// Requête SQL sécurisée
-		$req = $bdd->prepare("SELECT r.nom_race 
-							FROM races r JOIN bovins b 
-								ON r.id_race = b.id_race 
-							JOIN utilisateurs u 
-								ON b.id_utilisateur = u.id_utilisateur 
-							WHERE u.id_utilisateur= :id_utilisateur 
-							GROUP BY r.id_race  ");
-		$req->bindValue('id_utilisateur', $_SESSION['id_utilisateur'], PDO::PARAM_STR);
-		$req->execute();
-		$rows = $req->Count();
-		$resultat = $req->fetchAll(PDO::FETCH_NAMED);
-		$resultat=$resultat[0];
-	
-		echo '<a href='.$chemin1.'>fiche_race</a>';
+		
 	
 				$eleveur=$_GET["id_utilisateur"];
-				/*
+				
 				if (in_array($eleveur,$liste_eleveur_bord))
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Bordelaise </a> <br><br>" ;
@@ -86,7 +83,7 @@
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}
-				*/
+				
 				
 					echo "<INPUT TYPE='SUBMIT' name='bt_submit_hist' value='Voir son historique de prévisions paillettes'>";
 					echo "<INPUT type='hidden' name='eleveur' value='" . $eleveur . "'>" ;

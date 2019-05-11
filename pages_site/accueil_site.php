@@ -25,24 +25,24 @@
 			</div>
 			
 			<div class="col-md-4 col-lg-4">
-				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/cra.jpg" width="374" height="257	"></a>
+				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/mouton.jpg"></a>
 			</div>
 			
 			<div class="col-md-4 col-lg-4">
-				<a href="https://www.ifce.fr/"><img class="img-fluid" src="../mise_en_page/images/ifce.jpg" width="300" height="285"></a>
+				<a href="https://www.ifce.fr/"><img class="img-fluid" src="../mise_en_page/images/ifce.jpg"></a>
 			</div>
-		</div>
-	</div>
-	<div class="container">	
-		<div class="row">
-			</li>
-			<div id="block1" class="col-md-3 offset-md-2">
+			<div class="col-md-4 col-lg-4">
 				<p align='center'>
 					Enregistrer et visualiser les
 					informations relatives à vos cheptels bovins.
 				</p>
 			</div>
-			<div id="block2" class="col-md-3 offset-md-2">
+			<div class="col-md-4 col-lg-4">
+				<p align='center'>
+					Modifier les données de votre cheptel ovin.
+				</p>
+			</div>
+			<div class="col-md-4 col-lg-4">
 				<p align='center'>
 					Enregistrer et de visualiser les
 					informations concernant vos cheptels équins.

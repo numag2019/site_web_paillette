@@ -9,8 +9,8 @@ $chemin : chemin d'accès au fichier GeniS à envoyer sur Cranet
 $ftpTarget : emplacement où le fichier va être envoyé */
 
 // on établit la connexion au serveur
-	// $ftpServer = '194.199.251.99';
-	$ftpServer = '81.185.175.217';
+	$ftpServer = '194.199.251.99';
+
 	// on se connecte en tant qu'utilisateur
 	$ftpUser = 'cranet';
 	$ftpPwd = 'numag2019';

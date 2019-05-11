@@ -1,11 +1,12 @@
-﻿<html>
+﻿<!-- Cette page permet l'envoi des fichiers pdf vers cranet. Page appelé avec la page creationcsv.php-->
+
+
+<html>
 <body>
 
 <?php
 
-
-
-
+// On prend tous les noms des fichiers présents dans le dosssier pdf
 $nb_fichier = 0;   //variable nombre de fichier
 $chemin=array();
 $ftpTarget=array();

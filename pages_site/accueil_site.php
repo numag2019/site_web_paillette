@@ -13,18 +13,20 @@
 
 
 	<!--  Navigation -->
-	<?php include("../mise_en_page/navigation.html"); ?>
+	 <?php 
+	 include("../mise_en_page/navigation.html"); 
+	 ?>
 	</head>
 	
 	<body>
 		
-
-		
-	<div class="container">	
+ 	<div class="container">	
 		<div class="h-100 row align-items-center">
 			<div class="col-md-4 col-lg-4">
+
 				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/synel2.png"></a>
 								<p align='center'>
+
 					Enregistrer et visualiser les
 					informations relatives à vos cheptels bovins.
 				</p>
@@ -46,10 +48,9 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- DIV Pied de page -->
-	<?php include ("../mise_en_page/pied.html");?>
 	</body>
+		<!-- DIV Pied de page -->
+	<?php include ("../mise_en_page/pied.html");?>
 	
 
 </html>

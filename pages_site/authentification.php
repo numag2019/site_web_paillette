@@ -19,13 +19,16 @@
 	</head>
 	
 	<body>	
-Identifiez-vous :
+
+<br></br><br></br><br></br>
+
 		<div class="container">	
 			<div class="row">
-				<div id="block1" class="col-md-3 offset-md-4" align='center' >
+				<br></br><br></br><br></br>
+				<div id="block2" class="col-md-3 offset-md-4" align='center' >
 					<form action="verification_connexion.php" method="post">
 					  <div class="form-group">
-						<label for="identifiant">Identifiant</label>
+						<label for="identifiant">Identifiez-vous :</label>
 						<input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="Identifiant">
 						<small id="remarque" class="form-text text-muted">Vous devez détenir un compte</small>
 					  </div>

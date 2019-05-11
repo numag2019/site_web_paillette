@@ -22,27 +22,22 @@
 		<div class="h-100 row align-items-center">
 			<div class="col-md-4 col-lg-4">
 				<a href="https://www.synel.net/"><img class="img-fluid" src="https://www.synelia.fr/wp-content/uploads/2016/10/gabarit-solutions-a-la-une-synelia-synel.jpg"></a>
-			</div>
-			
-			<div class="col-md-4 col-lg-4">
-				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/mouton.jpg"></a>
-			</div>
-			
-			<div class="col-md-4 col-lg-4">
-				<a href="https://www.ifce.fr/"><img class="img-fluid" src="../mise_en_page/images/ifce.jpg"></a>
-			</div>
-			<div class="col-md-4 col-lg-4">
-				<p align='center'>
+								<p align='center'>
 					Enregistrer et visualiser les
 					informations relatives à vos cheptels bovins.
 				</p>
 			</div>
+			
 			<div class="col-md-4 col-lg-4">
-				<p align='center'>
-					Modifier les données de votre cheptel ovin.
+				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/mouton.jpg"></a>
+								<p align='center'>
+					Enregistrer et visualiser les
+					informations relatives à vos cheptels bovins.
 				</p>
 			</div>
+			
 			<div class="col-md-4 col-lg-4">
+				<a href="https://www.ifce.fr/"><img class="img-fluid" src="../mise_en_page/images/ifce.jpg"></a>
 				<p align='center'>
 					Enregistrer et de visualiser les
 					informations concernant vos cheptels équins.

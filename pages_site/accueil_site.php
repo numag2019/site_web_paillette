@@ -23,7 +23,7 @@
 	<div class="container">	
 		<div class="h-100 row align-items-center">
 			<div class="col-md-4 col-lg-4">
-				<a href="https://www.synel.net/"><img class="img-fluid" src="https://www.synelia.fr/wp-content/uploads/2016/10/gabarit-solutions-a-la-une-synelia-synel.jpg"></a>
+				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/synel2.png"></a>
 								<p align='center'>
 					Enregistrer et visualiser les
 					informations relatives à vos cheptels bovins.

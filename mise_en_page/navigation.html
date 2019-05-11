@@ -25,7 +25,8 @@ session_start();
 			</li>
 		</ul>
 		
-<?php	
+<?php
+
 if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 {	
 ?>
@@ -33,12 +34,12 @@ if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+					<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon espace</a>
 					<?php
 					if (isset($_SESSION['identifiant']))
 					{
 					?>
-						<a class="dropdown-item" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+						<a class="dropdown-item" href="../pages_site/mot_de_passe_oublie.php">Mot de passe oublié</a>
 						<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
 						
@@ -53,10 +54,9 @@ if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 <?php
 }
 
-
 else
 {
-				if (isset($_SESSION['id_utilisateur']))
+				if ((isset($_SESSION['id_utilisateur'])) and ($autorisation=TRUE or $autorisation=$_SESSION['id_type']))
 				{
 					// On affiche les liens disponible au type d'utilisateur connecté
 					if ($_SESSION['id_type']==1)//eleveur
@@ -191,6 +191,7 @@ else
 				{
 					echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
 				}
+
 				?>
 				
 

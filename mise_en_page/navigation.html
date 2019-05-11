@@ -31,13 +31,13 @@ if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
-					<a class="dropdown-item" href="../pages_site/mon_espace.php">Changer mon mot de passe</a>
+					<a class="dropdown-item" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
 					<?php
 					if (isset($_SESSION['identifiant']))
 					{
 					?>
 						<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+								<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
 						</div>
 						<?php
 					}
@@ -92,7 +92,7 @@ else
 								{
 								?>
 									<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+											<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
 									</div>
 									<?php
 								}
@@ -133,7 +133,7 @@ else
 									{
 									?>
 										<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+												<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
 										</div>
 										<?php
 									}
@@ -173,7 +173,7 @@ else
 								{
 								?>
 									<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+											<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
 									</div>
 									<?php
 								}

@@ -6,19 +6,45 @@
 		<!-- navigation.html -->
 
 <?php
+session_start();
 if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 {	
 ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="navbar-brand" id="navbarNav">
-		<ul class="nav nav-pills">
+<nav class="navbar navbar-expand-md fixed-top navbar-light" style="background-color: rgba(255,255,255,1);">
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
 			<li class="nav-item">
-				<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil</a>
+				<a href="#" class="nav-link disabled" style="color:red">Bienvenue sur CRAnet</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil&nbsp; &nbsp;<span class="fas fa-home"></span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="../pages_site/mon_espace.php">Mon cheptel bovin</a>
+				<a href="localhost/CRAnet/contact.html" class="nav-link">Contact&nbsp; &nbsp;<span class="fas fa-address-card"></span></a>
+			</li>
+			<li class="nav-item">
+				<a href="localhost/CRAnet/a_propos.html" class="nav-link">A propos&nbsp; &nbsp;<span class="fas fa-comment"></span></a>
 			</li>
 		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+					<a class="dropdown-item" href="../pages_site/mon_espace.php">Changer mon mot de passe</a>
+					<?php
+					if (isset($_SESSION['identifiant']))
+					{
+					?>
+						<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+						</div>
+						<?php
+					}
+					?>
+				</div>
+			</li>
+		</ul>	
 	</div>
 </nav>
 <?php
@@ -28,11 +54,11 @@ if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 else
 {
 	?>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="navbar-brand" id="navbarNav">
-			<ul class="nav nav-pills">
-				<li class="nav-item">
-					<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil</a>
+	<nav class="navbar navbar-expand-md fixed-top navbar-light" style="background-color: rgba(255,255,255,1);">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil&nbsp; &nbsp;<span class="fas fa-home"></span></a>
 				</li>
 				<?php
 				if (isset($_SESSION['id_utilisateur']))
@@ -53,10 +79,27 @@ else
 								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
 							</div>
 						</li>
+					</ul>
 						<!--lien vers la plateforme de récupération de mot de passe-->
-						<li class="nav-item">
-							<a class="nav-link" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+								<a class="dropdown-item" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+								<?php
+								if (isset($_SESSION['identifiant']))
+								{
+								?>
+									<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+									</div>
+									<?php
+								}
+								?>
+							</div>
 						</li>
+					</ul>
 						<?php
 						}
 					elseif ($_SESSION['id_type']==21 or $_SESSION['id_type']==22 or $_SESSION['id_type']==23)//administrateur de race
@@ -78,6 +121,26 @@ else
 								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
 							</div>
 						</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+									<a class="dropdown-item" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+									<?php
+									if (isset($_SESSION['identifiant']))
+									{
+									?>
+										<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+										</div>
+										<?php
+									}
+									?>
+								</div>
+							</li>
+						</ul>
 						<?php
 					}
 					elseif ($_SESSION['id_type']==3)
@@ -99,6 +162,25 @@ else
 								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
 							</div>
 						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+								<?php
+								if (isset($_SESSION['identifiant']))
+								{
+								?>
+									<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="../pages_site/changement_mdp">Déconnexion</a>
+									</div>
+									<?php
+								}
+								?>
+							</div>
+						</li>
+					</ul>
 						<?php
 					}
 				}
@@ -107,7 +189,7 @@ else
 					echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
 				}
 				?>
-				</ul>
+				
 
 		</div>
 	</nav>

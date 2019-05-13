@@ -4,6 +4,8 @@
 if $_SESSION['id_type']==1;*/
 $id_utilisateur = 4;
 
+require "Mes_fonctions.php" ;
+
 $link = mysqli_connect('localhost', 'root', '', 'crabase');
 mysqli_set_charset($link, "utf8mb4");
 
@@ -36,6 +38,35 @@ echo '<br> <br>';
 
 if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	{
+		
+	$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise
+	$result_bord=mysqli_query($link, $query_bord);
+	$liste_eleveur_bord=requete_2col_to_list ($result_bord) ;
+				
+	$query_mar="SELECT id_utilisateur FROM bovins WHERE id_race=6"; // requête pour avoir un tableau contenant les éleveurs de la race Marine
+	$result_mar=mysqli_query($link, $query_mar);
+	$liste_eleveur_mar=requete_2col_to_list ($result_mar) ;
+				
+	$query_bear="SELECT id_utilisateur FROM bovins WHERE id_race=19"; // requête pour avoir un tableau contenant les éleveurs de la race Béarnaise
+	$result_bear=mysqli_query($link, $query_bear);
+	$liste_eleveur_bear=requete_2col_to_list ($result_bear) ;
+				
+	// Requête SQL sécurisée
+		
+	$eleveur = 4;	
+	if (in_array($eleveur,$liste_eleveur_bord))
+		{
+		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Bordelaise </a> <br><br>" ;
+		}
+	if (in_array($eleveur,$liste_eleveur_mar))
+		{
+		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Marine </a> <br><br>" ;
+		}
+	if (in_array($eleveur,$liste_eleveur_bear))
+		{
+		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
+		}	
+			
 	$race = $_GET['liste_race'];
 	if ($race == 6)
 		$nom_race = 'marine';

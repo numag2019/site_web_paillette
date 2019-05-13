@@ -100,4 +100,7 @@ else
 
 ?>
 </body>
+
+ <!-- DIV Pied de page -->
+<?php include ("../mise_en_page/pied.html");?>
 </html>

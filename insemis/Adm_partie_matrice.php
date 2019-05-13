@@ -10,6 +10,7 @@
 		
 		
 		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
+		
 	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
 <head>

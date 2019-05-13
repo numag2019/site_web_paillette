@@ -178,7 +178,9 @@ echo '<br> <br>';
 						if ($tab_coeff[0][0]>$tab_color[0][1])
 							$color = 'red';
 						echo '<td bgcolor ='.$color.'><center>';
-						echo $tab_coeff[0][0];
+						if(isset($tab_coeff[0][0]))
+							echo $tab_coeff[0][0];
+						if(isset($tab_prev[0][0]))
 						echo ' <br> '.$tab_prev[0][0];
 						echo '</center></td>';
 						//echo '</tr>';

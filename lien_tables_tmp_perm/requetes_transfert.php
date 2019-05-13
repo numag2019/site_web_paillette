@@ -1,5 +1,6 @@
 <html>
 <body>
+<<<<<<< HEAD
 
 
 <!--pour le type d'utilisateur : le cra doit pouvoir modifier les droits sur
@@ -22,68 +23,130 @@ WHERE condition-->
 <!--periodes-->
 
 <!--previsions se remplira par formulaire-->
+=======
+<!--••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+>>>>>>> 699356be0e68bc6a3e8332c76334b9f74b0584d3
+
+CETTE PAGE PERMET D'INSERER DE NOUVELLES DONNEES OU DE METTRE A JOUR DES DONNEES DE
+ 4 TABLES PERMANENTES (utilisateurs, bovins, races, coefficients)
+A PARTIR DES 4 TABLES INTERMÉDIAIRES DE LA BDD DATACRANET (eleveurs_intermediaire, bovins_intermediaire,
+ races_intermediaire, coefficients_intermediaire)
+
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••-->
 
 <?php
 
-
+//Lien à la base de donnée
 $link=mysqli_connect('localhost','root','','crabase');
 mysqli_set_charset($link,"utf8mb4");
 
-// $queryd="SELECT DATE_FORMAT(Observations.date,'%d/%m/%Y'),Observations.nombre,oiseaux.nom_commun,Communes.nom_commune,Departements.id_dpt FROM observations
-		// JOIN oiseaux ON observations.id_oiseau=oiseaux.id_oiseau
-		// JOIN Communes ON observations.id_commune=Communes.id_commune
-		// JOIN Departements ON Communes.id_dpt=Departements.id_dpt and Departements.nom_dpt='".$dep."'
-		// WHERE MONTH(Observations.date) BETWEEN '".$date1."' and '".$date2."' and Observations.nombre >".$nbremin."
-		// GROUP BY Observations.date";
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // UTILISATEURS
-// Pb : utiliser id de genis sinon risque de deux noms pareils. id_eleveurs=id_genis ?
-$requete="INSERT INTO utilisateurs(id_utilisateur,nom,prenom,email)
-SELECT eleveurs_intermediaires.id_eleveur, eleveurs_intermediaires.nom,
-eleveurs_intermediaires.prenom,eleveurs_intermediaires.email 
-FROM eleveurs_intermediaires 
+
+//INSERTION
+$requeteUtI="INSERT INTO utilisateurs(id_utilisateur,nom,prenom,email)
+SELECT eleveurs_intermediaire.id_eleveur, eleveurs_intermediaire.nom,
+eleveurs_intermediaire.prenom,eleveurs_intermediaire.email 
+FROM eleveurs_intermediaire 
 WHERE not exists (SELECT utilisateurs.id_utilisateur from utilisateurs 
-WHERE utilisateurs.id_utilisateur=eleveurs_intermediaires.id_eleveur )";
+WHERE utilisateurs.id_utilisateur=eleveurs_intermediaire.id_eleveur )";
 
 // Exécution requête
-$obs=mysqli_query($link,$requete);
+$obsUtI=mysqli_query($link,$requeteUtI);
+
+// MISE A JOUR
+$requeteUtU="UPDATE utilisateurs 
+	INNER JOIN eleveurs_intermediaire
+	ON utilisateurs.id_utilisateur=eleveurs_intermediaire.id_eleveur
+	SET utilisateurs.nom=eleveurs_intermediaire.nom,
+	utilisateurs.prenom=eleveurs_intermediaire.prenom,
+	utilisateurs.email=eleveurs_intermediaire.email";
+
+// Exécution requête
+$obsUtU=mysqli_query($link,$requeteUtU);
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //RACES
-// Pb : seuil min seuil max ?
-$requete="INSERT INTO races(id_race, nom_race)
-SELECT races_intermediaires.id_race_int,races_intermediaires.nom_race
-FROM races_intermediaires
-WHERE not exists (SELECT races.id_race from races WHERE races.id_race=races_intermediaires.id_race_int )";
+
+//INSERTION
+$requeteRaI="INSERT INTO races(id_race, nom_race)
+SELECT races_intermediaire.id_race_int,races_intermediaire.nom_race
+FROM races_intermediaire
+WHERE not exists (SELECT races.id_race from races WHERE races.id_race=races_intermediaire.id_race_int )";
 
 // Exécution requête
-$obs=mysqli_query($link,$requete);
+ $obsRaI=mysqli_query($link,$requeteRaI);
 
+// MISE A JOUR
+$requeteRaU="UPDATE races 
+INNER JOIN races_intermediaire 
+ON races.id_race=races_intermediaire.id_race_int 
+SET races.nom_race=races_intermediaire.nom_race";
+
+// Exécution requête
+ $obsRaU=mysqli_query($link,$requeteRaU);
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //BOVINS
-// Pb : mort (date d'un cote et chiffre de l'autre)
-$requete="INSERT INTO bovins(id_bovin, nom_bovin,sexe,mort,id_race,id_utilisateur)
-SELECT bovins_intermediaires.id_bovin, bovins_intermediaires.nom_bovin, bovins_intermediaires.sexe,
-bovins_intermediaires.date_mort, bovins_intermediaires.id_race, bovins_intermediaires.id_eleveur
-FROM bovins_intermediaires
-WHERE not exists (SELECT bovins.id_bovin from races WHERE bovins.id_bovin=bovins_intermediaires.id_bovin )";
+
+//INSERTION
+$requeteBoI="INSERT INTO bovins(id_bovin, nom_bovin,sexe,mort,id_race,id_utilisateur) 
+SELECT bovins_intermediaire.id_bovin, bovins_intermediaire.nom_bovin, 
+bovins_intermediaire.sexe, bovins_intermediaire.mort, bovins_intermediaire.id_race,
+ bovins_intermediaire.id_eleveur FROM bovins_intermediaire
+ WHERE not exists (SELECT bovins.id_bovin from bovins WHERE bovins.id_bovin=bovins_intermediaire.id_bovin )";
 
 // Exécution requête
-$obs=mysqli_query($link,$requete);
 
-//COEFFICIENTS
-$requete="INSERT INTO coefficients(id_coeff, valeur_coeff,id_vache,id_taureau)
-SELECT coefficients_intermediaires.id_coeff_int, coefficients_intermediaires.valeur_coeff, 
-coefficients_intermediaires.id_vache, coefficients_intermediaires.id_taureau
-FROM coefficients_intermediaires
-WHERE not exists (SELECT coefficients.id_coeff from coefficients
- WHERE coefficients.id_coeff=coefficients_intermediaires.id_coeff_int )";
+$obsBoI=mysqli_query($link,$requeteBoI);
  
- // Exécution requête
-$obs=mysqli_query($link,$requete);
+ // MISE A JOUR
+$requeteBoU="UPDATE bovins
+INNER JOIN bovins_intermediaire
+ON bovins.id_bovin=bovins_intermediaire.id_bovin
+SET bovins.nom_bovin=bovins_intermediaire.nom_bovin,
+bovins.sexe=bovins_intermediaire.sexe,
+bovins.id_race=bovins_intermediaire.id_race";
 
-//PERIODES
-//Pb : à réfléchir. Date début date du jour ? reinitialisation quand une periode pour une race prend fin
-// Probablement inutile de faire une requete. Remplissage avec interaction admin.)^$
+// Exécution requête
+$obsBoU=mysqli_query($link,$requeteBoU);
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//COEFFICIENTS
+
+//INSERTION
+$requeteCoI="INSERT INTO coefficients(id_coeff, valeur_coeff,id_vache,id_taureau)
+SELECT coefficients_intermediaire.id_coeff_int, coefficients_intermediaire.valeur_coeff, 
+coefficients_intermediaire.id_vache, coefficients_intermediaire.id_taureau
+FROM coefficients_intermediaire
+WHERE not exists (SELECT coefficients.id_coeff 
+FROM coefficients
+WHERE coefficients.id_coeff=coefficients_intermediaire.id_coeff_int )";
+ 
+// Exécution requête
+$obsCoI=mysqli_query($link,$requeteCoI);
+ 
+// MISE A JOUR
+ $requeteCoU="UPDATE coefficients
+ INNER JOIN coefficients_intermediaire
+ ON coefficients.id_coeff=coefficients_intermediaire.id_coeff_int
+SET coefficients.valeur_coeff=coefficients_intermediaire.valeur_coeff,
+coefficients.id_vache=coefficients_intermediaire.id_vache,
+coefficients.id_taureau=coefficients_intermediaire.id_taureau";
+
+// Exécution requête
+$obsCoU=mysqli_query($link,$requeteCoU);
+
 
 
 ?>

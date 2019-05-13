@@ -1,0 +1,25 @@
+<!-- appelle des pages suivantes dans la barre de navigation-->
+
+<HTML>
+
+<!-- navigation.html -->
+
+	<!-- Section de Menu : à insérer sur chacune des pages -->
+	<div id="navigation">
+		<ul>
+			<li class="gauche"><a href="../pages_site/acceuil_site.php">Accueil</a></li>
+			<li class="gauche"><a href="http://194.199.250.44:8080/ora/main_icefaces.html">Information Ovin	</a> 
+			<li class="gauche"><a href="mon_espace.php">Mon espace</a></li>
+			
+<?php 
+	if (isset($_SESSION['identifiant']))
+	{
+	echo ("Bonjour"&nbsp.$_SESSION['identifiant']);
+	echo ('<li class="droite"><a href="deconnexion.php">Déconnexion</a></li>');
+	}
+	
+?>
+			
+		</ul>
+	</div>
+</HTML>

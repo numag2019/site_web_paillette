@@ -128,7 +128,6 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 						if ($tab_coeff[0][0]>$tab_color[0][1])
 							$color = 'red';
 						echo '<td bgcolor ='.$color.'><center>';
-						echo '<INPUT TYPE="number" name="bouton_prev" value = " " size = "2">';
 						//echo $tab_coeff[0][0];
 						echo $tab_prev[0][0];
 						echo '</center></td>';
@@ -147,7 +146,59 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 				echo '<tr>';
 				echo '<td bgcolor=red> Accouplement peu favorable </td> ';
 				echo '</tr>';
-				echo '<br> <br>';				
+				echo '<br> <br>';
+	echo "Prévoir un accouplement <br>";
+	echo "Choisissez le mâle : ";
+	echo '<SELECT NAME = "liste_male">';
+	for($i=0; $i < count($liste_nom_males); $i++)
+	{
+		$value = $liste_nom_males[$i];
+		echo "<OPTION VALUE ='".$value. "' ";
+		if (isset($_GET['liste_male']))
+		{
+			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
+			if ($value==$_GET['liste_male']) 
+			echo "selected";
+		}
+	echo ">".$liste_nom_males[$i]."</OPTION> ";
+	}
+	echo '</SELECT NAME> <br/>';
+	
+	echo "Choisissez la femelle : ";
+	echo '<SELECT NAME = "liste_femelle">';
+	for($i=0; $i < count($liste_nom_femelle); $i++)
+	{
+		$value = $liste_nom_femelle[$i];
+		echo "<OPTION VALUE ='".$value. "' ";
+		if (isset($_GET['liste_male']))
+		{
+			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
+			if ($value==$_GET['liste_male']) 
+			echo "selected";
+		}
+	echo ">".$liste_nom_femelle[$i]."</OPTION> ";
+	}
+	echo '</SELECT NAME> <br/>';
+	echo "Choisissez le nombre de paillettes à commander : ";
+	$liste_nombre = array('1','2','3','4','5');
+	echo '<SELECT NAME = "liste_nombre">';
+	for($i=0; $i < count($liste_nombre); $i++)
+	{
+		$value = $liste_nombre[$i];
+		echo "<OPTION VALUE ='".$value. "' ";
+		if (isset($_GET['liste_nombre']))
+		{
+			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
+			if ($value==$_GET['liste_nombre']) 
+			echo "selected";
+		}
+	echo ">".$liste_nombre[$i]."</OPTION> ";
+	}
+	echo '</SELECT NAME> <br/>';
+	echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_prev" value = "Valider la prévision">';
+	echo '<br> <br>';
+	
+	
 	echo "<input type='hidden' name='id_race' value='".$race."'>";
 	echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 	echo '<INPUT TYPE="submit" name="bouton_historique"  value="Afficher mon historique de commandes pour la race">';

@@ -5,8 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
 		
-		<!-- Entête -->
-		<?php include("../mise_en_page/entete.html");?>	
 
 		<!--  Navigation -->
 

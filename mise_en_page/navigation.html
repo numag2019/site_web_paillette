@@ -6,36 +6,57 @@
 		<!-- navigation.html -->
 
 <?php
+session_start();
+?>
+<nav class="navbar navbar-expand-md fixed-top navbar-light" style="background-color: rgba(255,255,255,1);">
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a href="#" class="nav-link disabled" style="color:red">Bienvenue sur CRAnet</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil&nbsp; &nbsp;<span class="fas fa-home"></span></a>
+			</li>
+			<li class="nav-item">
+				<a href="localhost/CRAnet/contact.html" class="nav-link">Contact&nbsp; &nbsp;<span class="fas fa-address-card"></span></a>
+			</li>
+			<li class="nav-item">
+				<a href="localhost/CRAnet/a_propos.html" class="nav-link">A propos&nbsp; &nbsp;<span class="fas fa-comment"></span></a>
+			</li>
+		</ul>
+		
+<?php
+
 if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
 {	
 ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="navbar-brand" id="navbarNav">
-		<ul class="nav nav-pills">
-			<li class="nav-item">
-				<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil</a>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon espace</a>
+					<?php
+					if (isset($_SESSION['identifiant']))
+					{
+					?>
+						<a class="dropdown-item" href="../pages_site/mot_de_passe_oublie.php">Mot de passe oublié</a>
+						<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
+						
+					<?php
+					}
+					?>
+				</div>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="../pages_site/mon_espace.php">Mon cheptel bovin</a>
-			</li>
-		</ul>
+		</ul>	
 	</div>
 </nav>
 <?php
 }
 
-
 else
 {
-	?>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="navbar-brand" id="navbarNav">
-			<ul class="nav nav-pills">
-				<li class="nav-item">
-					<a class="nav-link" align='center' href="../pages_site/accueil_site.php">Accueil</a>
-				</li>
-				<?php
-				if (isset($_SESSION['id_utilisateur']))
+				if ((isset($_SESSION['id_utilisateur'])) and ($autorisation=TRUE or in_array($_SESSION['id_type'],$autorisation)))
 				{
 					// On affiche les liens disponible au type d'utilisateur connecté
 					if ($_SESSION['id_type']==1)//eleveur
@@ -43,20 +64,39 @@ else
 						?>
 						<!--lien vers la page etats_de_sorties.php-->
 						<li class="nav-item">
-							<a class="nav-link" href="../pages_site/etats_de_sorties.php">Accès états de sorties</a>
+							<a class="nav-link" href="../pages_site/affichage_pdf.php">Liens pdf</a>
 						</li>
 						<!--lien vers la plateforme paillette entant qu'éleveurs-->
+					<ul>
+					<ul class="nav navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
-							<div class="dropdown-menu">
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="../insemis/Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a>
 								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
 							</div>
 						</li>
+					</ul>
 						<!--lien vers la plateforme de récupération de mot de passe-->
-						<li class="nav-item">
-							<a class="nav-link" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+								<a class="dropdown-item" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+								<?php
+								if (isset($_SESSION['identifiant']))
+								{
+								?>
+									<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
+									</div>
+									<?php
+								}
+								?>
+							</div>
 						</li>
+					</ul>
 						<?php
 						}
 					elseif ($_SESSION['id_type']==21 or $_SESSION['id_type']==22 or $_SESSION['id_type']==23)//administrateur de race
@@ -64,26 +104,50 @@ else
 						?>	
 						<!--lien vers la page etats_de_sorties.php en-->
 						<li class="nav-item">
-							<a class="nav-link" href="../pages_site/etats_de_sorties.php">Accès états de sorties</a>
+							<a class="nav-link" href="../pages_site/affichage_pdf.php">Liens pdf</a>
 						</li>
 						<!--lien vers la page plateforme plan_previsionnel_IA.php en tant qu'éleveurs-->
 						<li class="nav-item">
-							<a class="nav-link" href="../insemis/plan_previsionnel_IA.php">Plan prévisionnel d IA</a>
+							<a class="nav-link" href="../insemis/plan_previsionnel_IA.php">Plan prévisionnel d'IA</a>
 						</li>
 						<!--lien vers la plateforme paillette en tant qu'administrateur de race--> 
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="../insemis/Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a>
-								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
-							</div>
-						</li>
+						</ul>
+						<ul class="nav navbar-nav">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="../insemis/Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a>
+									<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
+								</div>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+									<a class="dropdown-item" href="../pages_site/changement_mdp.php">Changer mon mot de passe</a>
+									<?php
+									if (isset($_SESSION['identifiant']))
+									{
+									?>
+										<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
+										</div>
+										<?php
+									}
+									?>
+								</div>
+							</li>
+						</ul>
 						<?php
 					}
 					elseif ($_SESSION['id_type']==3)
 					{
 						?>
 						<!--lien vers l'administration du site-->
+					</ul>
+					<ul class="nav navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accès à l'administration du site</a>
 							<div class="dropdown-menu">
@@ -91,7 +155,9 @@ else
 								<a class="dropdown-item" href="type_utilisateur.php">Associer identifiant et mot de passe à un compte</a>
 							</div>
 						</li>
+					</ul>
 						<!--lien vers la plateforme paillette en tant qu'administrateur de race -->
+					<ul class="nav navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
 							<div class="dropdown-menu">
@@ -99,6 +165,25 @@ else
 								<a class="dropdown-item" href="../insemis/Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
 							</div>
 						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user">&nbsp; &nbsp;Utilisateur</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="../pages_site/mon_espace.php">Mon compte</a>
+								<?php
+								if (isset($_SESSION['identifiant']))
+								{
+								?>
+									<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
+									</div>
+									<?php
+								}
+								?>
+							</div>
+						</li>
+					</ul>
 						<?php
 					}
 				}
@@ -106,12 +191,14 @@ else
 				{
 					echo "<script type='text/javascript'>document.location.replace('authentification.php');</script>";
 				}
+
 				?>
-				</ul>
+				
 
 		</div>
 	</nav>
 	<?php
+echo str_repeat('<br>',6);
 }
 ?>
 

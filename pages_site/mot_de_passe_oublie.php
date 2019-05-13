@@ -1,22 +1,28 @@
-<!--Page accessible en cliquant sur le lien mot de passe oublié,
+
+
+<html>
+		<!--Page accessible en cliquant sur le lien mot de passe oublié,
 	l'utilisateur doit alors rentrer son adresse email, si celle ci correspond 
 	à une présente dans la bdd, le mot de passe de l'utilisateur correspondant 
 	est remplacé par un nouveau créer de façon aléatoire, 
 	ce mot de passe est envoyé à l'utilisateur et est stocké de façon "hashé" dans la bdd-->		
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
+		<?php $authentification=1;?>
 
-		<!-- Entête -->
-		<?php include("../mise_en_page/entete.html");?>	
-
+		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+		<?php $autorisation=TRUE // tout le monde?>
+		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
+		
+		
 	</head>
 	
 	<body>

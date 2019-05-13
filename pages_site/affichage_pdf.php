@@ -35,7 +35,7 @@ if (isset($_SESSION['id_utilisateur']))
 		$req->execute();
 		$rows = $req->Count();
 		$resultat = $req->fetchAll(PDO::FETCH_NAMED);
-		$race=$resultat[$j]['nom_race'];
+		$race=$resultat[$0]['nom_race'];
 		$chemin='../importexport/export/';
 		$chemin1= $chemin.'fiche_race_'.$race.'.pdf';	
 		$chemin2= $chemin.'fiche_eleveur_'.$race.'.pdf';

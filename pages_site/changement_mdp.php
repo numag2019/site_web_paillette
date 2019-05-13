@@ -23,19 +23,20 @@
 
 <div class="container">	
 	<div class="row">
-		<div id="block1" class="col-md-3 offset-md-4" align='center' >
+		<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: white ;border-radius: 30px;" >
 			<form action="changement_mdp_verification_form.php" method="post">
 			  <div class="form-group">
-				<label for="mdp">Veuillez entrer votre mot de passe actuel :</label>
+				<label for="mdp" style="color: black">Veuillez entrer votre mot de passe actuel :</label>
 				<input type="mdp_changement" name="mdp_changement" class="form-control" id="mdp_changement" placeholder="Mot de passe">
-			  <button type="submit" class="btn btn-primary">Valider</button>
+			  <button type="submit" class="btn btn-primary" style="color: black" >Valider</button>
 			</form>
 		</div>
 	</div>
 </div>
 
 <?php if (isset ($_SESSION['error']))
-	{echo $_SESSION['error'];}?>
+	{echo $_SESSION['error'];
+	unset($_SESSION['error']);}?>
 
 		<!-- DIV Pied de page -->	
 

@@ -326,19 +326,20 @@ if (isset($_GET['bouton_valider_prev']))
 	mysqli_set_charset($link, "utf8mb4");
 	$req_test="SELECT *
 				FROM previsions
-				WHERE  id_vache=$_GET['liste_femelle'] and id_taureau=$_GET['liste_male']"
+				WHERE id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
 	$result_test=mysqli_query($link, $req_test);
-	if count(result_test>0) // la prevision existe
+	$tab_result = mysqli_fetch_all($result_test);
+	if (count($tab_result)>0) // la prevision existe
 	{
 	$query_race = "UPDATE previsions
-					ON nbr_paillettes=$_GET['liste_nombre']
-					WHERE  id_vache=$_GET['liste_femelle'] and id_taureau=$_GET['liste_male']";
+					ON nbr_paillettes=".$_GET['liste_nombre']."
+					WHERE  id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
 	$result_race = mysqli_query($link, $query_race);
 	}
 	else // sinon on la crée
 	{
 	$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
-			VALUES ( $_GET[liste_nombre],1 , $GET['liste_femelle'] , $GET['liste_male'])";
+			VALUES ( ".$_GET['liste_nombre'].",1 , ".$GET['liste_femelle']." , ".$GET['liste_male'].")";
 	$result_race = mysqli_query($link, $reqadd);
 
 	}

@@ -40,8 +40,7 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 	closedir($dossier);
 	 
 	 // si l'utilisateur est un éleveur ou un animateur de race
-	 $a=3;
-		if ($a!=3 )
+		if ($_SESSION['id_type']!=3 )
 		{
 			$link=mysqli_connect('localhost','root','','crabase');
 			mysqli_set_charset($link,"utf8mb4");

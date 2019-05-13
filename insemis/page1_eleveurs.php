@@ -36,7 +36,7 @@ echo '</SELECT NAME> <br/> <br/>';
 echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" value = "Valider">';
 echo '<br> <br>';
 
-if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
+if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GET['bouton_valider_prev']))
 	{
 		
 	$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise
@@ -166,6 +166,7 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 					echo '</td>';
 					echo '</center></tr>';
 				}
+				echo '</table>';
 				echo '<br>';
 				echo '<table border = 1>';
 				echo '<tr>';
@@ -177,7 +178,9 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 				echo '<tr>';
 				echo '<td bgcolor=red> Accouplement peu favorable </td> ';
 				echo '</tr>';
+				echo '</table>';
 				echo '<br> <br>';
+
 	echo "Prévoir un accouplement <br>";
 	echo "Choisissez le mâle : ";
 	echo '<SELECT NAME = "liste_male">';
@@ -334,6 +337,7 @@ if (isset($_GET['bouton_valider_prev']))
 				WHERE id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
 	$result_test=mysqli_query($link, $req_test);
 	$tab_result = mysqli_fetch_all($result_test);
+	echo count($tab_result);
 	if (count($tab_result)>0) // la prevision existe
 	{
 	$query_race = "UPDATE previsions
@@ -345,7 +349,7 @@ if (isset($_GET['bouton_valider_prev']))
 	else // sinon on la crée
 	{
 	$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
-			VALUES ( ".$_GET['liste_nombre'].",1 , ".$GET['liste_femelle']." , ".$GET['liste_male'].")";
+			VALUES ( ".$_GET['liste_nombre'].",6 , ".$GET['liste_femelle']." , ".$GET['liste_male'].")";
 	$result_race = mysqli_query($link, $reqadd);
 
 	}

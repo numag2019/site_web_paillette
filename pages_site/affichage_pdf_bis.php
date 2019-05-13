@@ -1,3 +1,5 @@
+<!--Page permettant l'afichage des pdf selon les utilisateurs-->
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -17,7 +19,7 @@
 <body>
 <?php
 
-// On prend tous les noms des fichiers présents dans le dosssier pdf
+// On prend tous les noms et les chemins des fichiers présents dans le dossier pdf
 $nb_fichier = 0;   //variable nombre de fichier
 $chemin=array();
 $nomfichier=array();
@@ -62,8 +64,15 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 			$nbligne=mysqli_num_rows($obs);
 			$nbcol=mysqli_num_fields($obs);
 			
-			echo '<h5>PDF à dispositions</h5>';
+			echo '<h5>PDF à disposition</h5>';
+			
+			
+			
+			
 			// mise à disposition des pdf de la race élevée par l'éleveur
+			echo "<BR>";
+			echo 'Les pdf de la race';
+			echo "<BR>";
 			$i=0;
 			while($i<$nb_fichier)
 			{
@@ -80,10 +89,17 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 				}
 				$i++;
 			}
+			
+			
+			
+			// mise à disposition des pdf de l'éleveur
+			echo "<BR>";
+			echo 'Les pdf de l\'éleveur';
+			echo "<BR>";
 			$i=0;
 			while($i<$nb_fichier)
 			{
-			// mise à disposition des pdf de l'éleveur
+			
 				// Si le nom de la race est présent dans le nom du pdf, on l'affiche
 				if (stripos($chemin[$i],$tab[0][1]))
 				{
@@ -92,22 +108,41 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 				}
 				$i++;
 			}
+			echo "<BR>";
+			echo 'pdf global';
+			echo "<BR>";
 			echo '<a href="../importexportCSV/exports/pdf/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
-						echo "<BR>";
+			echo "<BR>";
 		}
 		
 		
+		
+		
+		
 		// Si c'est l'administrateur, tous les documents sont affichés
+		
 		else
 		{
-			$k=0;
-			echo '<h5>PDF à dispositions</h5>';
+			$pdf=array('race','eleveur','elevage','global');
+			$j=0;
+			echo '<h5>PDF à disposition</h5>';
 			echo "<BR>";
-			while ($k<$nb_fichier)
+			while ($j<count($pdf))
 			{
-				echo '<a href='.$chemin[$k].'>'.$nomfichier[$k].'</a>';
 				echo "<BR>";
-				$k++;
+				echo 'Les pdf '.$pdf[$j];
+				echo "<BR>";
+				$k=0;
+				while ($k<$nb_fichier)
+				{
+					if (stripos($chemin[$k],$pdf[$j]))
+					{
+						echo '<a href='.$chemin[$k].'>'.$nomfichier[$k].'</a>';
+						echo "<BR>";
+					}
+					$k++;
+				}
+				$j++;
 			}
 		}
 

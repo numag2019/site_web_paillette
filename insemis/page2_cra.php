@@ -68,7 +68,7 @@ echo '<br> <br>';
 			echo '</SELECT>';
 			echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 			echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
-			echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
+			//echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 			echo '<INPUT type="submit" name="bouton_valider_race"  value="Valider">';
 			echo '<br> <br>';
 			//echo '</FORM>';

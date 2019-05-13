@@ -22,19 +22,24 @@
 			$link=mysqli_connect('localhost', 'root', '', 'crabase'); // connexion à la base de données
 			mysqli_set_charset($link, "utf8mb4"); // prise en compte des caractères de la base de données
 			
-			$query="SELECT id_utilisateur, nom, prenom FROM utilisateurs"; // requête pour la liste déroulante choix eleveur
+			// requête pour la liste déroulante choix eleveur
+			$query="SELECT id_utilisateur, nom, prenom FROM utilisateurs"; 
 			$result=mysqli_query($link, $query);
-			//var_dump($result);
+			$tab_nom=mysqli_fetch_all($result,MYSQLI_BOTH); 
 			
-			$tab_nom=mysqli_fetch_all($result,MYSQLI_BOTH); // identifiant et nom des observateurs regroupés dans un tableau
-			//var_dump($tab_nom);
-			//echo $tab_nom[0][1];
-			
-			$query_race="SELECT id_race, nom_race FROM races";
-			$result_race=mysqli_query($link, $query_race);
-			$tab_race=mysqli_fetch_all($result_race);
-
-		
+			if(isset($_GET['bouton_valider_eleveur']))
+			{
+				//requête pour la liste déroulante race (ne contient sue les races que l'éleveur élève)
+				$id_eleveur=$_GET["liste_eleveurs"];
+				$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
+							  FROM races
+							  JOIN bovins ON races.id_race = bovins.id_race
+							  JOIN utilisateurs ON bovins.id_utilisateur = utilisateurs.id_utilisateur
+							  WHERE utilisateurs.id_utilisateur =".$id_eleveur."";
+				$result_race=mysqli_query($link, $query_race);
+				$tab_race=mysqli_fetch_all($result_race);
+			}
+			//Formulaire avec la liste déroulante de l'éleveur Puis la liste déroulante de la race ou des races qu'il élève
 			echo '<FORM method = "GET" name = "formulaire">';
 
 			//liste déroulante éleveurs
@@ -59,7 +64,7 @@
 			echo '<br> <br>';
 			
 			// liste déroulante races
-			if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bouton_valider_race'])||isset($_GET['bouton_historique']))
+			if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bouton_valider_race'])||isset($_GET['bt_submit_hist']))
 			{
 				echo "Choisissez la race dont vous voulez voir la matrice de parenté : ";
 				echo "<SELECT name='liste_race'>";
@@ -83,6 +88,7 @@
 		
 		
 				//Affichage catalogue + matrice
+				//Affichage catalogue
 				if(isset($_GET['bouton_valider_race'])||isset($_GET['bt_submit_hist']))
 				{	
 					$link=mysqli_connect('localhost', 'root', '', 'crabase');
@@ -118,7 +124,7 @@
 						echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 					}
 						
-						//Affichage de la matrice de parenté de l'éleveur
+					//Affichage de la matrice de parenté de l'éleveur
 					$id_eleveur = $_GET["liste_eleveurs"];
 					$race = $_GET["liste_race"];
 					if ($race == 6)
@@ -128,13 +134,13 @@
 					if ($race == 19)
 						$nom_race = 'béarnaise';
 					echo "Matrice de parenté de l'éleveur " .$tab_nom[0][1] . " pour la race " .$nom_race;
-					/*echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
+					echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
 					echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 					echo "<input type='hidden' name='id_race' value='".$race."'>";
 					echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 					echo '<INPUT TYPE="submit" name="bouton_historique"  value="Afficher l historique de commande de l éleveur">';
 					echo '<br>';
-					*/
+					
 					
 					$query_matrice = "SELECT coefficients.id_vache, coefficients.id_taureau
 									 FROM coefficients
@@ -196,7 +202,7 @@
 						echo '<tr><center>';
 						echo '<td>'.$liste_nom_femelle[$i];;
 						for ($j=0; $j < $nb_males; $j++)
-							{
+						{
 							$query_color = "SELECT races.seuil_min, races.seuil_max FROM races WHERE id_race=".$race."";
 							$result_color = mysqli_query($link, $query_color);
 							$tab_color = mysqli_fetch_all($result_color);
@@ -214,6 +220,11 @@
 										WHERE id_vache=" .$liste_femelles[$i]." AND id_taureau=".$liste_males[$j]." AND id_periode=".$periode. "";
 							$result_prev = mysqli_query($link, $query_prev);
 							$tab_prev = mysqli_fetch_all($result_prev);
+							//echo $query_coeff;
+							//var_dump($tab_coeff);
+							//echo $tab_coeff[0][0];
+							//echo $tab_color[0][0];
+							//var_dump($tab_prev);
 							if ($tab_coeff[0][0]<$tab_color[0][0])
 								$color = 'green';
 							if ($tab_coeff[0][0]>$tab_color[0][0] AND $tab_coeff[0][0]<$tab_color[0][1] )
@@ -222,10 +233,11 @@
 								$color = 'red';
 							echo '<td bgcolor ='.$color.'><center>';
 							echo $tab_coeff[0][0];
-							echo ' <br> '.$tab_prev[0][0];
+							if(isset($tab_prev[0][0]))
+								echo ' <br> '.$tab_prev[0][0];
 							echo '</center></td>';
 							//echo '</tr>';
-							}
+						}
 						echo '</td>';
 						echo '</center></tr>';
 					}
@@ -278,13 +290,18 @@
 						}
 						//var_dump($liste_id_per);
 						
-						// Les lignes suivantes servent à obtenir la liste des vache de l'éleveur séléctionné dans les pages précédentes puis la liste des id_bovins
-						$query_liste_taureau="SELECT DISTINCT bovins.nom_bovin, bovins.id_bovin 
+						// Les lignes suivantes servent à obtenir la liste des taureaux puis la liste des id_bovins
+						/*$query_liste_taureau="SELECT DISTINCT bovins.nom_bovin, bovins.id_bovin 
 											FROM bovins 
 											JOIN previsions ON previsions.id_taureau=bovins.id_bovin
 											JOIN utilisateurs ON utilisateurs.id_utilisateur=bovins.id_utilisateur
 											WHERE (bovins.sexe=1 OR bovins.sexe=3) AND previsions.nbr_paillettes IS NOT NULL AND utilisateurs.id_utilisateur=$utilisateur";
-						//Faudra poiuvoir prendre les taureaux que de la race de l'adlinistrateur de race
+											*/
+						$query_liste_taureau="SELECT DISTINCT bovins.nom_bovin, bovins.id_bovin 
+											FROM bovins 
+											JOIN previsions ON previsions.id_taureau=bovins.id_bovin
+											WHERE (bovins.sexe=1 OR bovins.sexe=3) AND previsions.nbr_paillettes IS NOT NULL";
+						//Faudra poiuvoir prendre les taureaux que de la race de l'administrateur de race
 						$result_liste_taureau=mysqli_query($link, $query_liste_taureau);
 						$tab_liste_taureau=mysqli_fetch_all($result_liste_taureau);
 						$nbligne = mysqli_num_rows($result_liste_taureau);
@@ -294,17 +311,15 @@
 						{
 							$liste_taureau[$i]=$tab_liste_taureau[$i][0] ;
 						}
-						//var_dump($liste_taureau);
 						
 						$liste_id_taureau=[] ;
 						for ($i=0;$i<$nbligne;$i++)
 						{
 							$liste_id_taureau[$i]=$tab_liste_taureau[$i][1] ;
 						}
-						//var_dump($liste_id_taureau);
 
 
-						//affichage du tableau historique commandes
+						//affichage du TABLEAU historique commandes
 						$nb_periodes=count($liste_per);
 						$nb_taureau=count($liste_taureau);
 						
@@ -329,7 +344,6 @@
 									$query_paillettes="SELECT nbr_paillettes FROM previsions WHERE id_taureau=$liste_id_taureau[$j] AND id_periode=$liste_id_per[$i]";
 									$result_paillettes=mysqli_query($link, $query_paillettes);
 									$tab_paillettes=mysqli_fetch_all($result_paillettes);
-									//var_dump($tab_paillettes);
 									if (empty($tab_paillettes))
 										echo '<td> 0 </td>';
 									else
@@ -349,11 +363,6 @@
 								echo '</tr>';
 								
 							}
-							/*
-							echo "<tr>";
-							echo "<td> Total </td>";
-							echo "</tr>";
-							*/
 						echo '</table>';
 								
 					}

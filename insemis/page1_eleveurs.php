@@ -321,7 +321,9 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 					
 if (isset($_GET['bouton_valider_prev']))
 	{
-	
+	echo $_GET['liste_male'] ;
+	echo $_GET['liste_femelle'] ;
+	echo $_GET['liste_nombre'];
 	$link = mysqli_connect('localhost', 'root', '', 'crabase');
 	mysqli_set_charset($link, "utf8mb4");
 	$req_test="SELECT *

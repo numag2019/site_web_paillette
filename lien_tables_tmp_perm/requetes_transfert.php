@@ -1,6 +1,31 @@
 <html>
 <body>
+<<<<<<< HEAD
+
+
+<!--pour le type d'utilisateur : le cra doit pouvoir modifier les droits sur
+le site, donc, par défaut, les utilisateurs présents auront le statut d'éleveurs (id=1)
+sauf pour le CRA (id=3). Pb : si le CRA fait une erreur et vire les administrateurs, 
+personne ne pourra donner des droits
+De meme pour initialiser mdp et identifiant (que faire par défaut ? question de sécurité)-->
+
+<!--Penser aux modif de donnees des lignes existantes
+UPDATE table
+SET colonne_1 = 'valeur 1', colonne_2 = 'valeur 2', colonne_3 = 'valeur 3'
+WHERE condition-->
+
+<!--Ordre de remplissage (tables n'ayant pas de clés étrangères en premières etc)-->
+<!-- type utilisateur (fait)-->
+<!--utilisateurs-->
+<!--races-->
+<!--bovins-->
+<!--coefficients-->
+<!--periodes-->
+
+<!--previsions se remplira par formulaire-->
+=======
 <!--••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+>>>>>>> 699356be0e68bc6a3e8332c76334b9f74b0584d3
 
 CETTE PAGE PERMET D'INSERER DE NOUVELLES DONNEES OU DE METTRE A JOUR DES DONNEES DE
  4 TABLES PERMANENTES (utilisateurs, bovins, races, coefficients)
@@ -125,7 +150,7 @@ $obsCoU=mysqli_query($link,$requeteCoU);
 
 
 ?>
-	
+
 </body>
 
 </html>

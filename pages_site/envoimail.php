@@ -27,16 +27,16 @@ function envoimail ($email)
 		$passage_ligne = "\n";
 		}
 	//=====Déclaration des messages au format texte et au format HTML.
-	$message_txt = 'Veuillez trouvez ci dessous le mot de passe temporaire de votre comptre cranet: ( pensez a le changer rapidement)';
-	$message_txt2 = 'Rappel: votre identifiant est composé de la première lettre de votre prénom suivi de votre nom en majuscule';
+	//$message_txt = 'Veuillez trouvez ci dessous le mot de passe temporaire de votre comptre cranet: ( pensez a le changer rapidement)';
+	$message_txt ='Bonjour, veuillez ne pas prendre en compte le message que vous avez precedemment reçu , toutes nos excuses pour la gene occasionee.';
 	//=====Définition du sujet.
-	$sujet = "Reinitialisation de votre mot de passe Cranet";
+	$sujet = "Erreur message";
 	//=========
  
 	//=====Création du header de l'e-mail.
 	$header = "From: \"\"<cra.conservatoire@gmail.com>".$passage_ligne;
 	//=====Ajout du message au format txt
-	$message= $passage_ligne.$message_txt.$passage_ligne.$mdp.$passage_ligne.$passage_ligne.$message_txt2;
+	$message= $passage_ligne.$message_txt.$passage_ligne.$mdp.$passage_ligne.$passage_ligne ;
 ///php.ini
 	mail($email,$sujet,$message,$header);
 	}

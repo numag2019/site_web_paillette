@@ -4,6 +4,8 @@
 if $_SESSION['id_type']==1;*/
 $id_utilisateur = 4;
 
+require "Mes_fonctions.php" ;
+
 $link = mysqli_connect('localhost', 'root', '', 'crabase');
 mysqli_set_charset($link, "utf8mb4");
 
@@ -36,6 +38,35 @@ echo '<br> <br>';
 
 if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	{
+		
+	$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise
+	$result_bord=mysqli_query($link, $query_bord);
+	$liste_eleveur_bord=requete_2col_to_list ($result_bord) ;
+				
+	$query_mar="SELECT id_utilisateur FROM bovins WHERE id_race=6"; // requête pour avoir un tableau contenant les éleveurs de la race Marine
+	$result_mar=mysqli_query($link, $query_mar);
+	$liste_eleveur_mar=requete_2col_to_list ($result_mar) ;
+				
+	$query_bear="SELECT id_utilisateur FROM bovins WHERE id_race=19"; // requête pour avoir un tableau contenant les éleveurs de la race Béarnaise
+	$result_bear=mysqli_query($link, $query_bear);
+	$liste_eleveur_bear=requete_2col_to_list ($result_bear) ;
+				
+	// Requête SQL sécurisée
+		
+	$eleveur = 4;	
+	if (in_array($eleveur,$liste_eleveur_bord))
+		{
+		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Bordelaise </a> <br><br>" ;
+		}
+	if (in_array($eleveur,$liste_eleveur_mar))
+		{
+		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Marine </a> <br><br>" ;
+		}
+	if (in_array($eleveur,$liste_eleveur_bear))
+		{
+		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
+		}	
+			
 	$race = $_GET['liste_race'];
 	if ($race == 6)
 		$nom_race = 'marine';
@@ -152,7 +183,7 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	echo '<SELECT NAME = "liste_male">';
 	for($i=0; $i < count($liste_nom_males); $i++)
 	{
-		$value = $liste_nom_males[$i];
+		$value = $liste_males[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
 		if (isset($_GET['liste_male']))
 		{
@@ -168,9 +199,9 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	echo '<SELECT NAME = "liste_femelle">';
 	for($i=0; $i < count($liste_nom_femelle); $i++)
 	{
-		$value = $liste_nom_femelle[$i];
+		$value = $liste_femelles[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
-		if (isset($_GET['liste_male']))
+		if (isset($_GET['liste_femelle']))
 		{
 			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
 			if ($value==$_GET['liste_male']) 
@@ -288,6 +319,37 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	
 	}				
 					
+if (isset($_GET['bouton_valider_prev']))
+	{
+	echo $_GET['liste_male'] ;
+	echo '<br>';
+	echo $_GET['liste_femelle'] ;
+	echo '<br>';
+	echo $_GET['liste_nombre'];
+	echo '<br>';
+	$link = mysqli_connect('localhost', 'root', '', 'crabase');
+	mysqli_set_charset($link, "utf8mb4");
+	$req_test="SELECT *
+				FROM previsions
+				WHERE id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
+	$result_test=mysqli_query($link, $req_test);
+	$tab_result = mysqli_fetch_all($result_test);
+	if (count($tab_result)>0) // la prevision existe
+	{
+	$query_race = "UPDATE previsions
+					SET nbr_paillettes=nbr_paillettes+".$_GET['liste_nombre']."
+					WHERE  id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
 
+	$result_race = mysqli_query($link, $query_race);
+	}
+	else // sinon on la crée
+	{
+	$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
+			VALUES ( ".$_GET['liste_nombre'].",1 , ".$GET['liste_femelle']." , ".$GET['liste_male'].")";
+	$result_race = mysqli_query($link, $reqadd);
+
+	}
+	
+}
 ?>
 </HTML>

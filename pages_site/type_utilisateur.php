@@ -36,7 +36,7 @@ if (!isset($_POST['id_utilisateur_selection']) )
 
 	<div class="container">	
 		<div class="row">
-			<div id="block1" class="col-md-3 offset-md-4" align='center' >
+			<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: white" >
 				<FORM action="type_utilisateur.php" method="POST" name="form">
 					<div class="form-group">
 					  
@@ -47,7 +47,7 @@ if (!isset($_POST['id_utilisateur_selection']) )
 						$nbcol=mysqli_num_fields($result);
 						$j=0;
 						?>
-						<label for="id_utilisateur_selection">Choix de l'utilisateur</label>
+						<label for="id_utilisateur_selection" style="color: black" >Choix de l'utilisateur</label>
 						<select class="form-control" name="id_utilisateur_selection" id="id_utilisateur_selection">
 							<?php
 							while ($j<$nbligne)
@@ -78,7 +78,7 @@ if (!isset($_POST['id_utilisateur_selection']) )
 					$j=0;
 					?>
 					<div class="form-group">
-						<label for="id_type_selection">Choisir les droits à donner à l'utilisateur</label>
+						<label for="id_type_selection" style="color: black" >Choisir les droits à donner à l'utilisateur</label>
 						<select class="form-control" name="id_type_selection" id="id_type_selection">
 							<?php
 							while ($j<$nbligneb)
@@ -88,7 +88,7 @@ if (!isset($_POST['id_utilisateur_selection']) )
 							}
 							?>
 						</select>
-						<small align='left' id="remarque" class="form-text text-muted">Eleveur : accès à ses animaux et à la modification de son plan prévisionnel paillette <br>
+						<small align='left' id="remarque" class="form-text text-muted" style="color: black">Eleveur : accès à ses animaux et à la modification de son plan prévisionnel paillette <br>
 						Animateur : accès à tout les comptes éleveurs liés à une des trois races</small>
 					</div>
 					<input onclick="do;" type="submit" value="Valider" />

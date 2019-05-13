@@ -26,7 +26,7 @@
 			<div class="col-md-4 col-lg-4">
 
 				<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/synel2.png"></a>
-								<p align='center'>
+								<p align='center' style="color: #303030">
 
 					Enregistrer et visualiser les
 					informations relatives à vos cheptels bovins.
@@ -35,14 +35,14 @@
 			
 			<div class="col-md-4 col-lg-4">
 				<a href="http://194.199.250.44:8080/ora/main_icefaces.html?fbclid=IwAR0i_Dfnv6FnDNA9tiD1J3a6t0yc17vIprP5j0i55LLzgm0KLGKVHeK5VjU"><img class="img-fluid" src="../mise_en_page/images/mouton.jpg"></a>
-								<p align='center'>
+								<p align='center' style="color: #303030" >
 					Modifier les informations relatives à vos cheptels ovins.
 				</p>
 			</div>
 			
 			<div class="col-md-4 col-lg-4">
 				<a href="https://www.ifce.fr/"><img class="img-fluid" src="../mise_en_page/images/ifce.jpg"></a>
-				<p align='center'>
+				<p align='center' style="color: #303030" >
 					Enregistrer et de visualiser les
 					informations concernant vos cheptels équins.
 				</p>

@@ -68,7 +68,7 @@ echo '<br> <br>';
 			echo '</SELECT>';
 			echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 			echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
-			echo "<input type='hidden' name='nom_eleveur' value='".$nom_race."'>";
+			//echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 			echo '<INPUT type="submit" name="bouton_valider_race"  value="Valider">';
 			echo '<br> <br>';
 			//echo '</FORM>';
@@ -186,6 +186,7 @@ echo '<br> <br>';
 					echo '</td>';
 					echo '</center></tr>';
 				}
+				echo '</table>';
 				echo '<br>';
 				echo '<table border = 1>';
 				echo '<tr>';
@@ -197,6 +198,7 @@ echo '<br> <br>';
 				echo '<tr>';
 				echo '<td bgcolor=red> Accouplement peu favorable </td> ';
 				echo '</tr>';
+				echo '</table>';
 				echo '<br> <br>';
 					
 

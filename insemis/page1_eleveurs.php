@@ -201,7 +201,7 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	{
 		$value = $liste_femelles[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
-		if (isset($_GET['liste_male']))
+		if (isset($_GET['liste_femelle']))
 		{
 			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
 			if ($value==$_GET['liste_male']) 
@@ -322,8 +322,11 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 if (isset($_GET['bouton_valider_prev']))
 	{
 	echo $_GET['liste_male'] ;
+	echo '<br>';
 	echo $_GET['liste_femelle'] ;
+	echo '<br>';
 	echo $_GET['liste_nombre'];
+	echo '<br>';
 	$link = mysqli_connect('localhost', 'root', '', 'crabase');
 	mysqli_set_charset($link, "utf8mb4");
 	$req_test="SELECT *

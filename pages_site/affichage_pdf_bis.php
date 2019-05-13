@@ -130,7 +130,7 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 			while ($j<count($pdf))
 			{
 				echo "<BR>";
-				echo 'Les pdf '.$pdf[$j];
+				echo 'pdf '.$pdf[$j];
 				echo "<BR>";
 				$k=0;
 				while ($k<$nb_fichier)

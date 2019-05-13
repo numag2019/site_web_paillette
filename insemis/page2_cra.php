@@ -186,6 +186,7 @@ echo '<br> <br>';
 					echo '</td>';
 					echo '</center></tr>';
 				}
+				echo '</table>';
 				echo '<br>';
 				echo '<table border = 1>';
 				echo '<tr>';
@@ -197,6 +198,7 @@ echo '<br> <br>';
 				echo '<tr>';
 				echo '<td bgcolor=red> Accouplement peu favorable </td> ';
 				echo '</tr>';
+				echo '</table>';
 				echo '<br> <br>';
 					
 

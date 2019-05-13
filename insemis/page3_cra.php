@@ -8,6 +8,8 @@
 		{
 			if (isset($_GET['bouton_reini']))
 				alert("Etes-vous sûr de vouloir réinitialiser le tableau?");
+				return true;
+			
 		}
 	</script>
 </HEAD>

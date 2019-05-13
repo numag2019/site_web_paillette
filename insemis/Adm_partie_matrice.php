@@ -27,7 +27,7 @@
 			$result=mysqli_query($link, $query);
 			$tab_nom=mysqli_fetch_all($result,MYSQLI_BOTH); 
 			
-<<<<<<< HEAD
+
 			if(isset($_GET['bouton_valider_eleveur']))
 			{
 				//requête pour la liste déroulante race (ne contient sue les races que l'éleveur élève)

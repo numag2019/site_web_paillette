@@ -38,9 +38,10 @@
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
 
-		echo "Choisissez la race : ";
 		echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
-		echo '<SELECT NAME = "liste_race">';
+		echo '<div class="form-group row">';
+		echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
+		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
 		for($i=0; $i < count($tab_race); $i++)
 			{
 			$value = $tab_race[$i][0];
@@ -54,7 +55,8 @@
 			echo ">".$tab_race[$i][1]."</OPTION> ";
 			}
 		echo '</SELECT NAME> <br/> <br/>';
-		echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" value = "Valider">';
+		echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">';
+		echo '</div>';
 		echo '<br> <br>';
 
 		if(isset($_POST['bouton_valider'])||isset($_POST['bouton_historique'])||isset($_POST['bouton_valider_prev']))
@@ -142,7 +144,9 @@
 						$nb_males=count($liste_males);
 						$nb_femelle=count($liste_femelles);
 						
-						echo '<table border = 1>';
+						echo '<div class="row">';
+						echo '<div class="col-6">';
+						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td>&nbsp;</td>';
 						for ($j=0; $j < $nb_males; $j++)
@@ -189,8 +193,12 @@
 							echo '</center></tr>';
 						}
 						echo '</table>';
+						echo '</div>';
+						echo '</div>';
 						echo '<br>';
-						echo '<table border = 1>';
+						echo '<div class="row">';
+						echo '<div class="col-3">';
+						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';
 						echo '</tr>';
@@ -201,11 +209,14 @@
 						echo '<td bgcolor=red> Accouplement peu favorable </td> ';
 						echo '</tr>';
 						echo '</table>';
+						echo '</div>';
+						echo '</div>';
 						echo '<br> <br>';
 
-			echo "Prévoir un accouplement <br>";
-			echo "Choisissez le mâle : ";
-			echo '<SELECT NAME = "liste_male">';
+			echo "Prévoir un accouplement <br><br>";
+			echo '<div class="form-group row">';
+			echo "<label class='col-2 col-form-label'> Choisissez le mâle : </label>";
+			echo '<SELECT NAME = "liste_male" class="form-control col-2">';
 			for($i=0; $i < count($liste_nom_males); $i++)
 			{
 				$value = $liste_males[$i];
@@ -219,9 +230,10 @@
 			echo ">".$liste_nom_males[$i]."</OPTION> ";
 			}
 			echo '</SELECT NAME> <br/>';
-			
-			echo "Choisissez la femelle : ";
-			echo '<SELECT NAME = "liste_femelle">';
+			echo '</div>';
+			echo '<div class="form-group row">';
+			echo "<label class='col-2 col-form-label'> Choisissez la femelle : </label>";
+			echo '<SELECT NAME = "liste_femelle" class="form-control col-2">';
 			for($i=0; $i < count($liste_nom_femelle); $i++)
 			{
 				$value = $liste_femelles[$i];
@@ -235,9 +247,11 @@
 			echo ">".$liste_nom_femelle[$i]."</OPTION> ";
 			}
 			echo '</SELECT NAME> <br/>';
-			echo "Choisissez le nombre de paillettes à commander : ";
+			echo '</div>';
 			$liste_nombre = array('1','2','3','4','5');
-			echo '<SELECT NAME = "liste_nombre">';
+			echo '<div class="form-group row">';
+			echo "<label class='col-2 col-form-label'> Choisissez le nombre de paillettes à commander : </label>";
+			echo '<SELECT NAME = "liste_nombre" class="form-control col-2">';
 			for($i=0; $i < count($liste_nombre); $i++)
 			{
 				$value = $liste_nombre[$i];
@@ -251,13 +265,14 @@
 			echo ">".$liste_nombre[$i]."</OPTION> ";
 			}
 			echo '</SELECT NAME> <br/>';
-			echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_prev" value = "Valider la prévision">';
+			echo '</div>';
+			echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_prev" class="btn btn-primary" value = "Valider la prévision">';
 			echo '<br> <br>';
 			
 			
 			echo "<input type='hidden' name='id_race' value='".$race."'>";
 			echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
-			echo '<INPUT TYPE="submit" name="bouton_historique"  value="Afficher mon historique de commandes pour la race">';
+			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher mon historique de commandes pour la race">';
 			if(isset($_POST['bouton_historique']))
 				{
 					$id_race = $_POST['id_race'];

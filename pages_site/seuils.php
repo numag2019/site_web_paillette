@@ -29,7 +29,7 @@
 			<div class="container">	
 		<div class="row">
 			<div id="block1" class="col-md-3 offset-md-4" align='center' >
-				<FORM method="GET" name="formRaceSeuil">
+				<FORM method="POST" name="formRaceSeuil">
 					<div class="form-group">
 					<label for="id_utilisateur_selection">Choisissez la race</label>
 						<select class="form-control" name="liste_race" id="id_utilisateur_selection">
@@ -41,10 +41,10 @@
 							$valeur_affichee = $tab_race[$i][1];
 							echo "<OPTION value='".$value."' ";
 							
-							if (isset($_GET['liste_race'])) 
+							if (isset($_POST['liste_race'])) 
 							{
 								// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-								if ($value==$_GET['liste_race']) 
+								if ($value==$_POST['liste_race']) 
 									echo "selected";
 							}
 							echo ">".$tab_race[$i][1]."</OPTION>";  
@@ -62,9 +62,9 @@
 				<span class="help-block"></span>
 				
 				<?php
-				if (isset($_GET['seuil_min'])) 
+				if (isset($_POST['seuil_min'])) 
 					{
-					$valmin=$_GET['seuil_min'];			
+					$valmin=$_POST['seuil_min'];			
 					echo '<input id="textinput" name="seuil_min" type="text" value="'.$valmin.'" class="form-control input-md">';
 							
 					}
@@ -86,9 +86,9 @@
 		  <div class="col-md-4">
 			
 			<?php
-				if (isset($_GET['seuil_max'])) 
+				if (isset($_POST['seuil_max'])) 
 					{
-					$valmax=$_GET['seuil_max'];			
+					$valmax=$_POST['seuil_max'];			
 					echo '<input id="textinput" name="seuil_min" type="text" value="'.$valmax.'" class="form-control input-md">';
 							
 					}
@@ -112,13 +112,13 @@
 	
 	<?php 
 	
-	if(isset($_GET['liste_race'])||isset($_GET['seuil_min'])||isset($_GET['seuil_max']))
+	if(isset($_POST['liste_race'])||isset($_POST['seuil_min'])||isset($_POST['seuil_max']))
 	{
 	
 	
-	$race=$_GET['liste_race'];
-	$seuil_min=$_GET['seuil_min'];
-	$seuil_max=$_GET['seuil_max'];
+	$race=$_POST['liste_race'];
+	$seuil_min=$_POST['seuil_min'];
+	$seuil_max=$_POST['seuil_max'];
 	
 	// if (is_float($seuil_min)) 
 		// {

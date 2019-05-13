@@ -20,7 +20,7 @@
 // On prend tous les noms des fichiers présents dans le dosssier pdf
 $nb_fichier = 0;   //variable nombre de fichier
 $chemin=array();
-$ftpTarget=array();
+$nomfichier=array();
 if($dossier = opendir('./../importexportCSV/exports/pdf'))
 {
 	
@@ -28,7 +28,8 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 	{
 		if($fichier != '.' && $fichier != '..')
 		{
-			$chemin[]="exports/pdf/".$fichier;
+			$nomfichier[]=$fichier;
+			$chemin[]="./../importexportCSVexports/pdf/".$fichier;
 			$nb_fichier++; // On incrémente le compteur de 1
 			
 
@@ -38,7 +39,7 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 
  
 	closedir($dossier);
-	 
+
 	 // si l'utilisateur est un éleveur ou un animateur de race
 		if ($_SESSION['id_type']!=3 )
 		{
@@ -46,7 +47,7 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 			mysqli_set_charset($link,"utf8mb4");
 			
 			// Requête SQL 
-			$requeteElev="SELECT r.nom_race 
+			$requeteElev="SELECT r.nom_race, u.nom_utilisateur
 							FROM races r JOIN bovins b 
 								ON r.id_race = b.id_race 
 							JOIN utilisateurs u 
@@ -64,30 +65,37 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 			$nbligne=mysqli_num_rows($obs);
 			$nbcol=mysqli_num_fields($obs);
 			$i=0;
+			echo '<h5>PDF à dispositions</h5>';
+			// mise à disposition des pdf de la race élevée par l'éleveur
 			while($i<$nb_fichier)
 			{
 				$j=0;
 				while ($j<$nbligne)
 				{
+					// Si le nom de la race est présent dans le nom du pdf, on l'affiche
 					if (stripos($chemin[$i],$tab[$j][0]))
 					{
-						echo '<a href='.$chemin[$i].'>'.$chemin[$i].'</a>';
+						echo '<a href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
 						echo "<BR>";	
 					}
 					$j++;
 				}
 				$i++;
 			}
-			echo '<a href="../importexport/export/fiche_race_globale.pdf">"fiche_race_globale.pdf"</a>';
+			echo '<a href="../importexportCSV/exports/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
 						echo "<BR>";
 		}
+		
+		
 		// Si c'est l'administrateur, tous les documents sont affichés
 		else
 		{
 			$k=0;
+			echo '<h5>PDF à dispositions</h5>';
+			echo "<BR>";
 			while ($k<$nb_fichier)
 			{
-				echo '<a href='.$chemin[$k].'>'.$chemin[$k].'</a>';
+				echo '<a href='.$chemin[$k].'>'.$nomfichier[$k].'</a>';
 				echo "<BR>";
 				$k++;
 			}

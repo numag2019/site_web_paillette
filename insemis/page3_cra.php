@@ -197,7 +197,7 @@ if(isset($_POST['bouton_valider']))
 			echo '<td>'. $S_ut . '</td>';
 			echo '</tr>';
 			}
-		
+		echo '</table>';
 		echo '<br> <br>';
 		
 		}	

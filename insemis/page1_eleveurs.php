@@ -18,16 +18,16 @@ $result_race = mysqli_query($link, $query_race);
 $tab_race = mysqli_fetch_all($result_race);
 
 echo "Choisissez la race : ";
-echo '<FORM method = "GET" name = "formulaire_page1_eleveurs">';
+echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
 echo '<SELECT NAME = "liste_race">';
 for($i=0; $i < count($tab_race); $i++)
 	{
 	$value = $tab_race[$i][0];
 	echo "<OPTION VALUE ='".$value. "' ";
-	if (isset($_GET['liste_race']))
+	if (isset($_POST['liste_race']))
 		{
 		// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-		if ($value==$_GET['liste_race']) 
+		if ($value==$_POST['liste_race']) 
 		echo "selected";
 		}
 	echo ">".$tab_race[$i][1]."</OPTION> ";
@@ -36,7 +36,7 @@ echo '</SELECT NAME> <br/> <br/>';
 echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" value = "Valider">';
 echo '<br> <br>';
 
-if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GET['bouton_valider_prev']))
+if(isset($_POST['bouton_valider'])||isset($_POST['bouton_historique'])||isset($_POST['bouton_valider_prev']))
 	{
 		
 	$query_bord="SELECT id_utilisateur FROM bovins WHERE id_race=5"; // requête pour avoir un tableau contenant les éleveurs de la race bordelaise
@@ -67,7 +67,7 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GE
 		echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 		}	
 			
-	$race = $_GET['liste_race'];
+	$race = $_POST['liste_race'];
 	if ($race == 6)
 		$nom_race = 'marine';
 	if ($race == 5)
@@ -189,10 +189,10 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GE
 	{
 		$value = $liste_males[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
-		if (isset($_GET['liste_male']))
+		if (isset($_POST['liste_male']))
 		{
 			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-			if ($value==$_GET['liste_male']) 
+			if ($value==$_POST['liste_male']) 
 			echo "selected";
 		}
 	echo ">".$liste_nom_males[$i]."</OPTION> ";
@@ -205,10 +205,10 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GE
 	{
 		$value = $liste_femelles[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
-		if (isset($_GET['liste_femelle']))
+		if (isset($_POST['liste_femelle']))
 		{
 			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-			if ($value==$_GET['liste_male']) 
+			if ($value==$_POST['liste_male']) 
 			echo "selected";
 		}
 	echo ">".$liste_nom_femelle[$i]."</OPTION> ";
@@ -221,10 +221,10 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GE
 	{
 		$value = $liste_nombre[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
-		if (isset($_GET['liste_nombre']))
+		if (isset($_POST['liste_nombre']))
 		{
 			// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-			if ($value==$_GET['liste_nombre']) 
+			if ($value==$_POST['liste_nombre']) 
 			echo "selected";
 		}
 	echo ">".$liste_nombre[$i]."</OPTION> ";
@@ -237,10 +237,10 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GE
 	echo "<input type='hidden' name='id_race' value='".$race."'>";
 	echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 	echo '<INPUT TYPE="submit" name="bouton_historique"  value="Afficher mon historique de commandes pour la race">';
-	if(isset($_GET['bouton_historique']))
+	if(isset($_POST['bouton_historique']))
 		{
-			$id_race = $_GET['id_race'];
-			$nom_race = $_GET['nom_race'];
+			$id_race = $_POST['id_race'];
+			$nom_race = $_POST['nom_race'];
 			echo "Historique des prévisions de commande de paillettes pour la race ".$nom_race." <br><br>";
 			// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode
 			$query_liste_per="SELECT date_debut, date_fin, id_periode FROM periodes WHERE periodes.id_race =".$id_race."";
@@ -323,34 +323,34 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique'])||isset($_GE
 	
 	}				
 					
-if (isset($_GET['bouton_valider_prev']))
+if (isset($_POST['bouton_valider_prev']))
 	{
-	echo $_GET['liste_male'] ;
+	echo $_POST['liste_male'] ;
 	echo '<br>';
-	echo $_GET['liste_femelle'] ;
+	echo $_POST['liste_femelle'] ;
 	echo '<br>';
-	echo $_GET['liste_nombre'];
+	echo $_POST['liste_nombre'];
 	echo '<br>';
 	$link = mysqli_connect('localhost', 'root', '', 'crabase');
 	mysqli_set_charset($link, "utf8mb4");
 	$req_test="SELECT *
 				FROM previsions
-				WHERE id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
+				WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
 	$result_test=mysqli_query($link, $req_test);
 	$tab_result = mysqli_fetch_all($result_test);
 	echo count($tab_result);
 	if (count($tab_result)>0) // la prevision existe
 	{
 	$query_race = "UPDATE previsions
-					SET nbr_paillettes=nbr_paillettes+".$_GET['liste_nombre']."
-					WHERE  id_vache=".$_GET['liste_femelle']." and id_taureau=".$_GET['liste_male']."";
+					SET nbr_paillettes=nbr_paillettes+".$_POST['liste_nombre']."
+					WHERE  id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
 
 	$result_race = mysqli_query($link, $query_race);
 	}
 	else // sinon on la crée
 	{
 	$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
-			VALUES ( ".$_GET['liste_nombre'].",6 , ".$GET['liste_femelle']." , ".$GET['liste_male'].")";
+			VALUES ( ".$_POST['liste_nombre'].",6 , ".$POST['liste_femelle']." , ".$POST['liste_male'].")";
 	$result_race = mysqli_query($link, $reqadd);
 
 	}

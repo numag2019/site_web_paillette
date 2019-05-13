@@ -9,7 +9,7 @@ $result_eleveur = mysqli_query($link, $query_eleveur);
 $tab_eleveur = mysqli_fetch_all($result_eleveur);
 $nb_eleveur = mysqli_num_rows($result_eleveur);
 
-echo '<FORM method = "GET" name = "formulaire">';
+echo '<FORM method = "POST" name = "formulaire">';
 
 echo "Choisissez l'éleveur : ";
 echo "<SELECT name='liste_eleveurs'>";
@@ -19,10 +19,10 @@ echo "<SELECT name='liste_eleveurs'>";
 			$valeur_affichee = $tab_eleveur[$i][1];
 			
 			echo "<OPTION value='".$value."' ";
-			if (isset($_GET['liste_eleveurs'])) 
+			if (isset($_POST['liste_eleveurs'])) 
 			{
 				// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-				if ($value==$_GET['liste_eleveurs']) 
+				if ($value==$_POST['liste_eleveurs']) 
 					echo "selected";
 			}
 			echo ">".$tab_eleveur[$i][1]. ' ' .$tab_eleveur[$i][2]."</OPTION>";  
@@ -33,10 +33,10 @@ echo '<br> <br>';
 //echo '</FORM>';
 
 
-		if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bouton_valider_race'])||isset($_GET['bouton_historique']))
+		if(isset($_POST['bouton_valider_eleveur'])||isset($_POST['bouton_valider_race'])||isset($_POST['bouton_historique']))
 		{
-			//echo '<FORM method="GET" name="formulaire_race" >';
-			$id_eleveur = $_GET["liste_eleveurs"];
+			//echo '<FORM method="POST" name="formulaire_race" >';
+			$id_eleveur = $_POST["liste_eleveurs"];
 			$nom_eleveur = $tab_eleveur[$id_eleveur-1][1].$tab_eleveur[$id_eleveur-1][2];
 			$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 						  FROM races
@@ -56,10 +56,10 @@ echo '<br> <br>';
 					echo $value_race;
 					$valeur_affichee_race = $tab_race[$i][1];
 					echo "<OPTION value='".$value_race."' ";
-					if (isset($_GET['liste_race'])) 
+					if (isset($_POST['liste_race'])) 
 				{
 					// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-					if ($value_race==$_GET['liste_race']) 
+					if ($value_race==$_POST['liste_race']) 
 						echo "selected";
 				}	
 					echo ">".$tab_race[$i][1].'</OPTION> ';	
@@ -73,13 +73,13 @@ echo '<br> <br>';
 			echo '<br> <br>';
 			//echo '</FORM>';
 			
-			//$race = $_GET["liste_race"];
+			//$race = $_POST["liste_race"];
 			
 			
-			if(isset($_GET['bouton_valider_race'])||isset($_GET['bouton_historique']))
+			if(isset($_POST['bouton_valider_race'])||isset($_POST['bouton_historique']))
 			{
-				$id_eleveur = $_GET["liste_eleveurs"];
-				$race = $_GET["liste_race"];
+				$id_eleveur = $_POST["liste_eleveurs"];
+				$race = $_POST["liste_race"];
 				if ($race == 6)
 					$nom_race = 'marine';
 				if ($race == 5)
@@ -206,12 +206,12 @@ echo '<br> <br>';
 			}
 			
 		}
-			if(isset($_GET['bouton_historique']))
+			if(isset($_POST['bouton_historique']))
 				{
-				$nom_eleveur = $_GET['nom_eleveur'];
-				$id_eleveur = $_GET['id_eleveur'];
-				$id_race = $_GET['id_race'];
-				$nom_race = $_GET['nom_race'];
+				$nom_eleveur = $_POST['nom_eleveur'];
+				$id_eleveur = $_POST['id_eleveur'];
+				$id_race = $_POST['id_race'];
+				$nom_race = $_POST['nom_race'];
 				echo "Historique des prévisions de commande de paillettes de <b>" . $nom_eleveur . "</b> pour la race ".$nom_race. " <br><br>";
 
 				// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode

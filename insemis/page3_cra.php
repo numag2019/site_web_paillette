@@ -6,7 +6,7 @@
 	
 		function valider()
 		{
-			if (isset($_GET['bouton_reini']))
+			if (isset($_POST['bouton_reini']))
 				alert("Etes-vous sûr de vouloir réinitialiser le tableau?");
 				return true;
 			
@@ -25,17 +25,17 @@ $query_race = "SELECT id_race_int, nom_race FROM races_intermediaire";
 $result_race = mysqli_query($link, $query_race);
 $tab_race = mysqli_fetch_all($result_race);
 
-echo '<FORM onsubmit="return valider()" method = "GET" name = "formulaire_page3">';
+echo '<FORM onsubmit="return valider()" method = "POST" name = "formulaire_page3">';
 echo "Choisissez la race : ";
 echo '<SELECT NAME = "liste_race">';
 for($i=0; $i < count($tab_race); $i++)
 	{
 	$value = $tab_race[$i][0];
 	echo "<OPTION VALUE ='".$value. "' ";
-	if (isset($_GET['liste_race']))
+	if (isset($_POST['liste_race']))
 		{
 		// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-		if ($value==$_GET['liste_race']) 
+		if ($value==$_POST['liste_race']) 
 		echo "selected";
 		}
 	echo ">".$tab_race[$i][1]."</OPTION> ";
@@ -44,9 +44,9 @@ echo '</SELECT NAME> <br/> <br/>';
 echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" value = "Valider">';
 echo '<br> <br>';
 
-if(isset($_GET['bouton_valider']))
+if(isset($_POST['bouton_valider']))
 	{
-	$race = $_GET['liste_race'];
+	$race = $_POST['liste_race'];
 	if ($race == 6)
 		$nom_race = 'marine';
 	if ($race == 5)
@@ -64,10 +64,10 @@ if(isset($_GET['bouton_valider']))
 		{
 			$value = $tab_periode[$i][0];
 			echo "<OPTION VALUE ='".$value. "'"; 
-			if (isset($_GET['liste_periode']))
+			if (isset($_POST['liste_periode']))
 				{
 				// Dans le cas où une sélection a déjà été faite, on conserve cette sélection par défaut
-				if ($value==$_GET['liste_periode']) 
+				if ($value==$_POST['liste_periode']) 
 				echo "selected";	
 				}
 			echo ">" .$tab_periode[$i][1]. '-' .$tab_periode[$i][2]. "</OPTION>";
@@ -77,15 +77,15 @@ if(isset($_GET['bouton_valider']))
 	echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_periode" value = "Valider"> <br/> <br/>';
 	}
 	
-	if(isset($_GET['bouton_valider_periode']))
+	if(isset($_POST['bouton_valider_periode']))
 		{
-		$periode = $_GET['liste_periode'];
+		$periode = $_POST['liste_periode'];
 		$query_periode_af = 'SELECT periodes.date_debut, periodes.date_fin FROM periodes WHERE periodes.id_periode ='.$periode.' ';
 		$result_periode_af = mysqli_query($link, $query_periode_af);
 		$tab_periode_af = mysqli_fetch_all($result_periode_af);
 		echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1];
 		
-		$race=$_GET["id_race"];
+		$race=$_POST["id_race"];
 			
 		// Les lignes suivantes servent à obtenir la liste des éleveurs/utilisateurs et la liste des id_utilisateur
 		$query_liste_ut="SELECT DISTINCT utilisateurs.nom, utilisateurs.prenom, utilisateurs.id_utilisateur FROM utilisateurs 

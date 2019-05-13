@@ -3,7 +3,7 @@
 			$link=mysqli_connect('localhost', 'root', '', 'crabase'); // connexion à la base de données
 			mysqli_set_charset($link, "utf8mb4"); // prise en compte des caractères de la base de données
 			
-			$query="SELECT id_vache, id_taureau FROM `coefficients` WHERE id_utilisateur=$_SESSION['id_utilisateur']; // requête pour la liste déroulante choix eleveur
+			$query="SELECT id_vache, id_taureau FROM `coefficients` WHERE id_utilisateur=$_SESSION['id_utilisateur']"; // requête pour la liste déroulante choix eleveur
 			$result=mysqli_query($link, $query);
 			//var_dump($result);
 			
@@ -12,7 +12,7 @@
 			//echo $tab_nom[0][1];
 		
 	
-		echo "<FORM method='GET' name='formulaire'>" ; 
+		echo "<FORM method='POST' name='formulaire'>" ; 
 		
 			echo "<br>";
 			echo "<b> Sélectionner la vache </b>"  ;      //liste déroulante éleveur
@@ -30,4 +30,4 @@
 			echo "<br><br>";
 	
 			
-			if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bt_submit_hist']))
+			if(isset($_POST['bouton_valider_eleveur'])||isset($_POST['bt_submit_hist']))

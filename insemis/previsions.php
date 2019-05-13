@@ -106,7 +106,7 @@ else
 	// Connexion à la BDD en PDO
 	try { $bdd = new PDO('mysql:host=localhost;dbname=crabase','root',''); }
 	
-	catch (Exeption $e) { die('Erreur : ' . $e->getMessage())  or die(print_r($bdd->errorInfo())); }
+	catch (Exeption $e) { die('Erreur : ' . $e->POSTMessage())  or die(print_r($bdd->errorInfo())); }
 	
 	// Requête SQL sécurisée
 	$req = $bdd->prepare("UPDATE utilisateurs

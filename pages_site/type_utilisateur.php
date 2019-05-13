@@ -1,24 +1,24 @@
-<!-- Page disponible aux éleveurs bovins identifiés, 
-		elle permet l'accès à la plateforme paillette et à la page des états de sorties
-		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<html>
+<!--Page d'acceuil du site web CRAnet-->		
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
-
-		<!-- Entête -->
-		<?php include("../mise_en_page/entete.html");?>	
-
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
+		
+		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+		<?php $autorisation=3 // que le CRA?> 
+		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
 	
 	<body>
 <?php 
-if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
+if (!isset($_POST['id_utilisateur_selection']) )
 	{
 
 	// Sélection de l'utilisateur dont vous voulez changer le droit 
@@ -33,6 +33,7 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
 	$result=mysqli_query($link,$querya);
 
 	?>
+
 	<div class="container">	
 		<div class="row">
 			<div id="block1" class="col-md-3 offset-md-4" align='center' >
@@ -99,8 +100,8 @@ if (($_SESSION['id_type']==3) and !isset($_POST['id_utilisateur_selection']) )
 	
 	<?php
 	}
-	
-else
+// Si le CRA a rempli le formulaire est appuyé sur le bouton on exécute une requête modifiant le type d'utilisateur 	
+else 
 	{
 	// Connexion à la BDD en PDO
 	try { $bdd = new PDO('mysql:host=localhost;dbname=crabase','root',''); }

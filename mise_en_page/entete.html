@@ -1,18 +1,36 @@
 <html>
-<!-- entete.html -->
-	<!-- Section "Entete" à insérer sur chacune des pages -->	
-	<div id="entete">
-		<h1 align="center">
-		<meta charset='UTF-8'>
-			<!-- Insérez ici l'image de votre choix -->
-			<img alt="" src="../mise_en_page/images/cra.png" width="200" height="160"> 
-			
-			Le portail Cranet &mdash; 
-		</h1>
-		<p class="sous-titre"> <!-- on obtient l'usage du style entete.sous-titre de la feuille css -->
-			<strong><A HREF="mailto:jean-pierre.dacosta@agro-bordeaux.fr;francois.thiberville@agro-bordeaux.fr;lionel.bombrun@agro-bordeaux.fr">Concepteur :</A> </strong>
-			Equipe Numag
-		</p>
-	</div>
+
+
+	<!-- Section "Entete" à insérer sur chacune des pages -->
+	<div class="p-3 mb-2 bg-info text-white">
+		<div class="container-fluid">		
+			<div class="row">
+
+				<div id="block1" class="col-md-12">
+					<h1 align='center'>
+						Cranet
+					</h1>
+				</div>
+				<div id="block2" class="col-md-6">
+					<h5>
+							Concepteur : Equipe Numag
+					</h5>
+				</div>
+				<div id="block3" class="col-md-6">
+					<h5 align='right'>
+						<?php 
+						session_start();
+						if (isset($_SESSION['identifiant']))
+						{
+						
+							echo ("<p align='right'>Bonjour, ".$_SESSION['identifiant']."</p>");
+							echo ('<a  href="../pages_site/deconnexion.php"><h5 style="color:white"><em>Déconnexion</em></h5></a>');
+						}
+						?>
+					</h5>
+				</div>
+			</div>
+		</div>
+	</div>	
 
 </HTML>

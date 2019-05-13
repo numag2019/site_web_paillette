@@ -1,0 +1,14 @@
+xs < 576px
+sm >= 576px
+md >= 768px
+lg >= 992px
+xl >= 1200px
+
+
+intérieur div : 
+class="container-fluid"
+style="background:red"
+	<div id="block2" class="col-md-6" style="border:1px solid red">
+style='background:#9BE7DD'
+	
+	https://getbootstrap.com/docs/4.2/components/forms/

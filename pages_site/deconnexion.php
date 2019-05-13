@@ -5,12 +5,6 @@
 		// Suppression des variables de session et de la session
 		$_SESSION = array();
 		session_destroy();
-		// Suppression des cookies de connexion automatique
-		setcookie('login', '');
-		setcookie('pass_hache', '');
 		// Redirection vers l'acceuil 
-		header ('location : acceuil_site.php')
+		header ('Location: accueil_site.php')
 	?>
-	</body>
-</html>
-	

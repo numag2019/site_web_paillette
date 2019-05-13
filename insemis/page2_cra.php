@@ -259,13 +259,14 @@ echo '<br> <br>';
 						echo '<td>' . $liste_taureau[$j]. '</td>';
 						$j++;
 					}
-					
+				echo '<td>Total</td>';	
 				$i =0;
 				while ($i<$nb_periodes)
 				{
 					echo '<tr>';
 					echo "<td>" . $liste_per[$i] . "</td>";
 					$j=0;
+					$s_periode = 0;
 					while ($j<$nb_taureau)
 					{
 						$query_paillettes="SELECT nbr_paillettes FROM previsions WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."";
@@ -275,9 +276,11 @@ echo '<br> <br>';
 							echo '<td> 0 </td>';
 						else
 							echo '<td>' . $tab_paillettes[0][0]. '</td>';
+							$s_periode=$s_periode+$tab_paillettes[0][0];
 						$j++;
 					}
 					$i++;
+					echo '<td>'. $s_periode . '</td>';
 					echo '</tr>';
 				}
 				echo '</table>';

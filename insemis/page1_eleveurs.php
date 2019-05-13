@@ -183,7 +183,7 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	echo '<SELECT NAME = "liste_male">';
 	for($i=0; $i < count($liste_nom_males); $i++)
 	{
-		$value = $liste_nom_males[$i];
+		$value = $liste_males[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
 		if (isset($_GET['liste_male']))
 		{
@@ -199,7 +199,7 @@ if(isset($_GET['bouton_valider'])||isset($_GET['bouton_historique']))
 	echo '<SELECT NAME = "liste_femelle">';
 	for($i=0; $i < count($liste_nom_femelle); $i++)
 	{
-		$value = $liste_nom_femelle[$i];
+		$value = $liste_femelles[$i];
 		echo "<OPTION VALUE ='".$value. "' ";
 		if (isset($_GET['liste_male']))
 		{

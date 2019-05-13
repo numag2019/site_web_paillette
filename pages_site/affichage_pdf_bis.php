@@ -29,7 +29,7 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 		if($fichier != '.' && $fichier != '..')
 		{
 			$nomfichier[]=$fichier;
-			$chemin[]="./../importexportCSVexports/pdf/".$fichier;
+			$chemin[]="./../importexportCSV/exports/pdf/".$fichier;
 			$nb_fichier++; // On incrémente le compteur de 1
 			
 
@@ -47,13 +47,10 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 			mysqli_set_charset($link,"utf8mb4");
 			
 			// Requête SQL 
-			$requeteElev="SELECT r.nom_race, u.nom_utilisateur
-							FROM races r JOIN bovins b 
-								ON r.id_race = b.id_race 
-							JOIN utilisateurs u 
-								ON b.id_utilisateur = u.id_utilisateur 
-							WHERE u.id_utilisateur=".$_SESSION['id_utilisateur']."
-							GROUP BY r.id_race  ";
+			$requeteElev="SELECT r.nom_race, u.nom FROM races r 
+			JOIN bovins b ON r.id_race = b.id_race 
+			JOIN utilisateurs u ON b.id_utilisateur = u.id_utilisateur 
+			WHERE u.id_utilisateur=".$_SESSION['id_utilisateur']." GROUP BY r.id_race";
 
 			// Récupération de la requete Eleveurs		
 			$obs=mysqli_query($link,$requeteElev);
@@ -64,9 +61,10 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 			// Récupération lignes et colonnes du tableau
 			$nbligne=mysqli_num_rows($obs);
 			$nbcol=mysqli_num_fields($obs);
-			$i=0;
+			
 			echo '<h5>PDF à dispositions</h5>';
 			// mise à disposition des pdf de la race élevée par l'éleveur
+			$i=0;
 			while($i<$nb_fichier)
 			{
 				$j=0;
@@ -82,7 +80,19 @@ if($dossier = opendir('./../importexportCSV/exports/pdf'))
 				}
 				$i++;
 			}
-			echo '<a href="../importexportCSV/exports/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
+			$i=0;
+			while($i<$nb_fichier)
+			{
+			// mise à disposition des pdf de l'éleveur
+				// Si le nom de la race est présent dans le nom du pdf, on l'affiche
+				if (stripos($chemin[$i],$tab[0][1]))
+				{
+					echo '<a href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
+					echo "<BR>";	
+				}
+				$i++;
+			}
+			echo '<a href="../importexportCSV/exports/pdf/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
 						echo "<BR>";
 		}
 		

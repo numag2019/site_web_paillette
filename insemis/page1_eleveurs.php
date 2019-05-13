@@ -331,7 +331,7 @@ if (isset($_GET['bouton_valider_prev']))
 	if count(result_test>0) // la prevision existe
 	{
 	$query_race = "UPDATE previsions
-					ON nbr_paillettes=$_GET['liste_nombre']
+					ON nbr_paillettes= nbr_paillettes + $_GET['liste_nombre']
 					WHERE  id_vache=$_GET['liste_femelle'] and id_taureau=$_GET['liste_male']";
 	$result_race = mysqli_query($link, $query_race);
 	}

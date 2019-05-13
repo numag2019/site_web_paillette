@@ -14,7 +14,7 @@
 
 	
 
-	<p><a href="Adm_partie_matrice.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a></p>
+	<p><a href="Adm_choix_eleveur.php">Consulter la matrice de parenté et modifier les achats prévisionnels des éleveurs</a></p>
 	<p><a href="Adm_recap.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a></p>
 
 

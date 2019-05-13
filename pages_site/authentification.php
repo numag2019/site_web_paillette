@@ -25,7 +25,7 @@
 		<div class="container">	
 			<div class="row">
 				<br></br><br></br><br></br>
-				<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: white">
+				<div id="block2" class="col-md-3 offset-md-4" align='center'  border-radius=30px;>
 					<form action="verification_connexion.php" method="post">
 					  <div class="form-group">
 						<label for="identifiant" style="color: black">Identifiez-vous :</label>

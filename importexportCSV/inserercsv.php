@@ -45,7 +45,7 @@ $obsDB=mysqli_query($link,$queryDB);
 $obsDR=mysqli_query($link,$queryDR);
 
 //•• Ajout de données à la table eleveurs_intermediaire ••\\
-$queryEleveurs ="LOAD DATA LOCAL INFILE 'exports/tableauEleveurs.csv'
+$queryEleveurs ="LOAD DATA LOCAL INFILE 'exports/csv/tableauEleveurs.csv'
 INTO TABLE eleveurs_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -58,7 +58,7 @@ INTO TABLE eleveurs_intermediaire
 $obsE=mysqli_query($link,$queryEleveurs);
 
 //•• Ajout de données à la table bovins_intermediaire ••\\
-$queryBovins ="LOAD DATA LOCAL INFILE 'exports/tableauAnimal.csv'
+$queryBovins ="LOAD DATA LOCAL INFILE 'exports/csv/tableauAnimal.csv'
 INTO TABLE bovins_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -71,7 +71,7 @@ INTO TABLE bovins_intermediaire
 $obsB=mysqli_query($link,$queryBovins);
 
 //•• Ajout de données à la table races_intermediaire ••\\
-$queryRaces ="LOAD DATA LOCAL INFILE 'exports/tableauRace.csv'
+$queryRaces ="LOAD DATA LOCAL INFILE 'exports/csv/tableauRace.csv'
 INTO TABLE races_intermediaire
     FIELDS
         TERMINATED BY ';'
@@ -85,7 +85,7 @@ $obsC=mysqli_query($link,$queryRaces);
 
 		
 //•• Ajout de données à la table coefficients_intermediaire ••\\
-$queryCoeff ="LOAD DATA LOCAL INFILE 'exports/tableauCoeff.csv'
+$queryCoeff ="LOAD DATA LOCAL INFILE 'exports/csv/tableauCoeff.csv'
 INTO TABLE coefficients_intermediaire
     FIELDS
         TERMINATED BY ';'

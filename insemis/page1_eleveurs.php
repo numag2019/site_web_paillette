@@ -392,6 +392,7 @@
 			}
 			else // sinon on la crée
 			{
+			echo "nveau";
 			$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
 					VALUES ( ".$_POST['liste_nombre'].",6 , ".$POST['liste_femelle']." , ".$POST['liste_male'].")";
 			$result_race = mysqli_query($link, $reqadd);

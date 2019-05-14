@@ -25,8 +25,8 @@ if(isset($_POST['mdp_changement']))
 	if (password_verify($mdp,$_SESSION['mdp']))
 	{	?>
 	<div class="container">	
-		<div class="row">
-			<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
 				<form action='changement_mdp_verification_form.php' method='post'>
 					<label for="mdp" style="color: black; padding-top: 15px;">Veuillez entrer votre nouveau mot de passe deux fois de manière identique:</label><br>
 					<input type='text' class="form-control" placeholder="Mot de passe" name='nouveaumdp1'><br>

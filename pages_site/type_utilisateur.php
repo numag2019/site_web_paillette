@@ -35,8 +35,8 @@ if (!isset($_POST['id_utilisateur_selection']) )
 	?>
 
 	<div class="container">	
-		<div class="row">
-			<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
 				<FORM action="type_utilisateur.php" method="POST" name="form">
 					<div class="form-group">
 					  

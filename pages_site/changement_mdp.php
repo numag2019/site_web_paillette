@@ -22,8 +22,8 @@
 
 
 <div class="container">	
-	<div class="row">
-		<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
 			<form action="changement_mdp_verification_form.php" method="post">
 			  <div class="form-group">
 				<label for="mdp" style="color: black; padding-top: 15px;">Veuillez entrer votre mot de passe actuel :</label>

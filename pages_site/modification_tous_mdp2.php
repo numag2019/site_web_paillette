@@ -1,5 +1,6 @@
 <html>
-<!--Page d'acceuil du site web CRAnet-->		
+<!--Page Reinitialisant tous les mots de passes des éleveurs ainsi que ceux des animateurs,
+Par ailleurs, les identifiants deviennent de la forme première lettre du prénom suivit du nom de famille en majuscule-->		
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,7 +11,7 @@
 		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
 
 		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
-		<?php $autorisation=array(3) // que le CRA?>
+		<?php $autorisation=3// que le CRA?>
 		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
@@ -18,8 +19,7 @@
 
 <?php
 
-if ($_SESSION['id_type']==3)
-{
+
 ////////////////////////////////////////////// CREATION nouveaux mdp
 // recuperation des utilisateurs eleveurs
 $link=mysqli_connect('localhost','root','','crabase');
@@ -35,14 +35,14 @@ $nbligne=mysqli_num_rows($result);
 $j=0;
 while ($j<$nbligne)
 	{
-	envoimail($tab[$j][0]);
+//	envoimail($tab[$j][0]);    Enlever les commentaires pour que la fonctionnalité soit effective ///////////////::
 	$j++;
 	}
 /////////////////////////////////////////////CREATION identifiant : exemple Prénom: Théo Nom: NOBELLA --> identifiant= tNOBELLA
 
 $queryb="UPDATE utilisateurs SET identifiant= CONCAT(SUBSTR(prenom, 1, 1),nom) WHERE id_type != 3 ";
 $result=mysqli_query($link,$queryb);
-}
+
 echo "Les nouveaux mots de passe ont bien été envoyés aux éleveurs ayant une adresse email renseignée 
 <BR> Les identifiants sont maintenant de la forme: Première lettre du prénom/nom 
 <BR> Exemple :

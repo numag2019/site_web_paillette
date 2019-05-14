@@ -1,5 +1,5 @@
 <html>
-<!--P-->		
+<!-- Cette page contient le bouton conduisant au code permettant de reinitialiser tous les mots des passes-->		
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

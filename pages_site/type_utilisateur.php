@@ -124,7 +124,11 @@ if (isset($_SESSION['message_type_utilisateur']))
 	{echo $_SESSION['message_type_utilisateur']; 
 	unset ($_SESSION['message_type_utilisateur']);}
 			?>
-		<!-- DIV Pied de page -->	
-		<?php include ("../mise_en_page/pied.html");?>
+		
 	</body>
+	
+	<footer class="footer">
+	<!-- DIV Pied de page -->	
+		<?php include ("../mise_en_page/pied.html");?>
+	</footer>
 </html>

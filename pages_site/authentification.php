@@ -47,6 +47,8 @@
 		?>
 	</body>
 	
+	<footer class="footer">
 	<!-- pied de page -->	
 	<?php include ("../mise_en_page/pied.html");?>
+	</footer>
 </html>

@@ -19,11 +19,15 @@
 
 	<body>
 	
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <a href="modification_tous_mdp2.php" class="btn btn-default">Cliquer pour réinitialiser tous les mots de passe</a>
 			
-<!-- DIV Pied de page -->	
 
-		<?php include ("../mise_en_page/pied.html");?>
 	</body>
+	
+	<footer class="footer">
+	<!-- DIV Pied de page -->	
+		<?php include ("../mise_en_page/pied.html");?>
+	</footer>
+	
 </html>

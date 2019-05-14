@@ -1,3 +1,8 @@
+html{
+	position: relative;
+	min-height: 100%;
+}
+
 html,
 body {
 /*css for full size background image*/
@@ -32,4 +37,11 @@ input::-o-inner-spin-button,
 input::-o-outer-spin-button { 
 	-o-appearance: none;
 	margin:0
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
 }

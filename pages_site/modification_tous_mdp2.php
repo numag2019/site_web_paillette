@@ -48,8 +48,10 @@ echo "Les nouveaux mots de passe ont bien été envoyés aux éleveurs ayant une
 <BR> Exemple :
 <BR> Théo Nom: NOBELLA --> identifiant= tNOBELLA";
 ?>		
-<!-- DIV Pied de page -->	
-
-		<?php include ("../mise_en_page/pied.html");?>
 	</body>
+	
+	<footer class="footer">
+	<!-- DIV Pied de page -->	
+		<?php include ("../mise_en_page/pied.html");?>
+	</footer>
 </html>

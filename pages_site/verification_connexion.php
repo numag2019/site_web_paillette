@@ -32,7 +32,7 @@ else
 
 		if ($rows<1)
 		{	
-			$_SESSION['error']= 'Mauvais identifiant ou mot de passe ! (ligne 36 row<1)';
+			$_SESSION['error']= 'Mauvais identifiant ou mot de passe !';
 			header ('location : authentification.php');
 		}
 		else
@@ -48,7 +48,7 @@ else
 			}
 			else 
 			{
-			$_SESSION['error']='Mauvais identifiant ou mot de passe ! (ligne 50 password_verify=False)';
+			$_SESSION['error']='Mauvais identifiant ou mot de passe !';
 			header ('Location: authentification.php'); 
 			}
 		}	

@@ -1,5 +1,5 @@
 <html>
-<!--Page d'acceuil du site web CRAnet-->		
+<!--  Cette page est accessible au CRA et permet de modifier les id_type de tous les utilisateurs-->		
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

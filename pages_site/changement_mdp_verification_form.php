@@ -1,7 +1,6 @@
 <html>
-	<!--Page accessible en cliquant sur le lien gérer mon compte,
-	l'utilisateur doit alors rentrer son ancien mot de passe , si celle ci correspond 
-	à une présente dans la bdd, le mot de passe de l'utilisateur peut être remplacé-->		
+	<!-- Page executé par 'changement_mdp.php', si l'ancien mot de passe de l'utilisateur correspond à celui hashé  dans la bdd, 
+	à le nouveau mot de passe est hashé puis remplace l'ancien -->		
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

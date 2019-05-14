@@ -57,7 +57,7 @@
 				{
 					//echo '<FORM method="POST" name="formulaire_race" >';
 					$id_eleveur = $_POST["liste_eleveurs"];
-					$nom_eleveur = $tab_eleveur[$id_eleveur-1][1].$tab_eleveur[$id_eleveur-1][2];
+					$nom_eleveur = $tab_eleveur[$id_eleveur-1][1]. ' ' .$tab_eleveur[$id_eleveur-1][2];
 					$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 								  FROM races
 								  JOIN bovins ON races.id_race = bovins.id_race
@@ -162,10 +162,10 @@
 						$nb_femelle=count($liste_femelles);
 						
 						echo '<div class="row">';
-						echo '<div class="col-6">';
+						echo '<div class="col-1">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
-						echo '<td>&nbsp;</td>';
+						echo '<td class="col-2">&nbsp;</td>';
 						for ($j=0; $j < $nb_males; $j++)
 								{
 									echo '<td>' . $liste_nom_males[$j]. '</td>';
@@ -209,6 +209,8 @@
 									{
 										echo ' <br> '.$tab_prev[0][0];
 									}
+									else
+										echo "<br>&nbsp;<br>";
 								}
 								echo '</center></td>';
 								// echo '</tr>';

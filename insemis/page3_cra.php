@@ -19,16 +19,9 @@
 		 ?>
 
 		<TITLE>fenetre pop up</TITLE>
-		<script type="text/javascript">
-	
-			function valider()
-			{
-				if (isset($_POST['bouton_reini']))
-					alert("Etes-vous sûr de vouloir réinitialiser le tableau?");
-					return true;
-				
-			}
+		<script language="javascript" src="confirmation.js" type = "text/javascript"> 
 		</script>
+			
 	</head>
 
 	<body>
@@ -42,7 +35,7 @@
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
 
-		echo '<FORM onsubmit="return valider()" method = "POST" name = "formulaire_page3">';
+		echo '<FORM method = "POST" name = "formulaire_page3">';
 		echo '<div class="form-group row">';
 		echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
 		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
@@ -220,12 +213,18 @@
 					}
 				echo '</table>';
 				echo '<br> <br>';
+				echo '</FORM>';
+				echo '<FORM onclick="ConfirmMessage()">';
+				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage()" value = "Réinitialiser le tableau"> <br/> <br/>';
+				echo '</FORM>';
 				
 				}	
-		//echo '</FORM>';
-		//echo '<FORM onclick="return valider()" name = "formulaire_reini"';
-		echo '<INPUT TYPE = "submit" name = "bouton_reini" value = "Réinitialiser le tableau"> <br/> <br/>';
-		echo '</FORM>';
+		
+		
+		
+		
+		
+		
 		?>
 	</body>
 </html>

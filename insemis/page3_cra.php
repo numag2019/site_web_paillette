@@ -56,7 +56,7 @@
 		echo '</div>';
 		echo '<br> <br>';
 
-		if(isset($_POST['bouton_valider']))
+		if(isset($_POST['bouton_valider'])||isset($_POST['bouton_valider_periode']))
 			{
 			$race = $_POST['liste_race'];
 			if ($race == 6)
@@ -65,7 +65,8 @@
 				$nom_race = 'bordelaise';
 			if ($race == 19)
 				$nom_race = 'béarnaise';
-			$query_periode = "SELECT periodes.id_periode, periodes.date_debut, periodes.date_fin FROM periodes WHERE periodes.id_race = ".$race.""; 
+			$query_periode = "SELECT periodes.id_periode, date_format(periodes.date_debut,'%d/%m/%Y'), date_format(periodes.date_fin, '%d/%m/%Y')
+							FROM periodes WHERE periodes.id_race = ".$race.""; 
 			$result_periode = mysqli_query($link, $query_periode);
 			$tab_periode = mysqli_fetch_all($result_periode);
 
@@ -86,6 +87,7 @@
 				}
 			echo '</SELECT NAME> <br/> <br/>';
 			echo "<INPUT TYPE = 'hidden' name = 'id_race' value = '".$race."'>";
+			echo "<INPUT TYPE = 'hidden' name = 'nom_race' value = '".$nom_race."'>";
 			echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_periode" class="btn btn-primary" value = "Valider">';
 			echo '</div>';
 			echo '<br/> <br/>';
@@ -93,11 +95,21 @@
 			
 			if(isset($_POST['bouton_valider_periode']))
 				{
+				$nom_race = $_POST['nom_race'];
 				$periode = $_POST['liste_periode'];
-				$query_periode_af = 'SELECT periodes.date_debut, periodes.date_fin FROM periodes WHERE periodes.id_periode ='.$periode.' ';
+				$query_periode_af = 'SELECT date_format(periodes.date_debut, "%d/%m/%Y"), date_format(periodes.date_fin,"%d/%m/%Y") 
+									FROM periodes WHERE periodes.id_periode ='.$periode.' ';
 				$result_periode_af = mysqli_query($link, $query_periode_af);
 				$tab_periode_af = mysqli_fetch_all($result_periode_af);
-				echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1];
+				if ($tab_periode_af[0][1] == null)
+					{
+					echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' depuis le ' .$tab_periode_af[0][0].'';
+					}
+				else 
+					{
+					echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1];
+					}
+				
 				
 				$race=$_POST["id_race"];
 					
@@ -115,14 +127,14 @@
 					{
 						$liste_ut[$i]=$tab_liste_ut[$i][1] . " " . $tab_liste_ut[$i][0] ;
 					}
-				//var_dump($liste_ut);
+
 					
 				$liste_id_ut=[] ;
 				for ($i=0;$i<$nbligne;$i++)
 					{
 					$liste_id_ut[$i]=$tab_liste_ut[$i][2] ;
 					}
-					//var_dump($liste_id_ut);
+
 					
 
 				// Les lignes suivantes servent à obtenir la liste des taureaux de la race séléctionné dans les pages précédentes puis la liste des id_bovins
@@ -138,20 +150,17 @@
 					{
 					$liste_t[$i]=$tab_liste_t[$i][0] ;
 					}
-					//var_dump($liste_t);
 					
 				$liste_id_t=[] ;
 				for ($i=0;$i<$nbligne;$i++)
 					{
 					$liste_id_t[$i]=$tab_liste_t[$i][1] ;
 					}
-				//var_dump($liste_id_t);
 					
 					
 				//affichage du tableau récapitulatif
 				$nb_ut=count($liste_ut);
 				$nb_t=count($liste_t);
-				echo $nb_t;
 					
 				echo '<table border = 1>';
 				echo "<td> </td>" ;
@@ -177,14 +186,6 @@
 											WHERE previsions.id_taureau=".$liste_id_t[$j]." AND bovins.id_utilisateur=".$liste_id_ut[$i]."";
 						$result_paillettes=mysqli_query($link, $query_paillettes);
 						$tab_paillettes=mysqli_fetch_all($result_paillettes);
-						//var_dump($tab_paillettes);
-						/*$query_sum_paillettes="SELECT SUM(nbr_paillettes) FROM previsions 
-											JOIN bovins ON bovins.id_bovin=previsions.id_taureau
-											WHERE previsions.id_taureau=".$liste_id_t[$j]."";
-						echo $query_sum_paillettes;
-						$result_sum_paillettes=mysqli_query($link, $query_sum_paillettes);
-						$tab_sum_paillettes=mysqli_fetch_all($result_sum_paillettes);
-						var_dump($tab_sum_paillettes);*/
 						if (empty($tab_paillettes))
 							echo '<td> 0 </td>';
 						else
@@ -192,18 +193,6 @@
 							echo '<td>' . $tab_paillettes[0][0]. '</td>';
 							$S_ut=$S_ut+$tab_paillettes[0][0];
 							}
-								//echo '<td>'. $S_ut . '</td>';
-								//$S_t=$S_t+$tab_paillettes[0][0];
-								/*
-								if($j!=0)
-								{
-									echo '</tr>';
-									echo '<tr>';
-									echo '<td>'.$S_t.'</td>';
-									echo '</tr>';
-								}
-								*/
-								//$S_t=$S_t+$tab_paillettes[0][0];
 						$j++;
 						}
 					$i++;
@@ -213,15 +202,13 @@
 					}
 				echo '</table>';
 				echo '<br> <br>';
+				//echo '<INPUT type="submit" name="bouton_reini" value = "Réinitialiser le tableau">';
 				echo '</FORM>';
-				echo '<FORM onclick="ConfirmMessage()">';
+				echo '<FORM >';
 				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage()" value = "Réinitialiser le tableau"> <br/> <br/>';
 				echo '</FORM>';
 				
 				}	
-		
-		
-		
 		
 		
 		

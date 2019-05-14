@@ -22,6 +22,9 @@
 
 		<TITLE>fenetre pop up</TITLE>
 		<script  type="text/javascript" >
+		function gomenu(){
+			location.href="page3_cra.php";
+		}	
 		function ConfirmMessage(periode,race) {
 			if (confirm("Etes vous sûr de voulir réinitialiser le tableau ?")) { 
 			   // Clic sur OK
@@ -32,8 +35,11 @@
 						periode: periode,
 						race: race
 					}
+					//document.getElementById("test").innerHTML=response;
 			   });
 			}
+		alert('La nouvelle période a été créée');
+		gomenu();
 		}
 </script>
 			
@@ -226,6 +232,7 @@
 				echo $race;
 				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau"> <br/> <br/>';
 				echo '</FORM>';
+				echo '<span id="test"> </span>';
 				}
 				
 				}

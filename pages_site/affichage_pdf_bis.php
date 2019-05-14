@@ -102,7 +102,7 @@
 								while($i<$nb_fichier)
 								{
 								
-									// Si le nom de la race est présent dans le nom du pdf, on l'affiche
+									// Si le nom de l'eleveur est présent dans le nom du pdf, on l'affiche
 									if (stripos($chemin[$i],$tab[0][1]))
 									{
 										echo '<a href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
@@ -113,7 +113,7 @@
 								
 								// mise à disposition du pdf global
 								echo "<BR>";
-								echo '<h6 style="color: black">pdf global</h6>';
+								echo '<h6 style="color: black">Le pdf global</h6>';
 								
 								echo '<a href="../importexportCSV/exports/pdf/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
 								echo "<BR>";

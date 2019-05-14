@@ -27,10 +27,10 @@ function envoimail ($email)
 		$passage_ligne = "\n";
 		}
 	//=====Déclaration des messages au format texte et au format HTML.
-	//$message_txt = 'Veuillez trouvez ci dessous le mot de passe temporaire de votre comptre cranet: ( pensez a le changer rapidement)';
-	$message_txt ='Bonjour, veuillez ne pas prendre en compte le message que vous avez precedemment reçu , toutes nos excuses pour la gene occasionee.';
+	$message_txt = 'Veuillez trouvez ci dessous le mot de passe temporaire de votre comptre cranet: ( pensez a le changer rapidement)';
+	//$message_txt ='Bonjour, veuillez ne pas prendre en compte le message que vous avez precedemment reçu , toutes nos excuses pour la gene occasionee.';
 	//=====Définition du sujet.
-	$sujet = "Erreur message";
+	$sujet = "Reinitialisation de votre mot de passe";
 	//=========
  
 	//=====Création du header de l'e-mail.

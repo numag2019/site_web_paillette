@@ -220,14 +220,14 @@
 				echo '<br> <br>';
 				
 				if ($tab_periode_af[0][1] == null)
-					echo "<INPUT TYPE = 'hidden' name = 'date_fin' value =coucou>";
+					echo "<INPUT TYPE = 'hidden' name = 'date_fin' value ='coucou'>";
 					echo "coucou1";
 				//echo '<INPUT type="submit" name="bouton_reini" value = "Réinitialiser le tableau">';
 				echo '</FORM>';
 				
 				
-				echo '<FORM name = "form" method = "get" >';
-				$date_fin = $_GET['date_fin'];
+				echo '<FORM name = "form" method = "POST" >';
+				$date_fin = $_POST['date_fin'];
 				echo $date_fin;
 				if ($date_fin == 'coucou')
 				{

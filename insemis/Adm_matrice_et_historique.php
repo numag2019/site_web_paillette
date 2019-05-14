@@ -1,11 +1,25 @@
-<html>
+<!doctype html>
+<HTML lang='fr'>
+
 	<head>
-		<meta charset = "UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- <link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<!-- <link rel="stylesheet" href="../mise_en_page/bootstrap2.css"> -->
+	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+	<?php $autorisation=TRUE // tout le monde?>
+
+	<!--  Navigation -->
+	 <?php 
+	 include("../mise_en_page/navigation.html"); 
+	 ?>
 	</head>
 	
 	<body>
-		Plateforme Paillettes <br><br><br>
-	
 		<?php
 			require "Mes_fonctions.php" ;
 	
@@ -20,16 +34,16 @@
 			//var_dump($tab_nom);
 			//echo $tab_nom[0][1];
 		
-		if(isset($_GET["bouton_valider_eleveur"])||isset($_GET['bt_submit_hist']))
+		if(isset($_POST["bouton_valider_eleveur"])||isset($_POST['bt_submit_hist']))
 		{
-			$eleveur_select=$_GET["id_utilisateur"];
+			$eleveur_select=$_POST["id_utilisateur"];
 		}
 		
-		echo "<FORM method='GET' name='formulaire'>" ; 
-		
-			echo "<br>";
-			echo "<b> Séléctionnez un éleveur </b>"  ;      //liste déroulante éleveur
-				echo "<SELECT name='id_utilisateur' size='1'>";
+		echo '<FORM method = "POST" name = "formulaire">';
+		echo '<div class="form-group row">';
+		echo "<label class='col-2 col-form-label'> Choisissez l'éleveur : </label>";
+		//liste déroulante éleveur
+		echo "<SELECT name='id_utilisateur' class='form-control col-2'>";
 					// boucle permettant d'afficher la liste déroulante des noms d'eleveurs
 					$i=0;
 					for ($i=0;$i<count($tab_nom);$i++)
@@ -42,13 +56,14 @@
 						echo "<OPTION value = '" . $tab_nom[$i][0] ."'" . $sel .  ">". $tab_nom[$i][1]," " ,$tab_nom[$i][2] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
 					}
 				echo "</SELECT>";
-			echo "<br><br>";
+			echo "<br>";
 		
-			echo "<INPUT TYPE='SUBMIT' name='bouton_valider_eleveur' value='OK'>";
+			echo "<INPUT TYPE='SUBMIT' class='btn btn-primary' name='bouton_valider_eleveur' value='Valider'>";
+			echo "</div>";
 			echo "<br><br>";
 	
 			
-			if(isset($_GET['bouton_valider_eleveur'])||isset($_GET['bt_submit_hist']))
+			if(isset($_POST['bouton_valider_eleveur'])||isset($_POST['bt_submit_hist']))
 			{	
 				$link=mysqli_connect('localhost', 'root', '', 'crabase');
 				mysqli_set_charset($link, "utf8mb4"); 
@@ -78,9 +93,6 @@
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}
-				
-					echo "<INPUT TYPE='SUBMIT' name='bt_submit_hist' value='Voir son historique de prévisions paillettes'>";
-					echo "<br><br>";
 					
 					
 				//Affichage de la matrice				
@@ -226,10 +238,12 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br> <br>';	
-					
+					echo "<INPUT TYPE='SUBMIT' name='bt_submit_hist' class='btn btn-dark' value='Voir son historique de prévisions paillettes'>";
+					echo "<br><br>";
 
 				//Affichage de l'historique
-				if(isset($_GET['bt_submit_hist']))
+				
+				if(isset($_POST['bt_submit_hist']))
 				{
 					echo "Historique des prévisions de commande de paillettes de <b>" . $tab_eleveur[0][1] . " " . $tab_eleveur[0][0] . "</b> pour la race <b>" . $nom_race . "</b><br><br>";
 					//Sauf que la ca prend toutes les races, pas forcément que celles de la race de l'administrateur...
@@ -283,7 +297,9 @@
 					$nb_periodes=count($liste_per);
 					$nb_taureau=count($liste_taureau);
 					
-					echo '<table border = 1>';
+					// echo '<div class="row">';
+					echo '<div class="col-3">';
+					echo '<table class="table table-bordered">';
 						echo "<td> </td>" ;
 						$j = 0;
 						while ($j<$nb_taureau)
@@ -317,7 +333,9 @@
 							echo '<td><b>'. $S . '</b></td>';
 							echo '</tr>';
 						}
-					echo '</table>';		
+					echo '</table>';
+					echo '</div>';
+					echo '</div>';
 				}		
 			}
 			echo "</FORM>";

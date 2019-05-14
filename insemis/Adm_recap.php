@@ -95,15 +95,17 @@
 				$nb_ut=count($liste_ut);
 				$nb_t=count($liste_t);
 				
+				/*
 				echo '<table border = 1>';
 					echo "<td> </td>" ;
 					$j = 0;
+					
 					while ($j<$nb_t)
 						{
 							echo '<td>' . $liste_t[$j]. '</td>'; // affiche les noms de taureau en haut dans la première ligne du tableau
 							$j++;
 						}
-						
+					echo "<td><b> Total </b></td>";	
 					$i =0;
 					$S_t=0;
 					while ($i<$nb_ut)
@@ -119,7 +121,6 @@
 												WHERE previsions.id_taureau=$liste_id_t[$j] AND bovins.id_utilisateur=$liste_id_ut[$i]";
 							$result_paillettes=mysqli_query($link, $query_paillettes);
 							$tab_paillettes=mysqli_fetch_all($result_paillettes);
-							//var_dump($tab_paillettes);
 							if (empty($tab_paillettes))
 								echo '<td> 0 </td>';
 							else
@@ -129,7 +130,8 @@
 							}
 							//echo '<td>'. $S_ut . '</td>';
 							//$S_t=$S_t+$tab_paillettes[0][0];
-							/*
+							
+							--------
 							if($j!=0)
 							{
 								echo '</tr>';
@@ -137,14 +139,56 @@
 								echo '<td>'.$S_t.'</td>';
 								echo '</tr>';
 							}
-							*/
+							-------
+							
 							//$S_t=$S_t+$tab_paillettes[0][0];
 							$j++;
 						}
 						$i++;
-						echo '<td>'. $S_ut . '</td>';
+						echo '<td><b>'. $S_ut . '</b></td>';
 						echo '</tr>';
 					}
+					*/
+					
+					echo '<table border = 1>';
+					echo "<td> </td>" ;
+					$j = 0;
+					
+					while ($j<$nb_t)
+						{
+							echo '<td>' . $liste_t[$j]. '</td>'; // affiche les noms de taureau en haut dans la première ligne du tableau
+							$j++;
+						}
+					echo "<td><b> Total </b></td>";	
+					$i =0;
+					$S_t=0;
+					while ($i<$nb_ut)
+					{
+						echo '<tr>';
+						echo "<td>" . $liste_ut[$i] . "</td>"; // afiche les noms d'éleveurs dans la première colonne du tableau
+						$j=0;
+						$S_ut=0;
+						while ($j<$nb_t)
+						{
+							$query_paillettes="SELECT nbr_paillettes FROM previsions 
+												JOIN bovins ON bovins.id_bovin=previsions.id_taureau
+												WHERE previsions.id_taureau=$liste_id_t[$j] AND bovins.id_utilisateur=$liste_id_ut[$i]";
+							$result_paillettes=mysqli_query($link, $query_paillettes);
+							$tab_paillettes=mysqli_fetch_all($result_paillettes);
+							if (empty($tab_paillettes))
+								echo '<td> 0 </td>';
+							else
+							{
+								echo '<td>' . $tab_paillettes[0][0]. '</td>';
+								$S_ut=$S_ut+$tab_paillettes[0][0];
+							}
+							$j++;
+						}
+						$i++;
+						echo '<td><b>'. $S_ut . '</b></td>';
+						echo '</tr>';
+					}
+					echo "<td><b> Total </b></td>";
 			}
 		echo "</FORM>";
 		

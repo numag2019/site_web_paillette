@@ -15,7 +15,7 @@
 
 	<!--  Navigation -->
 	 <?php 
-	 // include("../mise_en_page/navigation.html"); 
+	 include("../mise_en_page/navigation.html"); 
 	 ?>
 	</head>
 	
@@ -277,14 +277,16 @@
 			
 			echo "<input type='hidden' name='id_race' value='".$race."'>";
 			echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
-			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher mon historique de commandes pour la race">';
+			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher mon historique de commandes">';
+			echo '<br> <br>';
 			if(isset($_POST['bouton_historique']))
 				{
 					$id_race = $_POST['id_race'];
 					$nom_race = $_POST['nom_race'];
 					echo "Historique des prévisions de commande de paillettes pour la race ".$nom_race." <br><br>";
 					// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode
-					$query_liste_per="SELECT date_debut, date_fin, id_periode FROM periodes WHERE periodes.id_race =".$id_race."";
+					$query_liste_per="SELECT date_format(date_debut,'%d/%m/%Y'), date_format(date_fin,'%d/%m/%Y'), id_periode 
+									FROM periodes WHERE periodes.id_race =".$id_race."";
 					$result_liste_per=mysqli_query($link, $query_liste_per);
 					$tab_liste_per=mysqli_fetch_all($result_liste_per);
 					$nbligne = mysqli_num_rows($result_liste_per);

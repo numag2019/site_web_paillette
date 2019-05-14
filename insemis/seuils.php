@@ -7,8 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
+		
+		
+		
+		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+		<?php $autorisation=3 // que le CRA?> 
+		
+		<!--  Navigation -->
+		<?php include("../mise_en_page/navigation.html"); ?>
 	</head>
 	<?php
 	//require "Mes_fonctions.php" ;
@@ -26,9 +38,9 @@
 	
 	
 	<!-- Liste déroulante choix de la race-->
-			<div class="container">	
-		<div class="row">
-			<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+		<div class="container">	
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
 				<FORM method="POST" name="formRaceSeuil">
 					<div class="form-group">
 					<label for="id_utilisateur_selection">Choisissez la race</label>
@@ -56,8 +68,8 @@
 					
 
 		<!-- Saisie de texte seuil min-->
-		<div class="form-group">
-			<div class="col-md-4">
+		<div class="form-group d-flex justify-content-center">
+			<div class="col-md-6">
 				<label class="control-label" for="textinput">Seuil minimal</label> 
 				<span class="help-block"></span>
 				
@@ -65,7 +77,7 @@
 				if (isset($_POST['seuil_min'])) 
 					{
 					$valmin=$_POST['seuil_min'];			
-					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="'.$valmin.'" class="form-control input-md">';
+					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="'.$valmin.'" class="form-control input-md" >';
 							
 					}
 				
@@ -81,9 +93,10 @@
 		</div>
 		
 			<!-- Saisie de texte seuil max-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="textinput">Seuil maximal</label> 
-		  <div class="col-md-4">
+		<div class="form-group d-flex justify-content-center">
+		<div class="col-md-6">
+		  <label class="control-label" for="textinput">Seuil maximal</label> 
+		  
 			
 			<?php
 				if (isset($_POST['seuil_max'])) 
@@ -129,7 +142,7 @@
 			{
 				echo "<script type='text/javascript'>";
 				echo 'alert("Veuillez entrer des valeurs de seuils");';
-				echo 'document.location.href="http://cranet/site_web_paillette/pages_site/seuils.php";';
+				echo 'document.location.href="http://cranet/site_web_paillette/insemis/seuils.php";';
 				echo '</script>';
 				
 				
@@ -139,7 +152,7 @@
 			{
 				echo "<script type='text/javascript'>";
 				echo 'alert("Veuillez entrer des valeurs de seuils entre 0 et 0,5");';
-				echo 'document.location.href="http://cranet/site_web_paillette/pages_site/seuils.php";';
+				echo 'document.location.href="http://cranet/site_web_paillette/insemis/seuils.php";';
 				echo '</script>';
 				
 			}

@@ -15,7 +15,7 @@
 
 	<!--  Navigation -->
 	 <?php 
-	 include("../mise_en_page/navigation.html"); 
+	 //include("../mise_en_page/navigation.html"); 
 	 ?>
 	</head>
 	
@@ -27,9 +27,12 @@
 
 		require "Mes_fonctions.php" ;
 
+		//Connection à la base de données crabase
 		$link = mysqli_connect('localhost', 'root', '', 'crabase');
 		mysqli_set_charset($link, "utf8mb4");
 
+		
+		//Requête sélectionnant les races qu'élèvent l'éleveur qui vient de se connecter
 		$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 						FROM races
 						JOIN bovins ON races.id_race = bovins.id_race
@@ -41,6 +44,8 @@
 		echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
 		echo '<div class="form-group row">';
 		echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
+		
+		//Liste déroulante permettant la sélection d'une race élevée par l'éleveur connecté
 		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
 		for($i=0; $i < count($tab_race); $i++)
 			{
@@ -55,6 +60,7 @@
 			echo ">".$tab_race[$i][1]."</OPTION> ";
 			}
 		echo '</SELECT NAME> <br/> <br/>';
+		//Bouton de validation de la race 
 		echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">';
 		echo '</div>';
 		echo '<br> <br>';
@@ -74,7 +80,7 @@
 			$result_bear=mysqli_query($link, $query_bear);
 			$liste_eleveur_bear=requete_2col_to_list ($result_bear) ;
 						
-			// Requête SQL sécurisée
+			//Boucle qui permet d'obtenir le catalogue de la race en fonction des races élevées
 				
 			$eleveur = 4;	
 			if (in_array($eleveur,$liste_eleveur_bord))
@@ -90,6 +96,7 @@
 				echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}	
 					
+			//Assignation du nom de la race en fonction de son identifiant
 			$race = $_POST['liste_race'];
 			if ($race == 6)
 				$nom_race = 'marine';
@@ -99,61 +106,71 @@
 				$nom_race = 'béarnaise';
 			echo 'Matrice de parenté pour la race '.$nom_race;	
 			
-
+			//Sélection des identifiants des vaches et des tauraux pour lesquels un coefficient de consanguinité a été calculé
 			$query_matrice = "SELECT coefficients.id_vache, coefficients.id_taureau
-										 FROM coefficients
-										 JOIN bovins ON bovins.id_bovin = coefficients.id_vache 
-										 WHERE bovins.id_race =".$race." and bovins.id_utilisateur = ".$id_utilisateur." ";
-						$result_matrice = mysqli_query($link, $query_matrice);
-						$tab_matrice = mysqli_fetch_all($result_matrice);
-						$nb_accouplement = mysqli_num_rows($result_matrice);
-						$liste_males = [];
-						$liste_nom_males = [];
-						for ($k=0; $k < $nb_accouplement; $k++)
-							{
-							$individu = $tab_matrice[$k][1];
-							if (in_array($individu,$liste_males))
-								{}
-							else
-								{
-								$query_nom_male = 'SELECT bovins.nom_bovin FROM bovins WHERE bovins.id_bovin='.$tab_matrice[$k][1].'';
-								$result_nom_male = mysqli_query($link, $query_nom_male);
-								$tab_nom_male = mysqli_fetch_all($result_nom_male);
-								array_push($liste_nom_males,$tab_nom_male[0][0]);
-								array_push($liste_males,$tab_matrice[$k][1]);
-								}
-							}
+							FROM coefficients
+							JOIN bovins ON bovins.id_bovin = coefficients.id_vache 
+							WHERE bovins.id_race =".$race." and bovins.id_utilisateur = ".$id_utilisateur." ";
+			$result_matrice = mysqli_query($link, $query_matrice);
+			$tab_matrice = mysqli_fetch_all($result_matrice);
+			$nb_accouplement = mysqli_num_rows($result_matrice);
+			
+			//Création d'une liste vide pour stocker les identifiants des mâles
+			$liste_males = [];
+			//Création d'une liste vide pour stocker les noms des mâles
+			$liste_nom_males = [];
+			//Pour tous les accouplements..
+			for ($k=0; $k < $nb_accouplement; $k++)
+				{
+				//on récupère l'identifiant du mâle
+				$individu = $tab_matrice[$k][1];
+				//si il est déjà dans la liste alors on ne l'ajoute pas
+				if (in_array($individu,$liste_males))
+					{}
+				//si il n'est pas dans la liste
+				else
+					{
+					//requête sélectionnant le nom du bovin correspondant à l'identifiant sélectionné
+					$query_nom_male = 'SELECT bovins.nom_bovin FROM bovins WHERE bovins.id_bovin='.$tab_matrice[$k][1].'';
+					$result_nom_male = mysqli_query($link, $query_nom_male);
+					$tab_nom_male = mysqli_fetch_all($result_nom_male);
+					//on ajoute le nom du mâle à la liste
+					array_push($liste_nom_males,$tab_nom_male[0][0]);
+					//on ajoute l'identifiant du mâle à la liste
+					array_push($liste_males,$tab_matrice[$k][1]);
+					}
+				}
 
-						$liste_femelles = [];
-						$liste_nom_femelle = [];
-						for ($k=0; $k < $nb_accouplement; $k++)
-							{
-							$individu_femelle = $tab_matrice[$k][0];
-							if (in_array($individu_femelle,$liste_femelles))
-								{}
-							else 
-								{
-								$query_nom_femelle = 'SELECT bovins.nom_bovin FROM bovins WHERE bovins.id_bovin='.$tab_matrice[$k][0].'';
-								$result_nom_femelle = mysqli_query($link, $query_nom_femelle);
-								$tab_nom_femelle = mysqli_fetch_all($result_nom_femelle);
-								array_push($liste_nom_femelle,$tab_nom_femelle[0][0]);
-								array_push($liste_femelles,$tab_matrice[$k][0]);
-								}
-							}
+				$liste_femelles = [];
+				$liste_nom_femelle = [];
+				for ($k=0; $k < $nb_accouplement; $k++)
+				{
+					$individu_femelle = $tab_matrice[$k][0];
+					if (in_array($individu_femelle,$liste_femelles))
+					{}
+					else 
+					{
+						$query_nom_femelle = 'SELECT bovins.nom_bovin FROM bovins WHERE bovins.id_bovin='.$tab_matrice[$k][0].'';
+						$result_nom_femelle = mysqli_query($link, $query_nom_femelle);
+						$tab_nom_femelle = mysqli_fetch_all($result_nom_femelle);
+						array_push($liste_nom_femelle,$tab_nom_femelle[0][0]);
+						array_push($liste_femelles,$tab_matrice[$k][0]);
+					}
+				}
 							
-						$nb_males=count($liste_males);
-						$nb_femelle=count($liste_femelles);
+				$nb_males=count($liste_males);
+				$nb_femelle=count($liste_femelles);
 						
-						echo '<div class="row">';
-						echo '<div class="col-6">';
-						echo '<table class="table table-bordered">';
-						echo '<tr>';
-						echo '<td>&nbsp;</td>';
-						for ($j=0; $j < $nb_males; $j++)
-								{
-									echo '<td>' . $liste_nom_males[$j]. '</td>';
-								}
-						echo '</tr>';
+				echo '<div class="row">';
+				echo '<div class="col-6">';
+				echo '<table class="table table-bordered">';
+				echo '<tr>';
+				echo '<td>&nbsp;</td>';
+				for ($j=0; $j < $nb_males; $j++)
+				{
+					echo '<td>' . $liste_nom_males[$j]. '</td>';
+				}
+					echo '</tr>';
 						
 						for ($i=0; $i < $nb_femelle; $i++)
 						{
@@ -186,7 +203,7 @@
 									if ($tab_coeff[0][0]>$tab_color[0][1])
 										$color = 'red';
 									echo '<td bgcolor ='.$color.'><center>';
-									echo $tab_coeff[0][0];
+									//echo $tab_coeff[0][0];
 									if(isset($tab_prev[0][0]))
 									{
 										echo ' <br> '.$tab_prev[0][0];
@@ -362,44 +379,50 @@
 						echo '</table>';	
 					
 				}
+						
+				
+					
+					
+					
 			
+			if (isset($_POST['bouton_valider_prev']))
+			{
+						echo $_POST['liste_male'] ;
+						echo '<br>';
+						echo $_POST['liste_femelle'] ;
+						echo '<br>';
+						echo $_POST['liste_nombre'];
+						echo '<br>';
+						$link = mysqli_connect('localhost', 'root', '', 'crabase');
+						mysqli_set_charset($link, "utf8mb4");
+						$req_test="SELECT *
+									FROM previsions
+									WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
+						$result_test=mysqli_query($link, $req_test);
+						$tab_result = mysqli_fetch_all($result_test);
+						echo count($tab_result);
+						if (count($tab_result)>0) // la prevision existe
+						{
+						$query_race = "UPDATE previsions
+										SET nbr_paillettes=nbr_paillettes+".$_POST['liste_nombre']."
+										WHERE  id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
+
+						$result_race = mysqli_query($link, $query_race);
+						}
+						else // sinon on la crée
+						{
+						echo "nveau";
+						$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
+								VALUES ( ".$_POST['liste_nombre'].",6 , ".$_POST['liste_femelle']." , ".$_POST['liste_male'].")";
+						echo $reqadd;
+						$result_race = mysqli_query($link, $reqadd);
+						}
+						echo "<script type='text/javascript'>document.location.replace('page1_eleveurs.php');</script>";
 			
 			}				
-							
-		if (isset($_POST['bouton_valider_prev']))
-			{
-			echo $_POST['liste_male'] ;
-			echo '<br>';
-			echo $_POST['liste_femelle'] ;
-			echo '<br>';
-			echo $_POST['liste_nombre'];
-			echo '<br>';
-			$link = mysqli_connect('localhost', 'root', '', 'crabase');
-			mysqli_set_charset($link, "utf8mb4");
-			$req_test="SELECT *
-						FROM previsions
-						WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
-			$result_test=mysqli_query($link, $req_test);
-			$tab_result = mysqli_fetch_all($result_test);
-			echo count($tab_result);
-			if (count($tab_result)>0) // la prevision existe
-			{
-			$query_race = "UPDATE previsions
-							SET nbr_paillettes=nbr_paillettes+".$_POST['liste_nombre']."
-							WHERE  id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
-
-			$result_race = mysqli_query($link, $query_race);
-			}
-			else // sinon on la crée
-			{
-			echo "nveau";
-			$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
-					VALUES ( ".$_POST['liste_nombre'].",6 , ".$POST['liste_femelle']." , ".$POST['liste_male'].")";
-			$result_race = mysqli_query($link, $reqadd);
-
-			}
-			
-		}
+				
+			}			
+		
 		?>
 	</body>
 </HTML>

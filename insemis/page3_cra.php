@@ -222,6 +222,8 @@
 				if ($tab_periode_af[0][1] == null)
 				{
 				echo '<FORM name = "form" method = "GET" >';
+				echo $periode;
+				echo $race;
 				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau"> <br/> <br/>';
 				echo '</FORM>';
 				}

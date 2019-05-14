@@ -23,6 +23,7 @@
 		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
+		
 		<TITLE>fenetre pop up</TITLE>
 		<script  type="text/javascript" >
 		function ConfirmMessage(periode,race) {
@@ -52,11 +53,15 @@
 		$query_race = "SELECT id_race_int, nom_race FROM races_intermediaire";
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
-
-		echo '<FORM method = "POST" name = "formulaire_page3">';
-		echo '<div class="form-group row">';
-		echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
-		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
+		?>
+		 class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+		
+				<FORM method = "POST" name = "formulaire_page3">
+					<div class="form-group row">
+					<label class='col-2 col-form-label'> Choisissez la race : </label>
+					<SELECT NAME = "liste_race" class="form-control col-2">
+		</div>
+		<?php
 		for($i=0; $i < count($tab_race); $i++)
 			{
 			$value = $tab_race[$i][0];
@@ -83,6 +88,7 @@
 				$nom_race = 'bordelaise';
 			if ($race == 19)
 				$nom_race = 'béarnaise';
+			
 			$query_periode = "SELECT periodes.id_periode, date_format(periodes.date_debut,'%d/%m/%Y'), date_format(periodes.date_fin, '%d/%m/%Y')
 							FROM periodes WHERE periodes.id_race = ".$race.""; 
 			$result_periode = mysqli_query($link, $query_periode);

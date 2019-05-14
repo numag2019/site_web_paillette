@@ -57,7 +57,7 @@
 				{
 					//echo '<FORM method="POST" name="formulaire_race" >';
 					$id_eleveur = $_POST["liste_eleveurs"];
-					$nom_eleveur = $tab_eleveur[$id_eleveur-1][1]. ' ' .$tab_eleveur[$id_eleveur-1][2];
+					$nom_eleveur = $tab_eleveur[$id_eleveur-1][2]. ' ' .$tab_eleveur[$id_eleveur-1][1];
 					$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 								  FROM races
 								  JOIN bovins ON races.id_race = bovins.id_race
@@ -113,7 +113,7 @@
 						echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 						echo "<input type='hidden' name='id_race' value='".$race."'>";
 						echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
-						echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher l historique de commande de l éleveur">';
+						
 						echo '<br>';
 						$query_matrice = "SELECT coefficients.id_vache, coefficients.id_taureau
 										 FROM coefficients
@@ -238,6 +238,8 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br> <br>';
+						echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher l historique de commande de l éleveur">';
+						echo '<br> <br>';
 					}
 					
 				}
@@ -250,7 +252,9 @@
 						echo "Historique des prévisions de commande de paillettes de <b>" . $nom_eleveur . "</b> pour la race ".$nom_race. " <br><br>";
 
 						// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode
-						$query_liste_per="SELECT date_debut, date_fin, id_periode FROM periodes WHERE periodes.id_race =".$id_race."";
+						$query_liste_per="SELECT date_format(date_debut,'%d/%m/%Y'), date_format(date_fin,'%d/%m/%Y'), id_periode 
+										FROM periodes WHERE periodes.id_race =".$id_race."
+										ORDER by date_debut";
 						$result_liste_per=mysqli_query($link, $query_liste_per);
 						$tab_liste_per=mysqli_fetch_all($result_liste_per);
 						$nbligne = mysqli_num_rows($result_liste_per);
@@ -268,7 +272,10 @@
 							}
 					
 						// Les lignes suivantes servent à obtenir la liste des vache de l'éleveur séléctionné dans les pages précédentes puis la liste des id_bovins
-						$query_liste_taureau="SELECT nom_bovin, id_bovin FROM bovins WHERE (sexe=1 OR sexe=3) AND id_utilisateur=".$id_eleveur."";
+						$query_liste_taureau="SELECT nom_bovin, id_bovin 
+											FROM bovins
+											JOIN previsions ON previsions.id_taureau=bovins.id_bovin
+											WHERE (sexe=1 OR sexe=3) AND bovins.id_race=$id_race AND previsions.nbr_paillettes IS NOT NULL";
 						$result_liste_taureau=mysqli_query($link, $query_liste_taureau);
 						$tab_liste_taureau=mysqli_fetch_all($result_liste_taureau);
 						$nbligne = mysqli_num_rows($result_liste_taureau);

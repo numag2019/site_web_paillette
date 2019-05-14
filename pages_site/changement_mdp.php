@@ -9,7 +9,7 @@
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-		<link rel="stylesheet" href="../mise_en_page/bootstrap.css">
+		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
 
 	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
@@ -22,21 +22,22 @@
 
 
 <div class="container">	
-	<div class="row">
-		<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: white ;border-radius: 30px;" >
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
 			<form action="changement_mdp_verification_form.php" method="post">
 			  <div class="form-group">
-				<label for="mdp" style="color: black">Veuillez entrer votre mot de passe actuel :</label>
+				<label for="mdp" style="color: black; padding-top: 15px;">Veuillez entrer votre mot de passe actuel :</label>
 				<input type="mdp_changement" name="mdp_changement" class="form-control" id="mdp_changement" placeholder="Mot de passe">
+				<br>
 			  <button type="submit" class="btn btn-primary" style="color: black" >Valider</button>
 			</form>
 		</div>
+		<?php if (isset ($_SESSION['error']))
+			{echo $_SESSION['error'];
+			unset($_SESSION['error']);}?>
 	</div>
 </div>
 
-<?php if (isset ($_SESSION['error']))
-	{echo $_SESSION['error'];
-	unset($_SESSION['error']);}?>
 
 		<!-- DIV Pied de page -->	
 

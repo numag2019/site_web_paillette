@@ -7,17 +7,6 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
 		
-		<script>
-$(document).ready(function() {
-
-    var docHeight = $(window).height();
-    var footerHeight = $('#footer').height();
-    var footerTop = $('#footer').position().top + footerHeight;
-
-    if (footerTop < docHeight)
-        $('#footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
-});
-</script>
 	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
 
@@ -32,28 +21,18 @@ $(document).ready(function() {
 		<div class="container">	
 			<div class="h-100 row align-items-center">
 				<div class="col-md-4 col-lg-4">
-
 					<a href="https://www.synel.net/"><img class="img-fluid" src="../mise_en_page/images/synel2.png"></a>
-									<p align='center' style="color: #303030">
-
-						Enregistrer et visualiser les
-						informations relatives à vos cheptels bovins.
-					</p>
+					<a href="https://www.synel.net/" class="btn btn-light" style="background: rgba(255,255,255,0.5);">Enregistrer et visualiser les informations relatives à vos cheptels bovins.</a>
 				</div>
 				
 				<div class="col-md-4 col-lg-4">
 					<a href="http://194.199.250.44:8080/ora/main_icefaces.html?fbclid=IwAR0i_Dfnv6FnDNA9tiD1J3a6t0yc17vIprP5j0i55LLzgm0KLGKVHeK5VjU"><img class="img-fluid" src="../mise_en_page/images/mouton.jpg"></a>
-									<p align='center' style="color: #303030" >
-						Modifier les informations relatives à vos cheptels ovins.
-					</p>
+					<a href="http://194.199.250.44:8080/ora/main_icefaces.html?fbclid=IwAR0i_Dfnv6FnDNA9tiD1J3a6t0yc17vIprP5j0i55LLzgm0KLGKVHeK5VjU" class="btn btn-light" style="background: rgba(255,255,255,0.5);">Modifier les informations relatives à vos cheptels ovins.</a>
 				</div>
 				
 				<div class="col-md-4 col-lg-4">
 					<a href="https://www.ifce.fr/"><img class="img-fluid" src="../mise_en_page/images/ifce.jpg"></a>
-					<p align='center' style="color: #303030" >
-						Enregistrer et de visualiser les
-						informations concernant vos cheptels équins.
-					</p>
+					<a href="https://www.ifce.fr/" class="btn btn-light" style="background: rgba(255,255,255,0.5);">Enregistrer et visualiser les informations concernant vos cheptels équins.</a>
 				</div>
 			</div>
 		</div>

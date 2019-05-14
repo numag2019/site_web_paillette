@@ -143,6 +143,10 @@ else
 						</ul>
 						<?php
 					}
+					
+					
+					
+					
 					elseif ($_SESSION['id_type']==3) // Membre du CRA
 					{
 						?>
@@ -160,12 +164,13 @@ else
 							</div>
 						</li>
 					</ul>
-						<!--lien vers la plateforme paillette en tant qu'administrateur de race -->
+						<!--lien vers la plateforme paillette-->
 					<ul class="nav navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d'IA</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="../insemis/page2_cra.php">Consulter les matrices de parenté</a>
+								<a class="dropdown-item" href="../insemis/seuils.php">Modifier les seuils des matrices de parenté</a>
 								<a class="dropdown-item" href="../insemis/page3_cra.php">Consulter le tableau récapitulatif des commandes prévisionnelles de paillettes de la race</a>
 							</div>
 						</li>

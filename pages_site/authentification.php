@@ -24,10 +24,10 @@
 
 		<div class="container">	
 			<div class="row">
-				<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: white ;border-radius: 30px;">
+				<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;">
 					<form action="verification_connexion.php" method="post">
 					  <div class="form-group">
-						<label for="identifiant" style="color: black">Identifiez-vous :</label>
+						<label for="identifiant" style="color: black; padding-top: 15px;">Identifiez-vous :</label>
 						<input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="Identifiant">
 						<small id="remarque" class="form-text text-muted">Vous devez détenir un compte</small>
 					  </div>

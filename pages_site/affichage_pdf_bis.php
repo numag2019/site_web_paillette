@@ -20,8 +20,8 @@
 
 		<div class="container">	
 			<div class="row">
-				<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: white ;border-radius: 30px;">
-					<h5 style="color: black">PDF à disposition</h5>
+				<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+					<h5 style="color: black; padding-top: 15px;">PDF à disposition</h5>
 					<BR>
 					<?php
 					// On prend tous les noms et les chemins des fichiers présents dans le dossier pdf

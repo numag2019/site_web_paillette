@@ -23,16 +23,20 @@ if(isset($_POST['mdp_changement']))
 	$mdp=$_POST['mdp_changement'];
 
 	if (password_verify($mdp,$_SESSION['mdp']))
-	{		
-	echo "<br /> Veuillez entrer votre nouveau mot de passe deux fois de façon identiques:";
-	echo "<form action='changement_mdp_verification_form.php' method='post'>
-			<p>
-			<input type='text' name='nouveaumdp1' />
-			<input type='text' name='nouveaumdp2' />
-			<input type='submit' value='Valider' />
-			</p>
-		</form>";
-	}
+	{	?>
+	<div class="container">	
+		<div class="row">
+			<div id="block1" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
+				<form action='changement_mdp_verification_form.php' method='post'>
+					<label for="mdp" style="color: black; padding-top: 15px;">Veuillez entrer votre nouveau mot de passe deux fois de façon identiques:</label><br>
+					<input type='text' class="form-control" placeholder="Mot de passe" name='nouveaumdp1'><br>
+					<input type='text' class="form-control" placeholder="Mot de passe" name='nouveaumdp2'><br>
+					<input type='submit' class='btn btn-primary' value='Valider' />
+				</form>
+			</div>
+		</div>
+	</div>
+	<?php }
 	else 
 	{
 		$_SESSION['error']='Votre mot de passe est incorrect.';

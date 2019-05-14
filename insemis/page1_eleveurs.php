@@ -15,7 +15,7 @@
 
 	<!--  Navigation -->
 	 <?php 
-	 // include("../mise_en_page/navigation.html"); 
+	 include("../mise_en_page/navigation.html"); 
 	 ?>
 	</head>
 	

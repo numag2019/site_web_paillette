@@ -142,7 +142,7 @@
 			{
 				echo "<script type='text/javascript'>";
 				echo 'alert("Veuillez entrer des valeurs de seuils");';
-				echo 'document.location.href="http://cranet/site_web_paillette/pages_site/seuils.php";';
+				echo 'document.location.href="http://cranet/site_web_paillette/insemis/seuils.php";';
 				echo '</script>';
 				
 				
@@ -152,7 +152,7 @@
 			{
 				echo "<script type='text/javascript'>";
 				echo 'alert("Veuillez entrer des valeurs de seuils entre 0 et 0,5");';
-				echo 'document.location.href="http://cranet/site_web_paillette/pages_site/seuils.php";';
+				echo 'document.location.href="http://cranet/site_web_paillette/insemis/seuils.php";';
 				echo '</script>';
 				
 			}

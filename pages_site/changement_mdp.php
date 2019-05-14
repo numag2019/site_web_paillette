@@ -1,5 +1,5 @@
 <!-- Page disponible aux éleveurs bovins identifiés, 
-		elle permet l'accès à la plateforme paillette et à la page des états de sorties
+		Elle permet de personnaliser son mot de passe
 		Si l'utilisateur n'est pas connecté, la page affiche le formulaire de connexion-->
 
 	<head>

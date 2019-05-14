@@ -15,7 +15,13 @@
 		
 			$tab_race=mysqli_fetch_all($result); // identifiant et nom des observateurs regroupés dans un tableau
 		
-		echo "<FORM method='GET' name='form_recap'>";
+			// Pour bloquer la liste déroulante
+			if(isset($_GET["bt_submit"]))
+			{
+				$race=$_GET["id_race"];
+			}
+			
+			echo "<FORM method='GET' name='form_recap'>";
 		
 			echo "<br>";
 			echo "<b> Séléctionnez une race </b>";        //liste déroulante race
@@ -23,13 +29,19 @@
 					// boucle permettant d'afficher la liste déroulante des races
 					$i=0;
 					for ($i=0;$i<count($tab_race);$i++)
+					{
+						$sel="";
+						if ($race==$tab_race[$i][0])
 						{
-						echo "<OPTION value = '" . $tab_race[$i][0] . "'> ". $tab_race[$i][1] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
-						}
+							$sel=" selected";
+						}	
+						echo "<OPTION value = '" . $tab_race[$i][0] . "'" . $sel . "> ". $tab_race[$i][1] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
+					}
 				echo "</SELECT>";
 			echo "<br><br>";
 			echo "<INPUT TYPE='SUBMIT' name='bt_submit' value='OK'>";
 			echo "<br><br>";
+			
 			
 			if(isset($_GET['id_race']))
 			{
@@ -51,10 +63,18 @@
 				
 				echo "Plateforme Paillettes - Récapitulatif des prévisions de commandes de paillettes pour la race <b>". $tab_race[0][0] . " </b><br><br><br>" ;
 				
+				/*
+				
+				$query_test="SELECT id_utilisateur 
+							FROM utilisateurs
+							WHERE"
+				
+				*/
+				
 				// Les lignes suivantes servent à obtenir la liste des éleveurs/utilisateurs et la liste des id_utilisateur
 				$query_liste_ut="SELECT DISTINCT utilisateurs.nom, utilisateurs.prenom, utilisateurs.id_utilisateur FROM utilisateurs 
 									JOIN bovins ON bovins.id_utilisateur=utilisateurs.id_utilisateur
-									JOIN previsions ON previsions.id_taureau=bovins.id_bovin
+									JOIN previsions ON previsions.id_vache=bovins.id_bovin
 									WHERE bovins.id_race=$race AND previsions.nbr_paillettes IS NOT NULL";
 				/*$query_liste_ut="SELECT DISTINCT utilisateurs.nom, utilisateurs.prenom, utilisateurs.id_utilisateur FROM utilisateurs 
 									JOIN bovins ON bovins.id_utilisateur=utilisateurs.id_utilisateur
@@ -190,9 +210,9 @@
 						while ($j<$nb_t)
 						{
 							$query_paillettes="SELECT SUM(nbr_paillettes) FROM previsions 
-												JOIN bovins ON bovins.id_bovin=previsions.id_taureau
+												JOIN bovins ON bovins.id_bovin=previsions.id_vache 
 												WHERE previsions.id_taureau=$liste_id_t[$j] AND bovins.id_utilisateur=$liste_id_ut[$i]
-												GROUP BY bovins.id_bovin";
+												GROUP BY previsions.id_taureau";
 							$result_paillettes=mysqli_query($link, $query_paillettes);
 							$tab_paillettes=mysqli_fetch_all($result_paillettes);
 							if (empty($tab_paillettes))

@@ -23,8 +23,8 @@
 
 
 		<div class="container">	
-			<div class="row">
-				<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
 					<form action="verification_connexion.php" method="post">
 					  <div class="form-group">
 						<label for="identifiant" style="color: black; padding-top: 15px;">Identifiez-vous :</label>

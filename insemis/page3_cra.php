@@ -19,8 +19,24 @@
 		 ?>
 
 		<TITLE>fenetre pop up</TITLE>
-		<script language="javascript" src="confirmation.js" type = "text/javascript"> 
-		</script>
+		<script type="text/javascript">
+		function ConfirmMessage(periode,race) {
+			if (confirm("Etes vous sûr de voulir réinitialiser le tableau ?")) { 
+			   alert('bonjour2');
+			   // Clic sur OK
+			   $.ajax({
+				    type: 'get', 
+					url: 'changer_periode.php', 
+					data: {
+						periode: periode,
+						race: race
+					}
+			   });
+			   alert('bonjour3');
+			}
+			alert('bonjour');
+		}
+</script>
 			
 	</head>
 
@@ -204,14 +220,13 @@
 				echo '<br> <br>';
 				//echo '<INPUT type="submit" name="bouton_reini" value = "Réinitialiser le tableau">';
 				echo '</FORM>';
-				echo '<FORM >';
-				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage()" value = "Réinitialiser le tableau"> <br/> <br/>';
+				}
+				
+				echo '<FORM name = "form" method = "get" >';
+				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau"> <br/> <br/>';
 				echo '</FORM>';
 				
-				}	
+		?>			
 		
-		
-		
-		?>
 	</body>
 </html>

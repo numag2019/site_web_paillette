@@ -57,7 +57,7 @@
 				{
 					//echo '<FORM method="POST" name="formulaire_race" >';
 					$id_eleveur = $_POST["liste_eleveurs"];
-					$nom_eleveur = $tab_eleveur[$id_eleveur-1][1].$tab_eleveur[$id_eleveur-1][2];
+					$nom_eleveur = $tab_eleveur[$id_eleveur-1][1]. ' ' .$tab_eleveur[$id_eleveur-1][2];
 					$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 								  FROM races
 								  JOIN bovins ON races.id_race = bovins.id_race
@@ -162,10 +162,10 @@
 						$nb_femelle=count($liste_femelles);
 						
 						echo '<div class="row">';
-						echo '<div class="col-6">';
+						echo '<div class="col-1">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
-						echo '<td>&nbsp;</td>';
+						echo '<td class="col-2">&nbsp;</td>';
 						for ($j=0; $j < $nb_males; $j++)
 								{
 									echo '<td>' . $liste_nom_males[$j]. '</td>';
@@ -195,19 +195,25 @@
 											WHERE id_vache=" .$liste_femelles[$i]." AND id_taureau=".$liste_males[$j]." AND id_periode=".$periode. "";
 								$result_prev = mysqli_query($link, $query_prev);
 								$tab_prev = mysqli_fetch_all($result_prev);
-								if ($tab_coeff[0][0]<$tab_color[0][0])
-									$color = 'green';
-								if ($tab_coeff[0][0]>$tab_color[0][0] AND $tab_coeff[0][0]<$tab_color[0][1] )
-									$color = 'orange';
-								if ($tab_coeff[0][0]>$tab_color[0][1])
-									$color = 'red';
-								echo '<td bgcolor ='.$color.'><center>';
 								if(isset($tab_coeff[0][0]))
+								{
+									if ($tab_coeff[0][0]<$tab_color[0][0])
+										$color = 'green';
+									if ($tab_coeff[0][0]>$tab_color[0][0] AND $tab_coeff[0][0]<$tab_color[0][1])
+										$color = 'orange';
+									if ($tab_coeff[0][0]>$tab_color[0][1])
+										$color = 'red';
+									echo '<td bgcolor ='.$color.'><center>';
 									echo $tab_coeff[0][0];
-								if(isset($tab_prev[0][0]))
-								echo ' <br> '.$tab_prev[0][0];
+									if(isset($tab_prev[0][0]))
+									{
+										echo ' <br> '.$tab_prev[0][0];
+									}
+									else
+										echo "<br>&nbsp;<br>";
+								}
 								echo '</center></td>';
-								//echo '</tr>';
+								// echo '</tr>';
 								}
 							echo '</td>';
 							echo '</center></tr>';

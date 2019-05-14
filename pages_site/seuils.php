@@ -29,7 +29,7 @@
 			<div class="container">	
 		<div class="row">
 			<div id="block1" class="col-md-3 offset-md-4" align='center' >
-				<FORM action="type_utilisateur.php" method="POST" name="form">
+				<FORM method="POST" name="formRaceSeuil">
 					<div class="form-group">
 					<label for="id_utilisateur_selection">Choisissez la race</label>
 						<select class="form-control" name="liste_race" id="id_utilisateur_selection">
@@ -54,30 +54,94 @@
 							</select>
 					</div>
 					
-	<!-- Saisie de texte seuil max-->
+
+		<!-- Saisie de texte seuil min-->
+		<div class="form-group">
+			<div class="col-md-4">
+				<label class="control-label" for="textinput">Seuil minimal</label> 
+				<span class="help-block"></span>
+				
+				<?php
+				if (isset($_POST['seuil_min'])) 
+					{
+					$valmin=$_POST['seuil_min'];			
+					echo '<input id="textinput" name="seuil_min" type="text" value="'.$valmin.'" class="form-control input-md">';
+							
+					}
+				
+				else
+				 {
+					echo '<input id="textinput" name="seuil_min" type="text" value="" class="form-control input-md">';
+				}	
+				?>
+				
+				<span class="help-block"></span>  
+			</div>
+		  
+		</div>
+		
+			<!-- Saisie de texte seuil max-->
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="textinput">Seuil maximal</label> 
 		  <div class="col-md-4">
-			<input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+			
+			<?php
+				if (isset($_POST['seuil_max'])) 
+					{
+					$valmax=$_POST['seuil_max'];			
+					echo '<input id="textinput" name="seuil_min" type="text" value="'.$valmax.'" class="form-control input-md">';
+							
+					}
+				
+				else
+				 {
+					echo '<input id="textinput" name="seuil_max" type="text" value="" class="form-control input-md">';
+				}	
+				?>
 			<span class="help-block"></span>  
 		  </div>
 		</div>
-		
-		<!-- Saisie de texte seuil min-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="textinput">Seuil minimal</label> 
-		  <div class="col-md-4">
-			<input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-			<span class="help-block"></span>  
-		  </div>
-		</div>
+	
 
-
-zizi
-
+		<!-- Bouton avec icone -->
+				<input type="submit" name"submit_seuil" href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-ok"></span> </a>
+				</FORM>
 
 
 	</body>
+	
+	<?php 
+	
+	if(isset($_POST['liste_race'])||isset($_POST['seuil_min'])||isset($_POST['seuil_max']))
+	{
+	
+	
+	$race=$_POST['liste_race'];
+	$seuil_min=$_POST['seuil_min'];
+	$seuil_max=$_POST['seuil_max'];
+	
+	// if (is_float($seuil_min)) 
+		// {
+		// echo "$seuil_min";
+		// echo "$seuil_max";
+		// echo "$race";
+		// }
+	
+	
+	$requeteMajSeuils=
+	"UPDATE races
+	SET seuil_min=".$seuil_min.", seuil_max=".$seuil_max."
+	WHERE id_race=".$race."
+
+	";
+	$seuilQuery=mysqli_query($link,$requeteMajSeuils);
+	
+	}
+	
+	?>
+	
+
+
 	
 	
 </html>

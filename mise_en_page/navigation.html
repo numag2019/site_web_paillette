@@ -27,7 +27,7 @@ session_start();
 		
 <?php
 
-if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php')
+if ($_SERVER['PHP_SELF']=='/site_web_paillette/pages_site/accueil_site.php' and !ISSET($_SESSION['id_utilisateur']))
 {	
 ?>
 		<ul class="nav navbar-nav navbar-right">
@@ -63,11 +63,12 @@ else
 					{ 
 						?>
 						<!--lien vers la page etats_de_sorties.php-->
+					<ul class="nav navbar-nav navbar-right">
 						<li class="nav-item">
 							<a class="nav-link" href="../pages_site/affichage_pdf_bis.php">Liens pdf</a>
 						</li>
 						<!--lien vers la plateforme paillette entant qu'éleveurs-->
-					<ul>
+					</ul>
 					<ul class="nav navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plan prévisionnel d IA</a>
@@ -90,7 +91,7 @@ else
 								?>
 									<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="../pages_site/deconnexion.php">Déconnexion</a>
-									</div>
+									
 									<?php
 								}
 								?>

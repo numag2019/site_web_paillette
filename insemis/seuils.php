@@ -38,9 +38,9 @@
 	
 	
 	<!-- Liste déroulante choix de la race-->
-			<div class="container">	
-		<div class="row">
-			<div id="block2" class="col-md-3 offset-md-4" align='center' style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+		<div class="container">	
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
 				<FORM method="POST" name="formRaceSeuil">
 					<div class="form-group">
 					<label for="id_utilisateur_selection">Choisissez la race</label>
@@ -68,8 +68,8 @@
 					
 
 		<!-- Saisie de texte seuil min-->
-		<div class="form-group">
-			<div class="col-md-4">
+		<div class="form-group d-flex justify-content-center">
+			<div class="col-md-6">
 				<label class="control-label" for="textinput">Seuil minimal</label> 
 				<span class="help-block"></span>
 				
@@ -77,7 +77,7 @@
 				if (isset($_POST['seuil_min'])) 
 					{
 					$valmin=$_POST['seuil_min'];			
-					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="'.$valmin.'" class="form-control input-md">';
+					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="'.$valmin.'" class="form-control input-md" >';
 							
 					}
 				
@@ -93,9 +93,10 @@
 		</div>
 		
 			<!-- Saisie de texte seuil max-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="textinput">Seuil maximal</label> 
-		  <div class="col-md-4">
+		<div class="form-group d-flex justify-content-center">
+		<div class="col-md-6">
+		  <label class="control-label" for="textinput">Seuil maximal</label> 
+		  
 			
 			<?php
 				if (isset($_POST['seuil_max'])) 

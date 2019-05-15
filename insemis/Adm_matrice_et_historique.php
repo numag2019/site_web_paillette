@@ -9,7 +9,7 @@
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-		<!-- <link rel="stylesheet" href="../mise_en_page/bootstrap2.css"> -->
+		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
 	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
 
@@ -38,10 +38,12 @@
 		{
 			$eleveur_select=$_POST["id_utilisateur"];
 		}
-		
+		echo'<div class="container">	
+				 <div class="row d-flex justify-content-center">
+				 <div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row">';
-		echo "<label class='col-2 col-form-label'> Choisissez l'éleveur : </label>";
+		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
 		//liste déroulante éleveur
 		echo "<SELECT name='id_utilisateur' class='form-control col-2'>";
 					// boucle permettant d'afficher la liste déroulante des noms d'eleveurs
@@ -56,8 +58,6 @@
 						echo "<OPTION value = '" . $tab_nom[$i][0] ."'" . $sel .  ">". $tab_nom[$i][1]," " ,$tab_nom[$i][2] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
 					}
 				echo "</SELECT>";
-			echo "<br>";
-		
 			echo "<INPUT TYPE='SUBMIT' class='btn btn-primary' name='bouton_valider_eleveur' value='Valider'>";
 			echo "</div>";
 			echo "<br><br>";
@@ -341,6 +341,11 @@
 				}		
 			}
 			echo "</FORM>";
+			echo '</div>';
+			echo '</div>';
 		?>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	</body>
 </html>

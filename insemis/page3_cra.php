@@ -153,11 +153,11 @@
 				
 				if ($tab_periode_af[0][1] == null)
 					{
-					echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' depuis le ' .$tab_periode_af[0][0].'';
+					echo '<strong> Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' depuis le ' .$tab_periode_af[0][0].'</strong> ';
 					}
 				else 
 					{
-					echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1];
+					echo '<strong> Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1].'<strong>' ;
 					}
 				
 				echo '</div> <br/>';
@@ -252,7 +252,7 @@
 					}
 				
 				echo '</table>';
-				echo '<br> <br>';
+				echo '<br>';
 				echo '</div>';
 				
 				if ($tab_periode_af[0][1] == null)

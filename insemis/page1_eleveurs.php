@@ -130,7 +130,7 @@
 				//si il n'est pas dans la liste
 				else
 					{
-					//requête sélectionnant le nom du bovin correspondant à l'identifiant sélectionné
+					//requête sélectionnant le nom du mâle correspondant à l'identifiant sélectionné
 					$query_nom_male = 'SELECT bovins.nom_bovin FROM bovins WHERE bovins.id_bovin='.$tab_matrice[$k][1].'';
 					$result_nom_male = mysqli_query($link, $query_nom_male);
 					$tab_nom_male = mysqli_fetch_all($result_nom_male);
@@ -141,71 +141,102 @@
 					}
 				}
 
+				//Création d'une liste vide pour stocker les identifiants des femelles
 				$liste_femelles = [];
+				//Création d'une liste vide pour stocker les noms des femelles
 				$liste_nom_femelle = [];
+				//Pour tous les accouplements..
 				for ($k=0; $k < $nb_accouplement; $k++)
 				{
+					//on récupère l'identifiant de la femelle
 					$individu_femelle = $tab_matrice[$k][0];
+					//si elle est déjà dans la liste alors on ne l'ajoute pas
 					if (in_array($individu_femelle,$liste_femelles))
 					{}
+					//sinon
 					else 
 					{
+						//requête sélectionnant le nom de la femelle correspondant à l'identifiant sélectionné
 						$query_nom_femelle = 'SELECT bovins.nom_bovin FROM bovins WHERE bovins.id_bovin='.$tab_matrice[$k][0].'';
 						$result_nom_femelle = mysqli_query($link, $query_nom_femelle);
 						$tab_nom_femelle = mysqli_fetch_all($result_nom_femelle);
+						//on ajoute le nom de la femelle à la liste
 						array_push($liste_nom_femelle,$tab_nom_femelle[0][0]);
+						//on ajoute l'identifiant de la femelle à la liste
 						array_push($liste_femelles,$tab_matrice[$k][0]);
 					}
 				}
 							
+				//on compte le nombre de mâles et de femelles
 				$nb_males=count($liste_males);
 				$nb_femelle=count($liste_femelles);
 						
 				echo '<div class="row">';
 				echo '<div class="col-6">';
+				//création de la matrice de parenté
 				echo '<table class="table table-bordered">';
 				echo '<tr>';
 				echo '<td>&nbsp;</td>';
+				//pour le nombre de mâles impliqués dans un accouplement
 				for ($j=0; $j < $nb_males; $j++)
 				{
+					//on ajoute le nom du mâle à chaque début de colonne
 					echo '<td>' . $liste_nom_males[$j]. '</td>';
 				}
 					echo '</tr>';
 						
+						//pour le nombre de femelles impliquées dans un accouplement
 						for ($i=0; $i < $nb_femelle; $i++)
 						{
 							echo '<tr><center>';
+							//on ajoute le nom de la femelle en début de ligne
 							echo '<td>'.$liste_nom_femelle[$i];
 							for ($j=0; $j < $nb_males; $j++)
-								{
+							{
+								//requête sélectionnant les seuils de la race pour définir le code couleur
 								$query_color = "SELECT races.seuil_min, races.seuil_max FROM races WHERE id_race=".$race."";
 								$result_color = mysqli_query($link, $query_color);
 								$tab_color = mysqli_fetch_all($result_color);
+								
+								//requête sélectionnant les coefficients pour un mâle et une femelle donnés
 								$query_coeff="SELECT coefficients.valeur_coeff 
 														FROM coefficients 
 														WHERE id_vache=" .$liste_femelles[$i]." AND id_taureau=".$liste_males[$j]."";
 								$result_coeff = mysqli_query($link, $query_coeff);
 								$tab_coeff = mysqli_fetch_all($result_coeff);
-								$query_periode = "SELECT periodes.id_periode FROM periodes WHERE ISNULL(date_fin) =1 AND id_race =".$race."";
+								
+								//requête sélectionnant l'identifiant de la période actuelle pour la race élevée
+								$query_periode = "SELECT periodes.id_periode 
+												FROM periodes 
+												WHERE ISNULL(date_fin) =1 AND id_race =".$race."";
 								$result_periode = mysqli_query($link, $query_periode);
 								$tab_periode = mysqli_fetch_all($result_periode);
+								//récupération de l'identifiant de la période actuelle
 								$periode = $tab_periode[0][0];
-								$query_prev = "SELECT previsions.nbr_paillettes FROM previsions 
+								
+								//requête sélectionnant les prévisions de paillettes pour un accouplement durant la période actuelle
+								$query_prev = "SELECT previsions.nbr_paillettes 
+											FROM previsions 
 											WHERE id_vache=" .$liste_femelles[$i]." AND id_taureau=".$liste_males[$j]." AND id_periode=".$periode. "";
 								$result_prev = mysqli_query($link, $query_prev);
 								$tab_prev = mysqli_fetch_all($result_prev);
+								
+								//détermination du code couleurs en fonction des seuils
 								if(isset($tab_coeff[0][0]))
 								{
+									//si le coefficient est inférieur au seuil minimum, alors la case sera colorée en vert
 									if ($tab_coeff[0][0]<$tab_color[0][0])
 										$color = 'green';
+									//si le coefficient est supérieur au seuil minimum mais inférieur au seuil maximum, alors la case sera colorée en orange
 									if ($tab_coeff[0][0]>$tab_color[0][0] AND $tab_coeff[0][0]<$tab_color[0][1])
 										$color = 'orange';
+									//si le coefficient est supérieur au seuil maximum, alors la case sera colorée en rouge
 									if ($tab_coeff[0][0]>$tab_color[0][1])
 										$color = 'red';
 									echo '<td bgcolor ='.$color.'><center>';
-									//echo $tab_coeff[0][0];
 									if(isset($tab_prev[0][0]))
 									{
+										//on écrit la prévision dans la case
 										echo ' <br> '.$tab_prev[0][0];
 									}
 								}
@@ -220,6 +251,7 @@
 						echo '<br>';
 						echo '<div class="row">';
 						echo '<div class="col-3">';
+						//création du tableau de légende des couleurs
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';
@@ -234,10 +266,12 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br> <br>';
-
+			
+			//choix de prévision d'un accouplement grâce à 3 listes déroulantes
 			echo "Prévoir un accouplement <br><br>";
 			echo '<div class="form-group row">';
 			echo "<label class='col-2 col-form-label'> Choisissez le mâle : </label>";
+			//on choisit le mâle
 			echo '<SELECT NAME = "liste_male" class="form-control col-2">';
 			for($i=0; $i < count($liste_nom_males); $i++)
 			{
@@ -251,6 +285,7 @@
 				}
 			echo ">".$liste_nom_males[$i]."</OPTION> ";
 			}
+			//on choisit la femelle
 			echo '</SELECT NAME> <br/>';
 			echo '</div>';
 			echo '<div class="form-group row">';
@@ -270,6 +305,7 @@
 			}
 			echo '</SELECT NAME> <br/>';
 			echo '</div>';
+			//on choisit le nombre de paillettes souhaitées pour cet accouplement
 			$liste_nombre = array('1','2','3','4','5');
 			echo '<div class="form-group row">';
 			echo "<label class='col-2 col-form-label'> Choisissez le nombre de paillettes à commander : </label>";
@@ -296,6 +332,7 @@
 			echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher mon historique de commandes">';
 			echo '<br> <br>';
+			//si le bouton historique a été cliquée, on affiche la matrice de parenté
 			if(isset($_POST['bouton_historique']))
 				{
 					$id_race = $_POST['id_race'];
@@ -380,11 +417,8 @@
 					
 				}
 						
-				
-					
-					
-					
 			
+			//si le bouton de validation de la prévision est cliqué
 			if (isset($_POST['bouton_valider_prev']))
 			{
 						echo $_POST['liste_male'] ;
@@ -395,25 +429,28 @@
 						echo '<br>';
 						$link = mysqli_connect('localhost', 'root', '', 'crabase');
 						mysqli_set_charset($link, "utf8mb4");
+						//requête sélectionnant les prévisions pour tous les accouplements possibles
 						$req_test="SELECT *
 									FROM previsions
 									WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
 						$result_test=mysqli_query($link, $req_test);
 						$tab_result = mysqli_fetch_all($result_test);
 						echo count($tab_result);
-						if (count($tab_result)>0) // la prevision existe
+						// si une prévision existe déjà 
+						if (count($tab_result)>0) 
 						{
+						//on actualise le nombre de paillettes commandées pour cet accouplement
 						$query_race = "UPDATE previsions
 										SET nbr_paillettes=nbr_paillettes+".$_POST['liste_nombre']."
 										WHERE  id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
-
 						$result_race = mysqli_query($link, $query_race);
 						}
-						else // sinon on la crée
+						//si aucune prévision n'a été réalisée pour cet accouplement
+						else 
 						{
-						echo "nveau";
+						//on crée la prévision avec le nombre de paillettes prévues
 						$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
-								VALUES ( ".$_POST['liste_nombre'].",6 , ".$_POST['liste_femelle']." , ".$_POST['liste_male'].")";
+								VALUES ( ".$_POST['liste_nombre'].",15 , ".$_POST['liste_femelle']." , ".$_POST['liste_male'].")";
 						echo $reqadd;
 						$result_race = mysqli_query($link, $reqadd);
 						}

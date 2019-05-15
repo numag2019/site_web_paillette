@@ -4,24 +4,31 @@
 </script>
 
 	<head>
+		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!-- <link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+
+		<!-- Bootstrap CSS -->
+		
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
-		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> -->
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-		<!-- <link rel="stylesheet" href="../mise_en_page/bootstrap2.css"> -->
+		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
+		
+		
+		
 		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
-		<?php $autorisation=TRUE // tout le monde?>
-
+		<?php $autorisation=3 // que le CRA?> 
+		
 		<!--  Navigation -->
-		 <?php 
-		 // include("../mise_en_page/navigation.html"); 
-		 ?>
-
+		<?php include("../mise_en_page/navigation.html"); ?>
+		
 		<TITLE>fenetre pop up</TITLE>
 		<script  type="text/javascript" >
+		function gomenu(){
+			location.href="page3_cra.php";
+		}	
 		function ConfirmMessage(periode,race) {
 			if (confirm("Etes vous sûr de voulir réinitialiser le tableau ?")) { 
 			   // Clic sur OK
@@ -32,8 +39,11 @@
 						periode: periode,
 						race: race
 					}
+					//document.getElementById("test").innerHTML=response;
 			   });
 			}
+		alert('La nouvelle période a été créée');
+		gomenu();
 		}
 </script>
 			
@@ -49,11 +59,15 @@
 		$query_race = "SELECT id_race_int, nom_race FROM races_intermediaire";
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
-
-		echo '<FORM method = "POST" name = "formulaire_page3">';
-		echo '<div class="form-group row">';
-		echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
-		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
+		?>
+		 class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+		
+				<FORM method = "POST" name = "formulaire_page3">
+					<div class="form-group row">
+					<label class='col-2 col-form-label'> Choisissez la race : </label>
+					<SELECT NAME = "liste_race" class="form-control col-2">
+		</div>
+		<?php
 		for($i=0; $i < count($tab_race); $i++)
 			{
 			$value = $tab_race[$i][0];
@@ -80,6 +94,7 @@
 				$nom_race = 'bordelaise';
 			if ($race == 19)
 				$nom_race = 'béarnaise';
+			
 			$query_periode = "SELECT periodes.id_periode, date_format(periodes.date_debut,'%d/%m/%Y'), date_format(periodes.date_fin, '%d/%m/%Y')
 							FROM periodes WHERE periodes.id_race = ".$race.""; 
 			$result_periode = mysqli_query($link, $query_periode);
@@ -226,6 +241,7 @@
 				echo $race;
 				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau"> <br/> <br/>';
 				echo '</FORM>';
+				echo '<span id="test"> </span>';
 				}
 				
 				}

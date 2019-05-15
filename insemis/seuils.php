@@ -42,9 +42,10 @@
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
 				<FORM method="POST" name="formRaceSeuil">
-					<div class="form-group">
+					<div class="form-group d-flex justify-content-center">
+					<div class="col-md-8">
 					<label for="id_utilisateur_selection">Choisissez la race</label>
-						<select class="form-control" name="liste_race" id="id_utilisateur_selection">
+						<select class="form-control" name="liste_race" id="id_utilisateur_selection" style="text-align:center">
 						
 						<?php
 						for($i=0; $i < count($tab_race); $i++)
@@ -65,6 +66,7 @@
 						
 							</select>
 					</div>
+					</div>
 					
 
 		<!-- Saisie de texte seuil min-->
@@ -77,13 +79,13 @@
 				if (isset($_POST['seuil_min'])) 
 					{
 					$valmin=$_POST['seuil_min'];			
-					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="'.$valmin.'" class="form-control input-md" >';
+					echo '<input style="text-align:center" id="textinput" name="seuil_min" type="number" step="any" value="'.$valmin.'" class="form-control input-md" >';
 							
 					}
 				
 				else
 				 {
-					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="" class="form-control input-md">';
+					echo '<input style="text-align:center" id="textinput" name="seuil_min" type="number" step="any" value="" class="form-control input-md">';
 				}	
 				?>
 				
@@ -102,13 +104,13 @@
 				if (isset($_POST['seuil_max'])) 
 					{
 					$valmax=$_POST['seuil_max'];			
-					echo '<input id="textinput" name="seuil_min" type="number" step="any" value="'.$valmax.'" class="form-control input-md">';
+					echo '<input style="text-align:center" id="textinput" name="seuil_min" type="number" step="any" value="'.$valmax.'" class="form-control input-md">';
 							
 					}
 				
 				else
 				 {
-					echo '<input id="textinput" name="seuil_max" type="number" step="any" value="" class="form-control input-md">';
+					echo '<input style="text-align:center" id="textinput" name="seuil_max" type="number" step="any" value="" class="form-control input-md">';
 				}	
 				?>
 			<span class="help-block"></span>  

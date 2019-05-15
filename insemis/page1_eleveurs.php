@@ -22,7 +22,7 @@
 	<body>
 		<?php	
 		$_SESSION['id_utilisateur']=$id_utilisateur;
-
+		echo $id_utilisateur;
 		require "Mes_fonctions.php" ;
 
 		//Connection à la base de données crabase

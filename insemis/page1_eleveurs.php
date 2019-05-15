@@ -358,7 +358,7 @@
 							}
 					
 						// Les lignes suivantes servent à obtenir la liste des vache de l'éleveur séléctionné dans les pages précédentes puis la liste des id_bovins
-						$query_liste_taureau="SELECT nom_bovin, id_bovin 
+						$query_liste_taureau="SELECT DISTINCT nom_bovin, id_bovin 
 											FROM bovins
 											JOIN previsions ON previsions.id_taureau=bovins.id_bovin
 											WHERE (sexe=1 OR sexe=3) AND bovins.id_race=$id_race AND previsions.nbr_paillettes IS NOT NULL";
@@ -399,7 +399,13 @@
 							$s_periode = 0;
 							while ($j<$nb_taureau)
 							{
-								$query_paillettes="SELECT nbr_paillettes FROM previsions WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."";
+								$query_paillettes="SELECT SUM(nbr_paillettes) 
+												   FROM previsions 
+												   WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."
+												   GROUP BY previsions.id_taureau";
+								/*$query_paillettes="SELECT SUM(nbr_paillettes) 
+												   FROM previsions 
+												   WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."";*/			   
 								$result_paillettes=mysqli_query($link, $query_paillettes);
 								$tab_paillettes=mysqli_fetch_all($result_paillettes);;
 								if (empty($tab_paillettes))

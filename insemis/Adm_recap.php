@@ -1,10 +1,25 @@
-<html>
+<!doctype html>
+<HTML lang='fr'>
+
 	<head>
-		<meta charset = "UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- <link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
+	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
+	<?php $autorisation=TRUE // tout le monde?>
+
+	<!--  Navigation -->
+	 <?php 
+	 include("../mise_en_page/navigation.html"); 
+	 ?>
 	</head>
 	
 	<body>
-		Plateforme Paillettes - Récapitulatif des prévisions de commandes de paillettes <br><br><br>
 		
 		<?php
 			$link=mysqli_connect('localhost', 'root', '', 'crabase'); // connexion à la base de données
@@ -16,36 +31,38 @@
 			$tab_race=mysqli_fetch_all($result); // identifiant et nom des observateurs regroupés dans un tableau
 		
 			// Pour bloquer la liste déroulante
-			if(isset($_GET["bt_submit"]))
+			if(isset($_POST["bt_submit"]))
 			{
-				$race=$_GET["id_race"];
+				$race=$_POST["id_race"];
 			}
-			
-			echo "<FORM method='GET' name='form_recap'>";
-		
-			echo "<br>";
-			echo "<b> Séléctionnez une race </b>";        //liste déroulante race
-				echo "<SELECT name='id_race' size='1'>";
-					// boucle permettant d'afficher la liste déroulante des races
-					$i=0;
-					for ($i=0;$i<count($tab_race);$i++)
+			echo'<div class="container">	
+				 <div class="row d-flex justify-content-center">
+				 <div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
+			echo "<FORM method='POST' name='form_recap'>";
+			echo '<div class="form-group row">';
+			echo '<br>';
+			echo "<label class='col-3 col-form-label'> Choisissez une race : </label>";
+			echo "<SELECT name='id_race' class='form-control col-2'>";
+				// boucle permettant d'afficher la liste déroulante des races
+				$i=0;
+				for ($i=0;$i<count($tab_race);$i++)
+				{
+					$sel="";
+					if ($race==$tab_race[$i][0])
 					{
-						$sel="";
-						if ($race==$tab_race[$i][0])
-						{
-							$sel=" selected";
-						}	
-						echo "<OPTION value = '" . $tab_race[$i][0] . "'" . $sel . "> ". $tab_race[$i][1] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
-					}
-				echo "</SELECT>";
-			echo "<br><br>";
+						$sel=" selected";
+					}	
+					echo "<OPTION value = '" . $tab_race[$i][0] . "'" . $sel . "> ". $tab_race[$i][1] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
+				}
+			echo "</SELECT>";
 			echo "<INPUT TYPE='SUBMIT' name='bt_submit' value='OK'>";
+			echo "</div>";
 			echo "<br><br>";
 			
 			
-			if(isset($_GET['id_race']))
+			if(isset($_POST['id_race']))
 			{
-				$race=$_GET["id_race"];
+				$race=$_POST["id_race"];
 			
 				$link=mysqli_connect('localhost', 'root', '', 'crabase'); // connexion à la base de données
 				mysqli_set_charset($link, "utf8mb4"); // prise en compte des caractères de la base de données
@@ -182,7 +199,9 @@
 					}
 					*/
 					
-					echo '<table border = 1>';
+					echo '<div class="row">';
+					echo '<div class="col-1">';
+					echo '<table class="table table-striped table-bordered">';
 					$L=[];
 					/*
 					$L[0][0]=4;
@@ -250,10 +269,16 @@
 					echo "<td><b>" . $S_TT . "</b></td>";
 					// ----------------------
 					echo "</table>";
+					echo "</div>";
+					echo "</div>";
 			}
 		echo "</FORM>";
-		
+		echo "</div>";
+		echo "</div>";
 		
 		?>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	</body>
 </html>

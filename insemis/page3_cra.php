@@ -51,7 +51,8 @@
 
 	<body>
 		<?php
-
+		
+		//Connexion à la base de données
 		$link = mysqli_connect('localhost', 'root', '', 'crabase');
 		mysqli_set_charset($link, "utf8mb4");
 
@@ -60,13 +61,16 @@
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
 		?>
-		 class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
-		
+		<div class="container">	
+			<div class="row d-flex justify-content-center">
+			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+			<br/>
 				<FORM method = "POST" name = "formulaire_page3">
-					<div class="form-group row">
-					<label class='col-2 col-form-label'> Choisissez la race : </label>
+					<div class="row d-flex justify-content-center">
+					<label class='col-3 col-form-label'> Choisissez la race : </label>
 					<SELECT NAME = "liste_race" class="form-control col-2">
-		</div>
+					
+		
 		<?php
 		for($i=0; $i < count($tab_race); $i++)
 			{
@@ -80,11 +84,16 @@
 				}
 			echo ">".$tab_race[$i][1]."</OPTION> ";
 			}
-		echo '</SELECT NAME> <br/> <br/>';
-		echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">';
-		echo '</div>';
-		echo '<br> <br>';
-
+		?>
+		
+		</SELECT NAME> <br/> <br/>
+		<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary btn-info" value = "Valider"><span class="glyphicon glyphicon-ok"></span>
+		
+		</div>
+		<br/>
+		
+		
+		<?php
 		if(isset($_POST['bouton_valider'])||isset($_POST['bouton_valider_periode']))
 			{
 			$race = $_POST['liste_race'];
@@ -99,10 +108,12 @@
 							FROM periodes WHERE periodes.id_race = ".$race.""; 
 			$result_periode = mysqli_query($link, $query_periode);
 			$tab_periode = mysqli_fetch_all($result_periode);
-
-			echo '<div class="form-group row">';
-			echo "<label class='col-2 col-form-label'> Choisissez la période : </label>";
-			echo '<SELECT NAME = "liste_periode" class="form-control col-2">';
+		?>
+			<div class="row d-flex justify-content-center">
+			<label class='col-3 col-form-label'> Choisissez la période : </label>
+			<SELECT NAME = "liste_periode" class="form-control col-2">
+			
+		<?php	
 			for($i=0; $i < count($tab_periode); $i++)
 				{
 					$value = $tab_periode[$i][0];
@@ -120,9 +131,17 @@
 			echo "<INPUT TYPE = 'hidden' name = 'nom_race' value = '".$nom_race."'>";
 			echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_periode" class="btn btn-primary" value = "Valider">';
 			echo '</div>';
-			echo '<br/> <br/>';
+			echo '<br/>';
 			}
+			?>
+			</div>
+			</div>
+			<br/> <br/>
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+					<div class="row d-flex justify-content-center">
 			
+			<?php
 			if(isset($_POST['bouton_valider_periode']))
 				{
 				$nom_race = $_POST['nom_race'];
@@ -131,6 +150,7 @@
 									FROM periodes WHERE periodes.id_periode ='.$periode.' ';
 				$result_periode_af = mysqli_query($link, $query_periode_af);
 				$tab_periode_af = mysqli_fetch_all($result_periode_af);
+				
 				if ($tab_periode_af[0][1] == null)
 					{
 					echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' depuis le ' .$tab_periode_af[0][0].'';
@@ -140,7 +160,7 @@
 					echo 'Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1];
 					}
 				
-				
+				echo '</div> <br/>';
 				$race=$_POST["id_race"];
 					
 				// Les lignes suivantes servent à obtenir la liste des éleveurs/utilisateurs et la liste des id_utilisateur
@@ -187,7 +207,7 @@
 					$liste_id_t[$i]=$tab_liste_t[$i][1] ;
 					}
 					
-					
+				echo '<div class="row d-flex justify-content-center">';	
 				//affichage du tableau récapitulatif
 				$nb_ut=count($liste_ut);
 				$nb_t=count($liste_t);
@@ -230,23 +250,27 @@
 					echo '<td>'. $S_ut . '</td>';
 					echo '</tr>';
 					}
+				
 				echo '</table>';
 				echo '<br> <br>';
+				echo '</div>';
 				
-			
 				if ($tab_periode_af[0][1] == null)
 				{
+				echo '<div class="row d-flex justify-content-center">';	
 				echo '<FORM name = "form" method = "GET" >';
-				echo $periode;
-				echo $race;
 				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau"> <br/> <br/>';
 				echo '</FORM>';
 				echo '<span id="test"> </span>';
+				echo '</div>';
 				}
 				
 				}
 				
-		?>			
+		?>	
+		
+		</div>
+		
 		
 	</body>
 </html>

@@ -2,14 +2,18 @@
 <HTML lang='fr'>
 
 	<head>
+	<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!-- <link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+
+		<!-- Bootstrap CSS -->
+		
 		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
-		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> -->
+		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-		<!-- <link rel="stylesheet" href="../mise_en_page/bootstrap2.css"> -->
+		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
+		
 	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
 
@@ -22,7 +26,7 @@
 	<body>
 		<?php	
 		$id_utilisateur=$_SESSION['id_utilisateur'];
-		echo $id_utilisateur;
+	
 		require "Mes_fonctions.php" ;
 
 		//Connection à la base de données crabase
@@ -42,7 +46,7 @@
 		
 		echo'<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;"> </br>';
+			<div class="col-md-8" style="background: rgba(0,0,0,0.4); border-radius: 10px;"> </br>';
 		echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
 		echo '<div class="row d-flex justify-content-center">';
 		echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
@@ -307,7 +311,7 @@
 			echo '</SELECT NAME> <br/>';
 			echo '</div>';
 			//on choisit le nombre de paillettes souhaitées pour cet accouplement
-			$liste_nombre = array('1','2','3','4','5');
+			$liste_nombre = array('-1','-2','-3','1','2','3');
 			echo '<div class="form-group row">';
 			echo "<label class='col-2 col-form-label'> Choisissez le nombre de paillettes à commander : </label>";
 			echo '<SELECT NAME = "liste_nombre" class="form-control col-2">';
@@ -333,6 +337,7 @@
 			echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
 			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher mon historique de commandes">';
 			echo '<br> <br>';
+			
 			//si le bouton historique a été cliquée, on affiche la matrice de parenté
 			if(isset($_POST['bouton_historique']))
 				{
@@ -341,7 +346,9 @@
 					echo "Historique des prévisions de commande de paillettes pour la race ".$nom_race." <br><br>";
 					// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode
 					$query_liste_per="SELECT date_format(date_debut,'%d/%m/%Y'), date_format(date_fin,'%d/%m/%Y'), id_periode 
-									FROM periodes WHERE periodes.id_race =".$id_race."";
+									FROM periodes 
+									WHERE periodes.id_race =".$id_race."
+									ORDER BY date_debut";
 					$result_liste_per=mysqli_query($link, $query_liste_per);
 					$tab_liste_per=mysqli_fetch_all($result_liste_per);
 					$nbligne = mysqli_num_rows($result_liste_per);
@@ -409,8 +416,11 @@
 								if (empty($tab_paillettes))
 									echo '<td> 0 </td>';
 								else
-									echo '<td>' . $tab_paillettes[0][0]. '</td>';
-									$s_periode=$s_periode+$tab_paillettes[0][0];
+									if(isset($tab_paillettes[0][0]))
+									{
+										echo '<td>' . $tab_paillettes[0][0]. '</td>';
+										$s_periode=$s_periode+$tab_paillettes[0][0];
+									}
 								$j++;
 							}
 							$i++;
@@ -425,21 +435,21 @@
 			//si le bouton de validation de la prévision est cliqué
 			if (isset($_POST['bouton_valider_prev']))
 			{
-						echo $_POST['liste_male'] ;
-						echo '<br>';
-						echo $_POST['liste_femelle'] ;
-						echo '<br>';
-						echo $_POST['liste_nombre'];
-						echo '<br>';
+				$id_race = $_POST['id_race'];
+					
 						$link = mysqli_connect('localhost', 'root', '', 'crabase');
 						mysqli_set_charset($link, "utf8mb4");
 						//requête sélectionnant la période actuelle afin de rajouter les nouvelles prévisions de paillettes
 						$query_periode_act = "SELECT id_periode
 											  FROM periodes
-											  WHERE periode.date_fin ISNULL";
+											  WHERE periodes.date_fin IS NULL and periodes.id_race=".$id_race." ";
+						
+					
 						$result_periode_act=mysqli_query($link, $query_periode_act);
 						$tab_periode_act = mysqli_fetch_all($result_periode_act);
+						
 						$id_periode = $tab_periode_act[0][0];
+				
 						//requête sélectionnant les prévisions pour tous les accouplements possibles
 						$req_test="SELECT *
 									FROM previsions
@@ -461,15 +471,21 @@
 						//on crée la prévision avec le nombre de paillettes prévues
 						$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
 								VALUES ( ".$_POST['liste_nombre'].",".$id_periode." , ".$_POST['liste_femelle']." , ".$_POST['liste_male'].")";
-						echo $reqadd;
+						
 						$result_race = mysqli_query($link, $reqadd);
 						}
-						echo "<script type='text/javascript'>document.location.replace('page1_eleveurs.php');</script>";
+						
+						//echo "<script type='text/javascript'>document.location.replace('page1_eleveurs.php');</script>";
 			
 			}				
 				
 			}			
 		
 		?>
+	</div>
+	</div>
+	</div>	
+	
 	</body>
+	
 </HTML>

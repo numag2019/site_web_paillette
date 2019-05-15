@@ -20,7 +20,7 @@
 
 		<div class="container" style="padding-bottom: 100px;">	
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+				<div class="col-md-4" style="background: rgba(0,0,0,0.4); border-radius: 10px;">
 					<h5 style="color: black; padding-top: 15px;">PDF à disposition</h5>
 					<BR>
 					<?php

@@ -24,7 +24,7 @@
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
 		
-		<TITLE>fenetre pop up</TITLE>
+		
 		<script  type="text/javascript" >
 		function gomenu(){
 			location.href="page3_cra.php";
@@ -63,11 +63,11 @@
 		?>
 		<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+			<div class="col-md-8" style="background: rgba(0,0,0,0.3); border-radius: 10px;">
 			<br/>
 				<FORM method = "POST" name = "formulaire_page3">
 					<div class="row d-flex justify-content-center">
-					<label class='col-3 col-form-label'> Choisissez la race : </label>
+					<label  class='col-3 col-form-label' > Choisissez la race : </label>
 					<SELECT NAME = "liste_race" class="form-control col-2">
 					
 		
@@ -110,7 +110,7 @@
 			$tab_periode = mysqli_fetch_all($result_periode);
 		?>
 			<div class="row d-flex justify-content-center">
-			<label class='col-3 col-form-label'> Choisissez la période : </label>
+			<label  class='col-3 col-form-label'> Choisissez la période : </label>
 			<SELECT NAME = "liste_periode" class="form-control col-2">
 			
 		<?php	
@@ -138,7 +138,7 @@
 			</div>
 			<br/> <br/>
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+				<div class="col-md-8" style="background: rgba(0,0,0,0.3); border-radius: 10px;">
 					<div class="row d-flex justify-content-center">
 			
 			<?php
@@ -153,11 +153,11 @@
 				
 				if ($tab_periode_af[0][1] == null)
 					{
-					echo '<strong> Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' depuis le ' .$tab_periode_af[0][0].'</strong> ';
+					echo '<p> Tableau récapitulatif des prévisions de commande de paillettes pour la race <b>'.$nom_race. '</b> depuis le ' .$tab_periode_af[0][0].'</p> ';
 					}
 				else 
 					{
-					echo '<strong> Tableau récapitulatif des prévisions de commande de paillettes pour la race '.$nom_race. ' du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1].'<strong>' ;
+					echo '<p> Tableau récapitulatif des prévisions de commande de paillettes pour la race <b>'.$nom_race. '</b> du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1].'</p>' ;
 					}
 				
 				echo '</div> <br/>';

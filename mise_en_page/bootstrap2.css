@@ -9,10 +9,10 @@ body {
 html,
 body {
 /*css for full size background image*/
-/*background: url(https://cdn.pixabay.com/photo/2018/05/15/23/02/snow-3404534_1280.jpg) no-repeat center center fixed;
-background: url(https://c.pxhere.com/photos/b4/ba/cow_pre_field_pasture_prairie_agriculture_animals_browse-1194728.jpg!d) no-repeat center center fixed;
-background: url() no-repeat center center fixed; */
-background: url(https://cdn.pixabay.com/photo/2017/06/23/23/50/cow-2436354_1280.jpg) no-repeat center center fixed;
+background: url(../mise_en_page/images/cowble.jpg) no-repeat center center fixed;
+  /* background: url(https://c.pxhere.com/photos/b4/ba/cow_pre_field_pasture_prairie_agriculture_animals_browse-1194728.jpg!d) no-repeat center center fixed; */
+/* background: url() no-repeat center center fixed;
+/* background: url(https://cdn.pixabay.com/photo/2017/06/23/23/50/cow-2436354_1280.jpg) no-repeat center center fixed; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

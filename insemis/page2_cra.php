@@ -59,7 +59,7 @@
 				{
 					//echo '<FORM method="POST" name="formulaire_race" >';
 					$id_eleveur = $_POST["liste_eleveurs"];
-					$nom_eleveur = $tab_eleveur[$id_eleveur-1][2]. ' ' .$tab_eleveur[$id_eleveur-1][1];
+					$nom_eleveur = $tab_eleveur[$id_eleveur][2]. ' ' .$tab_eleveur[$id_eleveur][1];
 					$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 								  FROM races
 								  JOIN bovins ON races.id_race = bovins.id_race

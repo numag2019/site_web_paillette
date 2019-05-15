@@ -20,10 +20,8 @@
 	</head>
 	
 	<body>
-		<?php
-		/*$_SESSION['id_utilisateur'];
-		if $_SESSION['id_type']==1;*/
-		$id_utilisateur = 4;
+		<?php	
+		
 
 		require "Mes_fonctions.php" ;
 

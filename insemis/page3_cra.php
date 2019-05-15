@@ -265,7 +265,7 @@
 				for ($j=0;$j<$nb_t;$j++)
 				{
 					$S_t=0;
-					for ($i=0;$i<nb_ut;$i++)
+					for ($i=0;$i<$nb_ut;$i++)
 					{
 						$S_t=$S_t+$L[$i][$j];
 					}

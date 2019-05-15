@@ -21,8 +21,8 @@
 	
 	<body>
 		<?php	
-		$_SESSION['id_utilisateur']=$id_utilisateur;
-
+		$id_utilisateur=$_SESSION['id_utilisateur'];
+		echo $id_utilisateur;
 		require "Mes_fonctions.php" ;
 
 		//Connection à la base de données crabase
@@ -39,9 +39,13 @@
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
 
+		
+		echo'<div class="container">	
+			<div class="row d-flex justify-content-center">
+			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;"> </br>';
 		echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
-		echo '<div class="form-group row">';
-		echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
+		echo '<div class="row d-flex justify-content-center">';
+		echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
 		
 		//Liste déroulante permettant la sélection d'une race élevée par l'éleveur connecté
 		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
@@ -57,7 +61,7 @@
 				}
 			echo ">".$tab_race[$i][1]."</OPTION> ";
 			}
-		echo '</SELECT NAME> <br/> <br/>';
+		echo '</SELECT NAME> <br/> ';
 		//Bouton de validation de la race 
 		echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">';
 		echo '</div>';

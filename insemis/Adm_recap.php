@@ -55,7 +55,7 @@
 					echo "<OPTION value = '" . $tab_race[$i][0] . "'" . $sel . "> ". $tab_race[$i][1] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
 				}
 			echo "</SELECT>";
-			echo "<INPUT TYPE='SUBMIT' name='bt_submit' value='OK'>";
+			echo "<INPUT TYPE='SUBMIT' class='btn btn-primary' name='bt_submit' value='Valider'>";
 			echo "</div>";
 			echo "<br><br>";
 			

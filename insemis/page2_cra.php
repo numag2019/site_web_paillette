@@ -28,7 +28,9 @@
 		$result_eleveur = mysqli_query($link, $query_eleveur);
 		$tab_eleveur = mysqli_fetch_all($result_eleveur);
 		$nb_eleveur = mysqli_num_rows($result_eleveur);
-
+		echo'<div class="container">	
+			<div class="row d-flex justify-content-center">
+			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row">';
 		echo "<label class='col-2 col-form-label'> Choisissez l'éleveur : </label>";

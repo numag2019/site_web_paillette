@@ -164,9 +164,10 @@
 				$race=$_POST["id_race"];
 					
 				// Les lignes suivantes servent à obtenir la liste des éleveurs/utilisateurs et la liste des id_utilisateur
-				$query_liste_ut="SELECT DISTINCT utilisateurs.nom, utilisateurs.prenom, utilisateurs.id_utilisateur FROM utilisateurs 
+				$query_liste_ut="SELECT DISTINCT utilisateurs.nom, utilisateurs.prenom, utilisateurs.id_utilisateur 
+										FROM utilisateurs 
 										JOIN bovins ON bovins.id_utilisateur=utilisateurs.id_utilisateur
-										JOIN previsions ON previsions.id_taureau=bovins.id_bovin
+										JOIN previsions ON previsions.id_vache=bovins.id_bovin
 										WHERE bovins.id_race=".$race." AND previsions.nbr_paillettes IS NOT NULL";
 				$result_liste_ut=mysqli_query($link, $query_liste_ut);
 				$tab_liste_ut=mysqli_fetch_all($result_liste_ut);
@@ -188,7 +189,8 @@
 					
 
 				// Les lignes suivantes servent à obtenir la liste des taureaux de la race séléctionné dans les pages précédentes puis la liste des id_bovins
-				$query_liste_t="SELECT DISTINCT nom_bovin, id_bovin FROM bovins 
+				$query_liste_t="SELECT DISTINCT nom_bovin, id_bovin 
+									FROM bovins 
 									JOIN previsions ON previsions.id_taureau=bovins.id_bovin
 									WHERE (bovins.sexe=1 OR bovins.sexe=3) AND bovins.id_race=$race AND previsions.nbr_paillettes IS NOT NULL AND previsions.id_periode =$periode";
 				$result_liste_t=mysqli_query($link, $query_liste_t);
@@ -213,6 +215,7 @@
 				$nb_t=count($liste_t);
 					
 				echo '<table border = 1>';
+				$L=[];
 				echo "<td> </td>" ;
 				$j = 0;
 				while ($j<$nb_t)
@@ -222,7 +225,7 @@
 					}
 				echo '<td>Total</td>';			
 				$i =0;
-				$S_t=0;
+				//$S_t=0;
 				while ($i<$nb_ut)
 					{
 					echo '<tr>';
@@ -231,18 +234,24 @@
 					$S_ut=0;
 					while ($j<$nb_t)
 						{
-						$query_paillettes="SELECT nbr_paillettes FROM previsions 
-											JOIN bovins ON bovins.id_bovin=previsions.id_taureau
-											WHERE previsions.id_taureau=".$liste_id_t[$j]." AND bovins.id_utilisateur=".$liste_id_ut[$i]."";
+						$query_paillettes="SELECT SUM(nbr_paillettes) FROM previsions 
+											JOIN bovins ON bovins.id_bovin=previsions.id_vache
+											WHERE previsions.id_taureau=".$liste_id_t[$j]." AND bovins.id_utilisateur=".$liste_id_ut[$i]."
+											GROUP BY previsions.id_taureau";
 						$result_paillettes=mysqli_query($link, $query_paillettes);
 						$tab_paillettes=mysqli_fetch_all($result_paillettes);
 						if (empty($tab_paillettes))
+						{
+							$tab_paillettes[0][0] = '0';
+							$L[$i][$j] = $tab_paillettes[0][0];
 							echo '<td> 0 </td>';
+						}
 						else
-							{
+						{
 							echo '<td>' . $tab_paillettes[0][0]. '</td>';
 							$S_ut=$S_ut+$tab_paillettes[0][0];
-							}
+							$L[$i][$j] = $tab_paillettes[0][0];
+						}
 						$j++;
 						}
 					$i++;
@@ -251,6 +260,19 @@
 					echo '</tr>';
 					}
 				
+				echo "<td><b>Total</b></td>";
+				$S_TT=0;
+				for ($j=0;$j<$nb_t;$j++)
+				{
+					$S_t=0;
+					for ($i=0;$i<nb_ut;$i++)
+					{
+						$S_t=$S_t+$L[$i][$j];
+					}
+					echo "<td><b>" .$S_t. "</b></td>";
+					$S_TT=$S_TT+$S_t;
+				}
+				echo "<td><b>".$S_TT."</b></td>";
 				echo '</table>';
 				echo '<br>';
 				echo '</div>';

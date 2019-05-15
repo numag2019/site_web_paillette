@@ -21,7 +21,7 @@
 	
 	<body>
 		<?php	
-		
+		$_SESSION['id_utilisateur']=$id_utilisateur;
 
 		require "Mes_fonctions.php" ;
 
@@ -79,17 +79,16 @@
 			$liste_eleveur_bear=requete_2col_to_list ($result_bear) ;
 						
 			//Boucle qui permet d'obtenir le catalogue de la race en fonction des races élevées
-				
-			$eleveur = 4;	
-			if (in_array($eleveur,$liste_eleveur_bord))
+					
+			if (in_array($id_utilisateur,$liste_eleveur_bord))
 				{
 				echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Bordelaise </a> <br><br>" ;
 				}
-			if (in_array($eleveur,$liste_eleveur_mar))
+			if (in_array($id_utilisateur,$liste_eleveur_mar))
 				{
 				echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Marine </a> <br><br>" ;
 				}
-			if (in_array($eleveur,$liste_eleveur_bear))
+			if (in_array($id_utilisateur,$liste_eleveur_bear))
 				{
 				echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}	

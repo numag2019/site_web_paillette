@@ -90,7 +90,7 @@
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}
-					
+				
 					
 				//Affichage de la matrice				
 				

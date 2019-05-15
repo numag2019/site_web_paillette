@@ -28,11 +28,8 @@
 			
 			$query="SELECT id_utilisateur, nom, prenom FROM utilisateurs"; // requête pour la liste déroulante choix eleveur
 			$result=mysqli_query($link, $query);
-			//var_dump($result);
 			
 			$tab_nom=mysqli_fetch_all($result,MYSQLI_BOTH); // identifiant et nom des observateurs regroupés dans un tableau
-			//var_dump($tab_nom);
-			//echo $tab_nom[0][1];
 		
 		if(isset($_POST["bouton_valider_eleveur"])||isset($_POST['bt_submit_hist']))
 		{
@@ -93,7 +90,7 @@
 				{
 					echo "<a href='file:///C:/Users/NUMAG3/Desktop/projet%20web%20entreprise/documents%20fournis/AQUITAINE2017diffusion.pdf'> Catalogue Taureaux Race Béarnaise </a> <br><br>" ;
 				}
-					
+				
 					
 				//Affichage de la matrice				
 				
@@ -108,6 +105,7 @@
 						
 						$race=5;
 						$nom_race="Bordelaise";
+						// La il faudra récupérer avec une variable session la race de l'animateur de race
 						
 						// Récupération du nom de l'éleveur, on se sert aussi de cette requête dans l'affichage de l'hsitorique plus bas
 						$query_eleveur="SELECT nom, prenom FROM utilisateurs WHERE id_utilisateur=$eleveur_select";

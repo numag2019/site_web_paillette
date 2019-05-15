@@ -273,7 +273,6 @@
 					$query_liste_taureau="SELECT DISTINCT bovins.nom_bovin, bovins.id_bovin 
 										FROM bovins 
 										JOIN previsions ON previsions.id_taureau=bovins.id_bovin
-										JOIN utilisateurs ON utilisateurs.id_utilisateur=bovins.id_utilisateur
 										WHERE (bovins.sexe=1 OR bovins.sexe=3) AND previsions.nbr_paillettes IS NOT NULL";
 					//Faudra pouvoir prendre les taureaux que de la race de l'adlinistrateur de race
 					$result_liste_taureau=mysqli_query($link, $query_liste_taureau);

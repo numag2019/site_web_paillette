@@ -33,7 +33,7 @@
 			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row">';
-		echo "<label class='col-2 col-form-label'> Choisissez l'éleveur : </label>";
+		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
 		echo "<SELECT name='liste_eleveurs' class='form-control col-2'>";
 				for($i=0; $i < count($tab_eleveur); $i++)
 				{
@@ -70,7 +70,7 @@
 					$tab_race = mysqli_fetch_all($result_race);
 
 					echo '<div class="form-group row">';
-					echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
+					echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
 					echo '<SELECT NAME = "liste_race" class="form-control col-2">';
 					for($i=0; $i < count($tab_race); $i++)
 						{

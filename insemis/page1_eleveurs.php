@@ -402,10 +402,7 @@
 								$query_paillettes="SELECT SUM(nbr_paillettes) 
 												   FROM previsions 
 												   WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."
-												   GROUP BY previsions.id_taureau";
-								/*$query_paillettes="SELECT SUM(nbr_paillettes) 
-												   FROM previsions 
-												   WHERE id_taureau=".$liste_id_taureau[$j]." AND id_periode=".$liste_id_per[$i]."";*/			   
+												   GROUP BY previsions.id_taureau";			   
 								$result_paillettes=mysqli_query($link, $query_paillettes);
 								$tab_paillettes=mysqli_fetch_all($result_paillettes);;
 								if (empty($tab_paillettes))
@@ -435,13 +432,19 @@
 						echo '<br>';
 						$link = mysqli_connect('localhost', 'root', '', 'crabase');
 						mysqli_set_charset($link, "utf8mb4");
+						//requête sélectionnant la période actuelle afin de rajouter les nouvelles prévisions de paillettes
+						$query_periode_act = "SELECT id_periode
+											  FROM periodes
+											  WHERE periode.date_fin ISNULL";
+						$result_periode_act=mysqli_query($link, $query_periode_act);
+						$tab_periode_act = mysqli_fetch_all($result_periode_act);
+						$id_periode = $tab_periode_act[0][0];
 						//requête sélectionnant les prévisions pour tous les accouplements possibles
 						$req_test="SELECT *
 									FROM previsions
 									WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
 						$result_test=mysqli_query($link, $req_test);
 						$tab_result = mysqli_fetch_all($result_test);
-						echo count($tab_result);
 						// si une prévision existe déjà 
 						if (count($tab_result)>0) 
 						{
@@ -456,7 +459,7 @@
 						{
 						//on crée la prévision avec le nombre de paillettes prévues
 						$reqadd="INSERT INTO previsions ( nbr_paillettes, id_periode	 , id_vache , id_taureau) 
-								VALUES ( ".$_POST['liste_nombre'].",15 , ".$_POST['liste_femelle']." , ".$_POST['liste_male'].")";
+								VALUES ( ".$_POST['liste_nombre'].",".$id_periode." , ".$_POST['liste_femelle']." , ".$_POST['liste_male'].")";
 						echo $reqadd;
 						$result_race = mysqli_query($link, $reqadd);
 						}

@@ -28,10 +28,12 @@
 		$result_eleveur = mysqli_query($link, $query_eleveur);
 		$tab_eleveur = mysqli_fetch_all($result_eleveur);
 		$nb_eleveur = mysqli_num_rows($result_eleveur);
-
+		echo'<div class="container">	
+			<div class="row d-flex justify-content-center">
+			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row">';
-		echo "<label class='col-2 col-form-label'> Choisissez l'éleveur : </label>";
+		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
 		echo "<SELECT name='liste_eleveurs' class='form-control col-2'>";
 				for($i=0; $i < count($tab_eleveur); $i++)
 				{
@@ -57,7 +59,7 @@
 				{
 					//echo '<FORM method="POST" name="formulaire_race" >';
 					$id_eleveur = $_POST["liste_eleveurs"];
-					$nom_eleveur = $tab_eleveur[$id_eleveur-1][2]. ' ' .$tab_eleveur[$id_eleveur-1][1];
+					$nom_eleveur = $tab_eleveur[$id_eleveur][2]. ' ' .$tab_eleveur[$id_eleveur][1];
 					$query_race = "SELECT DISTINCT races.id_race, races.nom_race 
 								  FROM races
 								  JOIN bovins ON races.id_race = bovins.id_race
@@ -68,7 +70,7 @@
 					$tab_race = mysqli_fetch_all($result_race);
 
 					echo '<div class="form-group row">';
-					echo "<label class='col-2 col-form-label'> Choisissez la race : </label>";
+					echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
 					echo '<SELECT NAME = "liste_race" class="form-control col-2">';
 					for($i=0; $i < count($tab_race); $i++)
 						{

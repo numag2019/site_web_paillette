@@ -119,7 +119,7 @@
 	
 
 		<!-- Bouton d'envoi -->
-				<input type="submit" name"submit_seuil" href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-ok"></span> </a>
+				<input type="submit" name="submit_seuil" href="#" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-ok"></span> </a>
 				</FORM>
 
 

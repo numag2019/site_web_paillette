@@ -73,7 +73,7 @@
 								
 								// mise à disposition des pdf de la race élevée par l'éleveur
 								echo "<BR>";
-								echo '<h6 style="color: white">Les pdf de la race</h6>';
+								echo '<h6 style="color: white"> <b>Les pdf de la race </b></h6>';
 								
 								$i=0;
 								while($i<$nb_fichier)
@@ -84,7 +84,7 @@
 										// Si le nom de la race est présent dans le nom du pdf, on l'affiche
 										if (stripos($chemin[$i],$tab[$j][0]))
 										{
-											echo '<a href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
+											echo '<a style="color: #d7fefb" href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
 											echo "<BR>";	
 										}
 										$j++;
@@ -96,7 +96,7 @@
 								
 								// mise à disposition des pdf de l'éleveur
 								echo "<BR>";
-								echo '<h6 style="color: white">Les pdf de l\'éleveur</h6>';
+								echo '<h6 style="color: white"> <b>Les pdf de l\'éleveur</b></h6>';
 								
 								$i=0;
 								while($i<$nb_fichier)
@@ -105,7 +105,7 @@
 									// Si le nom de l'eleveur est présent dans le nom du pdf, on l'affiche
 									if (stripos($chemin[$i],$tab[0][1]))
 									{
-										echo '<a href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
+										echo '<a style="color: #d7fefb" href='.$chemin[$i].'>'.$nomfichier[$i].'</a>';
 										echo "<BR>";	
 									}
 									$i++;
@@ -113,9 +113,9 @@
 								
 								// mise à disposition du pdf global
 								echo "<BR>";
-								echo '<h6 style="color: white">Le pdf global</h6>';
+								echo '<h6 style="color: white"><b>Le pdf global</b></h6>';
 								
-								echo '<a href="../importexportCSV/exports/pdf/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
+								echo '<a style="color: #d7fefb" href="../importexportCSV/exports/pdf/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
 								echo "<BR>";
 							}
 							
@@ -133,7 +133,7 @@
 								while ($j<count($pdf))
 								{
 									echo "<BR>";
-									echo '<h6 style="color: white">pdf '.$pdf[$j].'</h6>';
+									echo '<h6 style="color: white"> <b> pdf '.$pdf[$j].'</b></h6>';
 									
 									$k=0;
 									while ($k<$nb_fichier)

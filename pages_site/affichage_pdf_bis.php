@@ -20,7 +20,7 @@
 
 		<div class="container" style="padding-bottom: 100px;">	
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-4" style="background: rgba(0,0,0,0.4); border-radius: 10px; text-align:center;">
+				<div class="col-md-4 fond" style="text-align: center;">
 					<h5 style="color: white; padding-top: 15px; text-align:center;">Documents à disposition</h5>
 					
 					<?php

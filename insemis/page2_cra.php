@@ -30,11 +30,11 @@
 		$nb_eleveur = mysqli_num_rows($result_eleveur);
 		echo'<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
+			<div class="col-md-8 fond"><br>';
 		echo '<FORM method = "POST" name = "formulaire">';
-		echo '<div class="form-group row">';
+		echo '<div class="form-group row d-flex justify-content-center">';
 		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
-		echo "<SELECT name='liste_eleveurs' class='form-control col-2'>";
+		echo "<SELECT name='liste_eleveurs' class='form-control col-5'>";
 				for($i=0; $i < count($tab_eleveur); $i++)
 				{
 					$value = $tab_eleveur[$i][0];
@@ -50,7 +50,9 @@
 					echo ">".$tab_eleveur[$i][1]. ' ' .$tab_eleveur[$i][2]."</OPTION>";  
 				}
 		echo '</SELECT>';
+		echo "<div class='col-1'>";
 		echo '<INPUT type = "submit" name = "bouton_valider_eleveur" class="btn btn-primary" value = "Valider">';
+		echo '</div>';
 		echo '</div>';
 		echo '<br> <br>';
 		//echo '</FORM>';
@@ -69,9 +71,9 @@
 					$result_race = mysqli_query($link, $query_race);
 					$tab_race = mysqli_fetch_all($result_race);
 
-					echo '<div class="form-group row">';
+					echo '<div class="form-group row d-flex justify-content-center">';
 					echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
-					echo '<SELECT NAME = "liste_race" class="form-control col-2">';
+					echo '<SELECT NAME = "liste_race" class="form-control col-5">';
 					for($i=0; $i < count($tab_race); $i++)
 						{
 							$value_race = $tab_race[$i][0];
@@ -92,7 +94,9 @@
 					echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 					echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
 					//echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
+					echo "<div class='col-1'>";
 					echo '<INPUT type="submit" name="bouton_valider_race" class="btn btn-primary" value="Valider">';
+					echo '</div>';
 					echo '</div>';
 					echo '<br> <br>';
 					//echo '</FORM>';
@@ -110,7 +114,7 @@
 							$nom_race = 'bordelaise';
 						if ($race == 19)
 							$nom_race = 'béarnaise';
-						echo "Matrice de parenté de l'éleveur " .$nom_eleveur. " pour la race " .$nom_race;
+						echo "Matrice de parenté de l'éleveur <b>" .$nom_eleveur. "</b> pour la race <b>" .$nom_race . "</b><br>";
 						echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
 						echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 						echo "<input type='hidden' name='id_race' value='".$race."'>";
@@ -163,8 +167,8 @@
 						$nb_males=count($liste_males);
 						$nb_femelle=count($liste_femelles);
 						
-						echo '<div class="row">';
-						echo '<div class="col-1">';
+						echo '<div class="row d-flex justify-content-center">';
+						echo '<div class="col-5">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td class="col-2">&nbsp;</td>';
@@ -224,7 +228,7 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br>';
-						echo '<div class="row">';
+						echo '<div class="row d-flex justify-content-center">';
 						echo '<div class="col-3">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
@@ -240,7 +244,7 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br> <br>';
-						echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher l historique de commande de l éleveur">';
+						echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-light" value="Afficher l&apos;historique de commande de l&apos;éleveur">';
 						echo '<br> <br>';
 					}
 					

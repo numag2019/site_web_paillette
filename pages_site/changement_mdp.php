@@ -23,13 +23,15 @@
 
 <div class="container">	
 	<div class="row d-flex justify-content-center">
-		<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 fond"> <br>
 			<form action="changement_mdp_verification_form.php" method="post">
-			  <div class="form-group">
-				<label for="mdp" style="color: black; padding-top: 15px;">Veuillez entrer votre mot de passe actuel :</label>
-				<input type="mdp_changement" name="mdp_changement" class="form-control" id="mdp_changement" placeholder="Mot de passe">
-				<br>
-			  <button type="submit" class="btn btn-primary" style="color: black" >Valider</button>
+			<div class="row d-flex justify-content-center">
+				<label for="mdp" class="col-xs-3 col-sm-3 col-md-6 col-lg-6">Veuillez entrer votre mot de passe actuel :</label>
+				<div class="row d-flex justify-content-center">
+					<input type="mdp_changement" name="mdp_changement" class="form-control col-xs-3 col-sm-3 col-md-10 col-lg-10" id="mdp_changement" placeholder="Mot de passe">
+				</div>
+				<button type="submit" style="text-align: center" class="btn btn-primary">Valider</button>
+			</div>
 			</form>
 		</div>
 		<?php if (isset ($_SESSION['error']))
@@ -40,7 +42,8 @@
 
 
 		<!-- DIV Pied de page -->	
-
-		<?php include ("../mise_en_page/pied.html");?>
+		<footer style="position: absolute; bottom: 0; width: 100%">
+			<?php include ("../mise_en_page/pied.html");?>
+		</footer>
 	</body>
 </html>

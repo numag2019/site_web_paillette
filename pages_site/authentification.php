@@ -24,14 +24,14 @@
 
 		<div class="container">	
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+				<div class="col-md-3 fond">
 					<form action="verification_connexion.php" method="post">
 					  <div class="form-group">
-						<label for="identifiant" style="color: black; padding-top: 15px;">Identifiez-vous :</label>
+						<label for="identifiant" style="padding-top: 15px;">Identifiez-vous :</label>
 						<input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="Identifiant">
 						<small id="remarque" class="form-text text-muted">Vous devez détenir un compte</small>
 					  </div>
-					  <div class="form-group" style="color: black">
+					  <div class="form-group">
 						<label for="mdp">Mot de passe</label>
 						<input type="password" name="mdp" class="form-control" id="mdp" placeholder="Mot de passe">
 						<small id="mdpoublie" class="form-text text-muted"><a href="mot_de_passe_oublie.php">Mot de passe oublié ?</a></small>

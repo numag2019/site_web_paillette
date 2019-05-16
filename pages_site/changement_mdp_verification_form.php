@@ -26,9 +26,9 @@ if(isset($_POST['mdp_changement']))
 	{	?>
 	<div class="container">	
 		<div class="row d-flex justify-content-center">
-			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;" >
+			<div class="col-md-3 fond"> <br>
 				<form action='changement_mdp_verification_form.php' method='post'>
-					<label for="mdp" style="color: black; padding-top: 15px;">Veuillez entrer votre nouveau mot de passe deux fois de manière identique:</label><br>
+					<label for="mdp">Veuillez entrer votre nouveau mot de passe deux fois de manière identique:</label><br>
 					<input type='text' class="form-control" placeholder="Mot de passe" name='nouveaumdp1'><br>
 					<input type='text' class="form-control" placeholder="Mot de passe" name='nouveaumdp2'><br>
 					<input type='submit' class='btn btn-primary' value='Valider' />
@@ -70,6 +70,9 @@ else
 }
 
 ?>
+		<footer style="position: absolute; bottom: 0; width: 100%">
+			<?php include ("../mise_en_page/pied.html");?>
+		</footer>
 	</body>
-	<?php include ("../mise_en_page/pied.html");?>
+	
 </html>

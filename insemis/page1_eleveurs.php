@@ -43,16 +43,18 @@
 		$result_race = mysqli_query($link, $query_race);
 		$tab_race = mysqli_fetch_all($result_race);
 
-		
-		echo'<div class="container">	
+		?>
+		<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8" style="background: rgba(0,0,0,0.4); border-radius: 10px; text-align:center;"> </br>';
-		echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
-		echo '<div class="row d-flex justify-content-center">';
-		echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
+				<div class="col-md-8" style="background: rgba(0,0,0,0.4); border-radius: 10px; text-align:center;"> 
+				</br>
+				<FORM method = "POST" name = "formulaire_page1_eleveurs">
+					<div class="row d-flex justify-content-center">
+					<label class='col-3 col-form-label'> Choisissez la race : </label>
 		
-		//Liste déroulante permettant la sélection d'une race élevée par l'éleveur connecté
-		echo '<SELECT NAME = "liste_race" class="form-control col-2">';
+		<!--Liste déroulante permettant la sélection d'une race élevée par l'éleveur connecté-->
+		<SELECT NAME = "liste_race" class="form-control col-3">
+		<?php
 		for($i=0; $i < count($tab_race); $i++)
 			{
 			$value = $tab_race[$i][0];
@@ -65,12 +67,16 @@
 				}
 			echo ">".$tab_race[$i][1]."</OPTION> ";
 			}
-		echo '</SELECT NAME> <br/> ';
-		//Bouton de validation de la race 
-		echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">';
-		echo '</div>';
-		echo '<br> <br>';
-
+		?>
+		
+		</SELECT NAME> <br/> 
+		
+		<!--Bouton de validation de la race -->
+		<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">
+					</div>
+		<br> <br>
+					
+		<?php
 		if(isset($_POST['bouton_valider'])||isset($_POST['bouton_historique'])||isset($_POST['bouton_valider_prev']))
 			{
 				
@@ -175,13 +181,19 @@
 				//on compte le nombre de mâles et de femelles
 				$nb_males=count($liste_males);
 				$nb_femelle=count($liste_femelles);
-						
-				echo '<div class="row">';
-				echo '<div class="col-6">';
-				//création de la matrice de parenté
-				echo '<table class="table table-bordered">';
-				echo '<tr>';
-				echo '<td>&nbsp;</td>';
+				
+				?>
+				
+				<div class="row">
+					
+						<div class="col-6">
+				
+				<!--création de la matrice de parenté-->
+				<table class="table table-bordered">
+				<tr>
+				<td>&nbsp;</td>
+				
+				<?php
 				//pour le nombre de mâles impliqués dans un accouplement
 				for ($j=0; $j < $nb_males; $j++)
 				{
@@ -256,8 +268,9 @@
 						echo '<br>';
 						echo '<div class="row">';
 						echo '<div class="col-3">';
+						
 						//création du tableau de légende des couleurs
-						echo '<table class="table table-bordered">';
+						echo '<table class="table table-bordered" align="center">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';
 						echo '</tr>';
@@ -482,8 +495,8 @@
 			}			
 		
 		?>
-	</div>
-	</div>
+			</div>
+		</div>
 	</div>	
 	
 	</body>

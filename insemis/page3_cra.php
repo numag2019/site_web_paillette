@@ -236,7 +236,7 @@
 						{
 						$query_paillettes="SELECT SUM(nbr_paillettes) FROM previsions 
 											JOIN bovins ON bovins.id_bovin=previsions.id_vache
-											WHERE previsions.id_taureau=".$liste_id_t[$j]." AND bovins.id_utilisateur=".$liste_id_ut[$i]."
+											WHERE previsions.id_taureau=".$liste_id_t[$j]." AND bovins.id_utilisateur=".$liste_id_ut[$i]." AND previsions.id_periode=".$periode."
 											GROUP BY previsions.id_taureau";
 						$result_paillettes=mysqli_query($link, $query_paillettes);
 						$tab_paillettes=mysqli_fetch_all($result_paillettes);

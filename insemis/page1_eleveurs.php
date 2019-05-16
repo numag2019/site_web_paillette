@@ -357,6 +357,7 @@
 				{
 					$id_race = $_POST['id_race'];
 					$nom_race = $_POST['nom_race'];
+					
 					echo "Historique des prévisions de commande de paillettes pour la race ".$nom_race." <br><br>";
 					// Les lignes suivantes servent à obtenir la liste des périodes et la liste des id_periode
 					$query_liste_per="SELECT date_format(date_debut,'%d/%m/%Y'), date_format(date_fin,'%d/%m/%Y'), id_periode 
@@ -450,6 +451,8 @@
 			if (isset($_POST['bouton_valider_prev']))
 			{
 				$id_race = $_POST['id_race'];
+				
+					
 					
 						$link = mysqli_connect('localhost', 'root', '', 'crabase');
 						mysqli_set_charset($link, "utf8mb4");
@@ -463,11 +466,11 @@
 						$tab_periode_act = mysqli_fetch_all($result_periode_act);
 						
 						$id_periode = $tab_periode_act[0][0];
-				
+						echo $id_periode;
 						//requête sélectionnant les prévisions pour tous les accouplements possibles
 						$req_test="SELECT *
 									FROM previsions
-									WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']."";
+									WHERE id_vache=".$_POST['liste_femelle']." and id_taureau=".$_POST['liste_male']." and id_periode=".$id_periode." ";
 						$result_test=mysqli_query($link, $req_test);
 						$tab_result = mysqli_fetch_all($result_test);
 						// si une prévision existe déjà 

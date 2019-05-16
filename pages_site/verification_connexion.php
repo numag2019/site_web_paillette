@@ -44,6 +44,9 @@ else
 				$_SESSION['id_type']=$resultat['id_type'];
 				$_SESSION['identifiant'] = $resultat['identifiant'];
 				$_SESSION['mdp']=$resultat['mdp'];
+				$_SESSION['nom_uti']=$resultat['nom'];
+				$_SESSION['prenom_uti']=$resultat['prenom'];
+				
 				header ('Location: mon_espace.php');
 			}
 			else 

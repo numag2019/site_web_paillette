@@ -23,18 +23,11 @@
 		if (isset($_SESSION['id_utilisateur']))
 		{
 			// On affiche les liens disponible au type d'utilisateur connecté
-			if ($_SESSION['id_type']==1)//eleveur
+		
 			{ 
-				echo "<p  align='center' style='color: #303030'>Bienvenue, éleveur</p>";
+				echo "<h5  align='center' style='color: white;padding-top: 15px '>Bienvenue, ".$_SESSION['prenom_uti']." ".$_SESSION['nom_uti']."</h5>";
 			}
-			elseif ($_SESSION['id_type']==21 or $_SESSION['id_type']==22 or $_SESSION['id_type']==23)//administrateur de race
-			{
-				echo "<p  align='center' style='color: #303030'>Bienvenue, animateur</p>";
-			}
-			elseif ($_SESSION['id_type']==3)
-			{
-				echo "<p  align='center' style='color: #303030'>Bienvenue, administrateur</p>";
-			}
+		
 		}
 		else 
 		{

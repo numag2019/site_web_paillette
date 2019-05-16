@@ -93,7 +93,7 @@
 				
 					
 					echo '<div class="row d-flex justify-content-center">';
-					echo '<div class="col-6">';
+					echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">';
 					echo '<table class="table table-striped table-bordered">';
 					$L=[];
 					echo "<td> </td>" ;

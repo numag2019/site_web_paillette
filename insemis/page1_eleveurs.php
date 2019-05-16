@@ -46,14 +46,14 @@
 		?>
 		<div class="container">	
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-8" style="background: rgba(0,0,0,0.4); border-radius: 10px; text-align:center;"> 
+				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 fond"> 
 				</br>
 				<FORM method = "POST" name = "formulaire_page1_eleveurs">
 					<div class="row d-flex justify-content-center">
-					<label class='col-3 col-form-label'> Choisissez la race : </label>
+					<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez la race : </label>
 		
 		<!--Liste déroulante permettant la sélection d'une race élevée par l'éleveur connecté-->
-		<SELECT NAME = "liste_race" class="form-control col-3">
+		<SELECT NAME = "liste_race" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">
 		<?php
 		for($i=0; $i < count($tab_race); $i++)
 			{
@@ -72,8 +72,10 @@
 		</SELECT NAME> <br/> 
 		
 		<!--Bouton de validation de la race -->
+		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
 		<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">
-					</div>
+		</div>
+		</div>
 		<br> <br>
 					
 		<?php
@@ -184,9 +186,8 @@
 				
 				?>
 				
-				<div class="row">
-					
-						<div class="col-6">
+				<div class="row d-flex justify-content-center">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				
 				<!--création de la matrice de parenté-->
 				<table class="table table-bordered">
@@ -266,11 +267,11 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br>';
-						echo '<div class="row">';
-						echo '<div class="col-3">';
+						echo '<div class="row d-flex justify-content-center">';
+						echo '<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">';
 						
 						//création du tableau de légende des couleurs
-						echo '<table class="table table-bordered" align="center">';
+						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';
 						echo '</tr>';
@@ -287,10 +288,10 @@
 			
 			//choix de prévision d'un accouplement grâce à 3 listes déroulantes
 			echo "Prévoir un accouplement <br><br>";
-			echo '<div class="form-group row">';
-			echo "<label class='col-2 col-form-label'> Choisissez le mâle : </label>";
+			echo '<div class="form-group row d-flex justify-content-center">';
+			echo "<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez le mâle : </label>";
 			//on choisit le mâle
-			echo '<SELECT NAME = "liste_male" class="form-control col-2">';
+			echo '<SELECT NAME = "liste_male" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">';
 			for($i=0; $i < count($liste_nom_males); $i++)
 			{
 				$value = $liste_males[$i];
@@ -305,10 +306,10 @@
 			}
 			//on choisit la femelle
 			echo '</SELECT NAME> <br/>';
-			echo '</div>';
-			echo '<div class="form-group row">';
-			echo "<label class='col-2 col-form-label'> Choisissez la femelle : </label>";
-			echo '<SELECT NAME = "liste_femelle" class="form-control col-2">';
+			echo '</div><br>';
+			echo '<div class="form-group row d-flex justify-content-center">';
+			echo "<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez la femelle : </label>";
+			echo '<SELECT NAME = "liste_femelle" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">';
 			for($i=0; $i < count($liste_nom_femelle); $i++)
 			{
 				$value = $liste_femelles[$i];
@@ -325,9 +326,9 @@
 			echo '</div>';
 			//on choisit le nombre de paillettes souhaitées pour cet accouplement
 			$liste_nombre = array('-1','-2','-3','1','2','3');
-			echo '<div class="form-group row">';
-			echo "<label class='col-2 col-form-label'> Choisissez le nombre de paillettes à commander : </label>";
-			echo '<SELECT NAME = "liste_nombre" class="form-control col-2">';
+			echo '<div class="form-group row d-flex align-items-center justify-content-center">';
+			echo "<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez le nombre de paillettes à commander : </label>";
+			echo '<SELECT NAME = "liste_nombre" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">';
 			for($i=0; $i < count($liste_nombre); $i++)
 			{
 				$value = $liste_nombre[$i];
@@ -348,7 +349,7 @@
 			
 			echo "<input type='hidden' name='id_race' value='".$race."'>";
 			echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
-			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher mon historique de commandes">';
+			echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-light" value="Afficher mon historique de commandes">';
 			echo '<br> <br>';
 			
 			//si le bouton historique a été cliquée, on affiche la matrice de parenté
@@ -402,7 +403,7 @@
 						$nb_periodes=count($liste_per);
 						$nb_taureau=count($liste_taureau);
 					
-						echo '<table border = 1>';
+						echo '<table class="table table-bordered">';
 						echo "<td> </td>" ;
 						$j = 0;
 						while ($j<$nb_taureau)

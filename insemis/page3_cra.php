@@ -67,8 +67,8 @@
 			<br/>
 				<FORM method = "POST" name = "formulaire_page3">
 					<div class="form-group row d-flex justify-content-center">
-					<label  class='col-3 col-form-label' > Choisissez la race : </label>
-					<SELECT NAME = "liste_race" class="form-control col-5">
+					<label  class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label' > Choisissez la race : </label>
+					<SELECT NAME = "liste_race" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">
 					
 		
 		<?php
@@ -87,7 +87,7 @@
 		?>
 		
 		</SELECT NAME> <br/> <br/>
-		<div class="col-1">
+		<div class="col-xs-3 col-sm-3 col-md-1 col-lg-1">
 		<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">
 		</div>
 		</div>
@@ -111,8 +111,8 @@
 			$tab_periode = mysqli_fetch_all($result_periode);
 		?>
 			<div class="row d-flex justify-content-center">
-			<label  class='col-3 col-form-label'> Choisissez la période : </label>
-			<SELECT NAME = "liste_periode" class="form-control col-5">
+			<label  class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez la période : </label>
+			<SELECT NAME = "liste_periode" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">
 			
 		<?php	
 			for($i=0; $i < count($tab_periode); $i++)
@@ -130,7 +130,7 @@
 			echo '</SELECT NAME> <br/> <br/>';
 			echo "<INPUT TYPE = 'hidden' name = 'id_race' value = '".$race."'>";
 			echo "<INPUT TYPE = 'hidden' name = 'nom_race' value = '".$nom_race."'>";
-			echo "<div class='col-1'>";
+			echo "<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>";
 			echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_periode" class="btn btn-primary" value = "Valider">';
 			echo '</div>';
 			echo '</div>';

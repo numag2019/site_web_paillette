@@ -30,11 +30,11 @@
 		$nb_eleveur = mysqli_num_rows($result_eleveur);
 		echo'<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8 fond"><br>';
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 fond"><br>';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row d-flex justify-content-center">';
-		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
-		echo "<SELECT name='liste_eleveurs' class='form-control col-5'>";
+		echo "<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez l'éleveur : </label>";
+		echo "<SELECT name='liste_eleveurs' class='form-control col-xs-5 col-sm-5 col-md-5 col-lg-5'>";
 				for($i=0; $i < count($tab_eleveur); $i++)
 				{
 					$value = $tab_eleveur[$i][0];
@@ -50,7 +50,7 @@
 					echo ">".$tab_eleveur[$i][1]. ' ' .$tab_eleveur[$i][2]."</OPTION>";  
 				}
 		echo '</SELECT>';
-		echo "<div class='col-1'>";
+		echo "<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>";
 		echo '<INPUT type = "submit" name = "bouton_valider_eleveur" class="btn btn-primary" value = "Valider">';
 		echo '</div>';
 		echo '</div>';
@@ -72,8 +72,8 @@
 					$tab_race = mysqli_fetch_all($result_race);
 
 					echo '<div class="form-group row d-flex justify-content-center">';
-					echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";
-					echo '<SELECT NAME = "liste_race" class="form-control col-5">';
+					echo "<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez la race : </label>";
+					echo '<SELECT NAME = "liste_race" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-5">';
 					for($i=0; $i < count($tab_race); $i++)
 						{
 							$value_race = $tab_race[$i][0];
@@ -94,7 +94,7 @@
 					echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 					echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
 					//echo "<input type='hidden' name='nom_race' value='".$nom_race."'>";
-					echo "<div class='col-1'>";
+					echo "<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>";
 					echo '<INPUT type="submit" name="bouton_valider_race" class="btn btn-primary" value="Valider">';
 					echo '</div>';
 					echo '</div>';
@@ -168,7 +168,7 @@
 						$nb_femelle=count($liste_femelles);
 						
 						echo '<div class="row d-flex justify-content-center">';
-						echo '<div class="col-5">';
+						echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td class="col-2">&nbsp;</td>';
@@ -229,7 +229,7 @@
 						echo '</div>';
 						echo '<br>';
 						echo '<div class="row d-flex justify-content-center">';
-						echo '<div class="col-3">';
+						echo '<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';

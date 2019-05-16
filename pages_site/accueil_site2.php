@@ -10,17 +10,20 @@
 		<!-- Custom styles for our template -->
 		<link rel="stylesheet" href="bootstrap-theme.css" media="screen" >
 		<link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="../mise_en_page/bootstrap2.css">
 		
 		<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
 
 	<!--  Navigation -->
-	 <?php 
-	 include("../mise_en_page/navigation2.html"); 
-	 ?>
+	 
 	</head>
 
 <body class="home" style="background: url(https://cdn.pixabay.com/photo/2017/06/23/23/50/cow-2436354_1280.jpg) no-repeat center center fixed; background-size: cover; height: 100%;">
+	<?php 
+	 include("../mise_en_page/navigation2.html"); 
+	 ?>
+	
 	<div class="container">	
 		<div class="h-100 row align-items-center">
 			<div class="col-md-4 col-lg-4">
@@ -44,7 +47,7 @@
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </body>
 
-	<footer>
+	<footer class="footer">
 		<?php include ("../mise_en_page/pied2.html");?>
 	</footer>
 

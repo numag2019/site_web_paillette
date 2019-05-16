@@ -112,7 +112,7 @@
 		?>
 			<div class="row d-flex justify-content-center">
 			<label  class='col-3 col-form-label'> Choisissez la période : </label>
-			<SELECT NAME = "liste_periode" class="form-control col-2">
+			<SELECT NAME = "liste_periode" class="form-control col-5">
 			
 		<?php	
 			for($i=0; $i < count($tab_periode); $i++)
@@ -130,17 +130,15 @@
 			echo '</SELECT NAME> <br/> <br/>';
 			echo "<INPUT TYPE = 'hidden' name = 'id_race' value = '".$race."'>";
 			echo "<INPUT TYPE = 'hidden' name = 'nom_race' value = '".$nom_race."'>";
+			echo "<div class='col-1'>";
 			echo '<INPUT TYPE = "SUBMIT" name = "bouton_valider_periode" class="btn btn-primary" value = "Valider">';
+			echo '</div>';
 			echo '</div>';
 			echo '<br/>';
 			}
 			?>
-			</div>
-			</div>
+			
 			<br/> <br/>
-			<div class="row d-flex justify-content-center">
-				<div class="col-md-8" style="background: rgba(0,0,0,0.3); border-radius: 10px;">
-					<div class="row d-flex justify-content-center">
 			
 			<?php
 			if(isset($_POST['bouton_valider_periode']))
@@ -161,7 +159,7 @@
 					echo '<p> Tableau récapitulatif des prévisions de commande de paillettes pour la race <b>'.$nom_race. '</b> du ' .$tab_periode_af[0][0]. ' au ' .$tab_periode_af[0][1].'</p>' ;
 					}
 				
-				echo '</div> <br/>';
+				echo '<br/>';
 				$race=$_POST["id_race"];
 					
 				// Les lignes suivantes servent à obtenir la liste des éleveurs/utilisateurs et la liste des id_utilisateur
@@ -210,11 +208,12 @@
 					$liste_id_t[$i]=$tab_liste_t[$i][1] ;
 					}
 					
-				echo '<div class="row d-flex justify-content-center">';	
+				
 				//affichage du tableau récapitulatif
 				$nb_ut=count($liste_ut);
 				$nb_t=count($liste_t);
-					
+				
+				echo '<div class="row d-flex justify-content-center">';
 				echo '<table border = 1>';
 				$L=[];
 				echo "<td> </td>" ;
@@ -275,14 +274,15 @@
 				}
 				echo "<td><b>".$S_TT."</b></td>";
 				echo '</table>';
-				echo '<br>';
 				echo '</div>';
+				echo '<br>';
+				
 				
 				if ($tab_periode_af[0][1] == null)
 				{
 				echo '<div class="row d-flex justify-content-center">';	
 				echo '<FORM name = "form" method = "GET" >';
-				echo '<INPUT TYPE = "button" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau"> <br/> <br/>';
+				echo '<INPUT TYPE = "button" class="btn btn-light" name = "bouton_reini" onclick="ConfirmMessage('.$periode. ',' .$race. ')" value = "Réinitialiser le tableau">';
 				echo '</FORM>';
 				echo '<span id="test"> </span>';
 				echo '</div>';

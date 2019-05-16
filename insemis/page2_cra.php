@@ -114,7 +114,7 @@
 							$nom_race = 'bordelaise';
 						if ($race == 19)
 							$nom_race = 'béarnaise';
-						echo "Matrice de parenté de l'éleveur " .$nom_eleveur. " pour la race " .$nom_race;
+						echo "Matrice de parenté de l'éleveur <b>" .$nom_eleveur. "</b> pour la race <b>" .$nom_race . "</b><br>";
 						echo "<input type='hidden' name='nom_eleveur' value='".$nom_eleveur."'>";
 						echo "<input type='hidden' name='id_eleveur' value='".$id_eleveur."'>";
 						echo "<input type='hidden' name='id_race' value='".$race."'>";
@@ -167,8 +167,8 @@
 						$nb_males=count($liste_males);
 						$nb_femelle=count($liste_femelles);
 						
-						echo '<div class="row">';
-						echo '<div class="col-1">';
+						echo '<div class="row d-flex justify-content-center">';
+						echo '<div class="col-5">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td class="col-2">&nbsp;</td>';
@@ -228,7 +228,7 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br>';
-						echo '<div class="row">';
+						echo '<div class="row d-flex justify-content-center">';
 						echo '<div class="col-3">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
@@ -244,7 +244,7 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br> <br>';
-						echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-dark" value="Afficher l&apos;historique de commande de l&apos;éleveur">';
+						echo '<INPUT TYPE="submit" name="bouton_historique" class="btn btn-light" value="Afficher l&apos;historique de commande de l&apos;éleveur">';
 						echo '<br> <br>';
 					}
 					

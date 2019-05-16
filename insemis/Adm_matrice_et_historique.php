@@ -4,9 +4,6 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!-- <link href="../mise_en_page/bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
-		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/site/docs/4.3/assets/js/vendor/jquery-slim.min.js"></script>
-		<script  type="text/javascript" src="../mise_en_page/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script> -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
@@ -15,13 +12,10 @@
 	<!-- Déclaration des types d'utilisateurs autorisés à accéder à cette page -->
 	<?php $autorisation=TRUE // tout le monde?>
 
-	<!--  Navigation -->
-	 <?php 
-	 include("../mise_en_page/navigation.html"); 
-	 ?>
 	</head>
 	
 	<body>
+	<?php include("../mise_en_page/navigation.html"); ?>
 		<?php
 			require "Mes_fonctions.php" ;
 	
@@ -39,12 +33,12 @@
 		}
 		echo'<div class="container">	
 				 <div class="row d-flex justify-content-center">
-				 <div class="col-md-8 fond"><br>';
+				 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 fond"><br>';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row d-flex justify-content-center">';
-		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
+		echo "<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3 col-form-label'> Choisissez l'éleveur : </label>";
 		//liste déroulante éleveur
-		echo "<SELECT name='id_utilisateur' class='form-control col-5'>";
+		echo "<SELECT name='id_utilisateur' class='form-control col-xs-5 col-sm-5 col-md-5 col-lg-5'>";
 					// boucle permettant d'afficher la liste déroulante des noms d'eleveurs
 					$i=0;
 					for ($i=0;$i<count($tab_nom);$i++)
@@ -57,7 +51,7 @@
 						echo "<OPTION value = '" . $tab_nom[$i][0] ."'" . $sel .  ">". $tab_nom[$i][1]," " ,$tab_nom[$i][2] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
 					}
 				echo "</SELECT>";
-			echo "<div class='col-1'>";
+			echo "<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>";
 			echo "<INPUT TYPE='SUBMIT' class='btn btn-primary' name='bouton_valider_eleveur' value='Valider'>";
 			echo "</div>";
 			echo "</div>";
@@ -166,7 +160,7 @@
 						$nb_femelle=count($liste_femelles);
 						
 						echo '<div class="row d-flex justify-content-center">';
-						echo '<div class="col-6">';
+						echo '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td>&nbsp;</td>';
@@ -225,7 +219,7 @@
 						echo '</div>';
 						echo '<br>';
 						echo '<div class="row d-flex justify-content-center">';
-						echo '<div class="col-4">';
+						echo '<div class="ccol-xs-12 col-sm-12 col-md-4 col-lg-4">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';

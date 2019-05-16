@@ -47,3 +47,8 @@ input::-o-outer-spin-button {
     bottom: 0;
     width: 100%;
 }
+
+.fond {
+	background: rgba(0,0,0,0.7);
+	border-radius: 10px;
+}

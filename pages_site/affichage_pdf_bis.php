@@ -20,9 +20,9 @@
 
 		<div class="container" style="padding-bottom: 100px;">	
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-4" style="background: rgba(0,0,0,0.4); border-radius: 10px;">
-					<h5 style="color: black; padding-top: 15px;">PDF à disposition</h5>
-					<BR>
+				<div class="col-md-4" style="background: rgba(0,0,0,0.4); border-radius: 10px; text-align:center;">
+					<h5 style="color: white; padding-top: 15px; text-align:center;">Documents à disposition</h5>
+					
 					<?php
 					// On prend tous les noms et les chemins des fichiers présents dans le dossier pdf
 					$nb_fichier = 0;   //variable nombre de fichier
@@ -73,7 +73,7 @@
 								
 								// mise à disposition des pdf de la race élevée par l'éleveur
 								echo "<BR>";
-								echo '<h6 style="color: black">Les pdf de la race</h6>';
+								echo '<h6 style="color: white">Les pdf de la race</h6>';
 								
 								$i=0;
 								while($i<$nb_fichier)
@@ -96,7 +96,7 @@
 								
 								// mise à disposition des pdf de l'éleveur
 								echo "<BR>";
-								echo '<h6 style="color: black">Les pdf de l\'éleveur</h6>';
+								echo '<h6 style="color: white">Les pdf de l\'éleveur</h6>';
 								
 								$i=0;
 								while($i<$nb_fichier)
@@ -113,7 +113,7 @@
 								
 								// mise à disposition du pdf global
 								echo "<BR>";
-								echo '<h6 style="color: black">Le pdf global</h6>';
+								echo '<h6 style="color: white">Le pdf global</h6>';
 								
 								echo '<a href="../importexportCSV/exports/pdf/fiche_race_globale.pdf">fiche_race_globale.pdf</a>';
 								echo "<BR>";
@@ -133,7 +133,7 @@
 								while ($j<count($pdf))
 								{
 									echo "<BR>";
-									echo '<h6 style="color: black">pdf '.$pdf[$j].'</h6>';
+									echo '<h6 style="color: white">pdf '.$pdf[$j].'</h6>';
 									
 									$k=0;
 									while ($k<$nb_fichier)

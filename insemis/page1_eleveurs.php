@@ -46,7 +46,7 @@
 		
 		echo'<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8" style="background: rgba(0,0,0,0.4); border-radius: 10px;"> </br>';
+			<div class="col-md-8" style="background: rgba(0,0,0,0.4); border-radius: 10px; text-align:center;"> </br>';
 		echo '<FORM method = "POST" name = "formulaire_page1_eleveurs">';
 		echo '<div class="row d-flex justify-content-center">';
 		echo "<label class='col-3 col-form-label'> Choisissez la race : </label>";

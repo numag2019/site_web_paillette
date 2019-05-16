@@ -37,9 +37,9 @@
 		}
 		echo'<div class="container">	
 				 <div class="row d-flex justify-content-center">
-				 <div class="col-md-8 fond">';
+				 <div class="col-md-8 fond"><br>';
 		echo '<FORM method = "POST" name = "formulaire">';
-		echo '<div class="form-group row">';
+		echo '<div class="form-group row d-flex justify-content-center">';
 		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
 		//liste déroulante éleveur
 		echo "<SELECT name='id_utilisateur' class='form-control col-5'>";
@@ -163,7 +163,7 @@
 						$nb_males=count($liste_males);
 						$nb_femelle=count($liste_femelles);
 						
-						echo '<div class="row">';
+						echo '<div class="row d-flex justify-content-center">';
 						echo '<div class="col-6">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
@@ -222,8 +222,8 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br>';
-						echo '<div class="row">';
-						echo '<div class="col-3">';
+						echo '<div class="row d-flex justify-content-center">';
+						echo '<div class="col-4">';
 						echo '<table class="table table-bordered">';
 						echo '<tr>';
 						echo '<td bgcolor=green> Accouplement très favorable </td> ';
@@ -238,7 +238,7 @@
 						echo '</div>';
 						echo '</div>';
 						echo '<br> <br>';	
-					echo "<INPUT TYPE='SUBMIT' name='bt_submit_hist' class='btn btn-dark' value='Voir son historique de prévisions paillettes'>";
+					echo "<INPUT TYPE='SUBMIT' name='bt_submit_hist' class='btn btn-light' value='Voir son historique de prévisions paillettes'>";
 					echo "<br><br>";
 
 				//Affichage de l'historique

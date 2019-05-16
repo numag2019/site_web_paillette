@@ -41,8 +41,8 @@
 				
 				echo'<div class="container">	
 				 <div class="row d-flex justify-content-center">
-				 <div class="col-md-8 fond">';
-				echo "Récapitulatif des prévisions de commandes de paillettes pour la race <b>". $tab_race[0][0] . " </b><br><br>" ;
+				 <div class="col-md-8 fond"><br>';
+				echo "Récapitulatif des prévisions de commandes de paillettes pour la race <b>". $tab_race[0][0] . " </b><br>" ;
 				
 				// Les lignes suivantes servent à obtenir la liste des éleveurs/utilisateurs et la liste des id_utilisateur
 				$query_liste_ut="SELECT DISTINCT utilisateurs.nom, utilisateurs.prenom, utilisateurs.id_utilisateur FROM utilisateurs 
@@ -92,8 +92,8 @@
 				$nb_t=count($liste_t);
 				
 					
-					echo '<div class="row">';
-					echo '<div class="col-1">';
+					echo '<div class="row d-flex justify-content-center">';
+					echo '<div class="col-6">';
 					echo '<table class="table table-striped table-bordered">';
 					$L=[];
 					echo "<td> </td>" ;

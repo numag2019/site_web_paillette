@@ -63,12 +63,12 @@
 		?>
 		<div class="container">	
 			<div class="row d-flex justify-content-center">
-			<div class="col-md-8" style="background: rgba(0,0,0,0.3); border-radius: 10px;">
+			<div class="col-md-8 fond">
 			<br/>
 				<FORM method = "POST" name = "formulaire_page3">
-					<div class="row d-flex justify-content-center">
+					<div class="form-group row d-flex justify-content-center">
 					<label  class='col-3 col-form-label' > Choisissez la race : </label>
-					<SELECT NAME = "liste_race" class="form-control col-2">
+					<SELECT NAME = "liste_race" class="form-control col-5">
 					
 		
 		<?php
@@ -87,8 +87,9 @@
 		?>
 		
 		</SELECT NAME> <br/> <br/>
-		<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary btn-info" value = "Valider"><span class="glyphicon glyphicon-ok"></span>
-		
+		<div class="col-1">
+		<INPUT TYPE = "SUBMIT" name = "bouton_valider" class="btn btn-primary" value = "Valider">
+		</div>
 		</div>
 		<br/>
 		

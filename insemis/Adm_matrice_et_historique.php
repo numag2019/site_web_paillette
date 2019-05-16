@@ -37,12 +37,12 @@
 		}
 		echo'<div class="container">	
 				 <div class="row d-flex justify-content-center">
-				 <div class="col-md-8" style="background: rgba(163,163,163,0.4); border-radius: 10px;">';
+				 <div class="col-md-8 fond">';
 		echo '<FORM method = "POST" name = "formulaire">';
 		echo '<div class="form-group row">';
 		echo "<label class='col-3 col-form-label'> Choisissez l'éleveur : </label>";
 		//liste déroulante éleveur
-		echo "<SELECT name='id_utilisateur' class='form-control col-2'>";
+		echo "<SELECT name='id_utilisateur' class='form-control col-5'>";
 					// boucle permettant d'afficher la liste déroulante des noms d'eleveurs
 					$i=0;
 					for ($i=0;$i<count($tab_nom);$i++)
@@ -55,7 +55,9 @@
 						echo "<OPTION value = '" . $tab_nom[$i][0] ."'" . $sel .  ">". $tab_nom[$i][1]," " ,$tab_nom[$i][2] . "</OPTION>"; // le nom est affiché (colonne 1), l'identifiant est stocké (colonne 0)
 					}
 				echo "</SELECT>";
+			echo "<div class='col-1'>";
 			echo "<INPUT TYPE='SUBMIT' class='btn btn-primary' name='bouton_valider_eleveur' value='Valider'>";
+			echo "</div>";
 			echo "</div>";
 			echo "<br><br>";
 	

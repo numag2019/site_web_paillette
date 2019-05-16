@@ -42,7 +42,8 @@
 
 
 		<!-- DIV Pied de page -->	
-
-		<?php include ("../mise_en_page/pied.html");?>
+		<footer style="position: absolute; bottom: 0; width: 100%">
+			<?php include ("../mise_en_page/pied.html");?>
+		</footer>
 	</body>
 </html>

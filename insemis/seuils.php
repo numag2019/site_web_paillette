@@ -1,7 +1,13 @@
 <!doctype html>
 <html lang="fr">
 	<head>
-	
+		<!--•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+				CETTE PAGE PERMET AUX MEMBRES DU CRA DE DETERMINER LES SEUILS MAX ET MIN  DES COEFFICIENTS DE CONSANGUINITE POUR CHAQUE RACE.
+				DANS LA MATRICE DE PARENTE : - SI COEFF<SEUILMIN : CASE VERTE
+											 - SI SEUILMAX>COEFF>SEUILMIN : CASE ORANGE
+											 - SI COEFF>SEUILMAX : CASE ROUGE
+		•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••-->
+		
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,10 +27,11 @@
 		
 		<!--  Navigation -->
 		<?php include("../mise_en_page/navigation.html"); ?>
+		
 	</head>
 	<?php
-	//require "Mes_fonctions.php" ;
-	
+;
+			//Connexion à la base de données
 			$link=mysqli_connect('localhost', 'root', '', 'crabase'); // connexion à la base de données
 			mysqli_set_charset($link, "utf8mb4"); // prise en compte des caractères de la base de données
 			
@@ -40,7 +47,7 @@
 	<!-- Liste déroulante choix de la race-->
 		<div class="container">	
 		<div class="row d-flex justify-content-center">
-			<div class="col-md-3" style="background: rgba(163,163,163,0.4); border-radius: 10px;">
+			<div class="col-md-3" style="background: rgba(0,0,0,0.4); border-radius: 10px;">
 				<FORM method="POST" name="formRaceSeuil">
 					<div class="form-group d-flex justify-content-center">
 					<div class="col-md-8">
@@ -127,11 +134,10 @@
 	
 	<?php 
 	
+	//Si l'on a cliqué sur le bouton d'envoi du formulaire 
 	if(isset($_POST['liste_race'])&&isset($_POST['seuil_min'])&&isset($_POST['seuil_max']))
 	{
-	
-	
-	
+		//On récupère sous forme de variable php les valeurs des objets du formulaire.
 		$race=$_POST['liste_race'];
 		$seuil_min=strval($_POST['seuil_min']);
 		$seuil_max=strval($_POST['seuil_max']);
@@ -139,7 +145,7 @@
 	
 	
 
-	
+		// Si les seuils ne sont pas remplis on affiche une fenetre d'alerte
 		if(empty($seuil_min)&&empty($seuil_min))
 			{
 				echo "<script type='text/javascript'>";
@@ -150,6 +156,7 @@
 				
 			}
 			
+		// Si les seuils ne sont pas compris entre 0 et 0.5, on affiche une fenetre d'alerte
 		elseif($seuil_min<=0||$seuil_min>=0.5||$seuil_max<=0||$seuil_max>=0.5)
 			{
 				echo "<script type='text/javascript'>";
@@ -162,7 +169,7 @@
 			{
 				
 				
-				
+				// s'il n'ya aucune erreur de saisie, on effectue une requete qui modifie les seuils pour la race.
 				$requeteMajSeuils=
 				"UPDATE races
 				SET seuil_min=".$seuil_min.", seuil_max=".$seuil_max."
